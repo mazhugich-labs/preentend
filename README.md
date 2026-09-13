@@ -79,3 +79,38 @@ setfacl -d -m u:$(id -u):rwx workspaces/isaac_sim_ws
 ```
 
 > С этими настройками **workspaces/isaac_sim_ws** доступна в контейнере **isaac_sim**, а **workspaces/ros2_ws** в контейнере **ros2**
+
+# Работа с проектом
+
+1. Клонируем репозиторий:
+```shell
+git clone git@github.com:mazhugich-labs/preentend.git
+cd preentend
+```
+
+2. Добавляем модули
+- все сразу:
+```shell
+git submodule update --init --recursive
+```
+- некоторые (если модуль содержит другие модули можно добавить в команду флаг `--recursive`):
+```shell
+git submodule update --init <модуль_1> ... <модуль_n>
+```
+
+## Запуск контейнеров через Makefile
+
+1. Пример 1. Запуск контейнера ros2:
+```shell
+make ros2-up
+```
+
+2. Пример 2. Вход в контейнер:
+```shell
+make ros2-exec
+```
+
+3. Пример 3. Закрытие и удаление контейнера:
+```shell
+make ros2-down
+```

@@ -1,0 +1,3 @@
+[submodule "workspaces/ros2_ws/src/preentend_pkgs"]
+	path = workspaces/ros2_ws/src/preentend_pkgs
+	url = git@github.com:mazhugich-labs/preentend_pkgs.git
