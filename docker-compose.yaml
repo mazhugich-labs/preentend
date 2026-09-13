@@ -1,7 +1,7 @@
 services:
   ros2:
     build:
-      dockerfile: docker/ros2/Dockerfile.ros2
+      dockerfile: docker/Dockerfile.ros2
       args:
         - USER_UID=${USER_UID}
         - USER_GID=${USER_GID}
@@ -32,7 +32,7 @@ services:
 
   isaac_sim:
     build:
-      dockerfile: docker/isaac_sim/Dockerfile.isaac_sim
+      dockerfile: docker/Dockerfile.isaac_sim
     container_name: ${PROJECT_NAME}-isaac_sim
     network_mode: "host"
     runtime: nvidia
@@ -53,6 +53,6 @@ services:
       - ${ISAACSIM_HUB_CACHE_PATH:-~/.cache/ov/hub}:/var/cache/hub:rw
       - ${PROJECT_ROOT}/workspaces/isaac_sim_ws:/isaac_sim/isaac_sim_ws
     depends_on:
-      isaac_sim-hub:
+      isaac_sim_hub:
         condition: service_started
     restart: unless-stopped
