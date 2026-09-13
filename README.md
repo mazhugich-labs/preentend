@@ -79,3 +79,20 @@ setfacl -d -m u:$(id -u):rwx workspaces/isaac_sim_ws
 ```
 
 > С этими настройками **workspaces/isaac_sim_ws** доступна в контейнере **isaac_sim**, а **workspaces/ros2_ws** в контейнере **ros2**
+
+## Запуск контейнеров через Makefile
+
+1. Пример 1. Запуск контейнера ros2:
+```shell
+make ros2-up
+```
+
+2. Пример 2. Вход в контейнер:
+```shell
+make ros2-exec
+```
+
+3. Пример 3. Закрытие и удаление контейнера:
+```shell
+make ros2-down
+```
