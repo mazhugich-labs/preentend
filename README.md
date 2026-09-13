@@ -80,7 +80,7 @@ setfacl -d -m u:$(id -u):rwx workspaces/isaac_sim_ws
 
 > С этими настройками **workspaces/isaac_sim_ws** доступна в контейнере **isaac_sim**, а **workspaces/ros2_ws** в контейнере **ros2**
 
-# Работа с проектом
+# Работа с репозиторием
 
 1. Клонируем репозиторий:
 ```shell
@@ -93,12 +93,14 @@ cd preentend
 ```shell
 git submodule update --init --recursive
 ```
-- некоторые (если модуль содержит другие модули можно добавить в команду флаг `--recursive`):
+- выборочно (если модуль содержит другие модули можно добавить в команду флаг `--recursive`):
 ```shell
 git submodule update --init <модуль_1> ... <модуль_n>
 ```
 
 ## Запуск контейнеров через Makefile
+
+> Если нет make то просто установите ебланы
 
 1. Пример 1. Запуск контейнера ros2:
 ```shell
@@ -113,4 +115,30 @@ make ros2-exec
 3. Пример 3. Закрытие и удаление контейнера:
 ```shell
 make ros2-down
+```
+
+# Работа с ROS из Docker
+
+1. Билдим пакеты:
+```shell
+cd /ros2_ws
+colcon build --symlink-install
+```
+Можно билдить выбранные пакеты если добавить флаг `--packages-select` а после него название пакета. Пример:
+```shell
+colcon build --symlink-install --packages-select preentend_description
+```
+
+2. Сурсим рабочее пространство:
+```
+source install/setup.bash
+```
+
+> С флагом `--symlink-install` при изменении файлов в уже забилженых пакетах заново их билдить не нужно
+
+## Пакет preentend_description
+
+Можно посмотреть ртк в **rviz**:
+```shell
+ros2 launch preentend_description view_preenrend.launch.py
 ```
