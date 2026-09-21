@@ -140,5 +140,16 @@ source install/setup.bash
 
 Можно посмотреть ртк в **rviz**:
 ```shell
-ros2 launch preentend_description view_preenrend.launch.py
+ros2 launch preentend_description view_preentend.launch.py
 ```
+
+![preentend_description_rviz](docs/assets/preentend_description_rviz.png) ![preentend_description_jsp_gui](docs/assets/preentend_description_jsp_gui.png)
+
+## Пакет preentend_moveit_config
+
+Можно поуправлять роботами по отдельности:
+```shell
+ros2 launch preentend_moveit_config demo.launch.py
+```
+
+![preentend_moveit_config](docs/assets/preentend_moveit_config.gif)
