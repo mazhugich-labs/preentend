@@ -86,8 +86,6 @@ setfacl -d -m u:$(id -u):rwx workspaces/isaac_sim_ws
 
 ## Запуск контейнеров через Makefile
 
-> Если нет make то просто установите ебланы
-
 1. Пример 1. Запуск контейнера ros2:
 ```shell
 make ros2-up
