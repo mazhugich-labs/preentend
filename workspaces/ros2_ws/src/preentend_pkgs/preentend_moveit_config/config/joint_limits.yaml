@@ -12,69 +12,69 @@ joint_limits:
     has_velocity_limits: true
     max_velocity: 3.6651914291880923
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot1_fanuc_J2:
     has_velocity_limits: true
     max_velocity: 3.6651914291880923
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot1_fanuc_J3:
     has_velocity_limits: true
     max_velocity: 4.6251225177849733
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot1_fanuc_J4:
     has_velocity_limits: true
     max_velocity: 7.3303828583761845
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot1_fanuc_J5:
     has_velocity_limits: true
     max_velocity: 7.8539816339744828
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot1_fanuc_J6:
     has_velocity_limits: true
     max_velocity: 12.566370614359172
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot1_lt_J1:
     has_velocity_limits: true
     max_velocity: 0.25
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot2_fanuc_J1:
     has_velocity_limits: true
     max_velocity: 3.6651914291880923
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot2_fanuc_J2:
     has_velocity_limits: true
     max_velocity: 3.6651914291880923
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot2_fanuc_J3:
     has_velocity_limits: true
     max_velocity: 4.6251225177849733
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot2_fanuc_J4:
     has_velocity_limits: true
     max_velocity: 7.3303828583761845
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot2_fanuc_J5:
     has_velocity_limits: true
     max_velocity: 7.8539816339744828
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot2_fanuc_J6:
     has_velocity_limits: true
     max_velocity: 12.566370614359172
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
   robot2_lt_J1:
     has_velocity_limits: true
     max_velocity: 0.25
     has_acceleration_limits: true
-    max_acceleration: 1.0
+    max_acceleration: 4.0
