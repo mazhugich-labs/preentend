@@ -3,15 +3,19 @@ services:
     build:
       dockerfile: docker/Dockerfile.ros2
       args:
-        - USER_UID=${USER_UID}
-        - USER_GID=${USER_GID}
+        - USER_UID=${USER_ID}
+        - USER_GID=${GROUP_ID}
     container_name: ${PROJECT_NAME}-ros2
     network_mode: host
     privileged: true
+    group_add:
+      - ${DRI_RENDER_GID:-109}
+      - ${DRI_CARD_GID:-44}
     tty: true
     stdin_open: true
     environment:
       - DISPLAY=${DISPLAY:-0}
+      - QT_X11_NO_MITSHM=1
       - XAUTHORITY=/tmp/.docker.xauth
       - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
     volumes:
@@ -40,6 +44,7 @@ services:
     stdin_open: true
     tty: true
     environment:
+      - ACCEPT_EULA=Y
       - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
       - NVIDIA_VISIBLE_DEVICES=${GPU_DEVICE:-all}
     volumes:

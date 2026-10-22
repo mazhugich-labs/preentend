@@ -1,6 +1,6 @@
-FROM osrf/ros:jazzy-desktop-full
+FROM osrf/ros:jazzy-desktop-full AS img_base
 
-ENV QT_X11_NO_MITSHM 1
+FROM img_base AS img_user
 
 ARG USERNAME=ros2_user
 ARG USER_UID=1000
@@ -22,16 +22,23 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y python3-pip
 ENV SHELL /bin/bash
 
+FROM img_user AS img_deps
+
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get update && apt-get install -y \
         ros-jazzy-ros2-control \
         ros-jazzy-ros2-controllers \
         ros-jazzy-moveit \
         ros-jazzy-joint-state-publisher \
-        ros-jazzy-joint-state-publisher-gui
+        ros-jazzy-joint-state-publisher-gui \
+        ros-jazzy-ros-gz \
+        ros-jazzy-gz-ros2-control
+
+FROM img_deps AS img_final
 
 RUN echo "source /opt/ros/jazzy/setup.bash" >> /home/${USERNAME}/.bashrc
 
 USER ${USERNAME}
 
+ENTRYPOINT [""]
 CMD ["/bin/bash"]
