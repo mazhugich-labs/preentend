@@ -10,22 +10,22 @@
 
         <xacro:include
             filename="$(find preentend_description)/urdf/linear_axis/${linear_axis_model}_macro.xacro" />
-        <xacro:include
-            filename="$(find preentend_description)/urdf/robot/${robot_model}_macro.xacro" />
-        <xacro:include
-            filename="$(find preentend_description)/urdf/end_effector/${end_effector_model}_macro.xacro" />
 
         <xacro:linear_axis prefix="${prefix}" parent="${parent}" use_gazebo="${use_gazebo}"
             use_ros2_control="${use_ros2_control}" hardware_plugin="${hardware_plugin}">
             <xacro:insert_block name="origin" />
         </xacro:linear_axis>
 
+        <xacro:include
+            filename="$(find preentend_description)/urdf/robot/${robot_model}_macro.xacro" />
         <xacro:robot_arm prefix="${prefix}" parent="${prefix}linear_axis_carrier_mount"
             use_gazebo="${use_gazebo}"
             use_ros2_control="${use_ros2_control}" hardware_plugin="${hardware_plugin}">
             <origin xyz="0 0 0" rpy="0 0 0" />
         </xacro:robot_arm>
 
+        <xacro:include
+            filename="$(find preentend_description)/urdf/end_effector/${end_effector_model}_macro.xacro" />
         <xacro:end_effector prefix="${prefix}" parent="${prefix}flange" use_gazebo="${use_gazebo}">
             <origin xyz="0 0 0" rpy="0 0 0" />
         </xacro:end_effector>

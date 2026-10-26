@@ -65,12 +65,18 @@
             <child link="${prefix}end_effector_origin" />
         </joint>
 
+        <link name="${prefix}end_effector_frame" />
+        <joint name="${prefix}end_effector_frame_joint" type="fixed">
+            <origin xyz="0.13125 0 -0.16" rpy="0 0 0"/>
+            <parent link="${prefix}end_effector_origin" />
+            <child link="${prefix}end_effector_frame" />
+        </joint>
+
         <link name="${prefix}end_effector_base_link">
             <inertial>
-                <mass value="1.40889" />
-                <origin xyz="0.104998 2.10691e-17 -0.0977302" rpy="0 -0 0" />
-                <inertia ixx="0.0377398" ixy="0" ixz="0.00470496" iyy="0.0379017" iyz="0"
-                    izz="0.00790301" />
+                <mass value="1.53208" />
+                <origin xyz="0.118979 0.00187954 -0.118072" rpy="0 -0 0" />
+                <inertia ixx="0.0418325" ixy="-0.000116094" ixz="0.00444694" iyy="0.0397799" iyz="0.000120736" izz="0.00878388" />
             </inertial>
             <visual>
                 <origin xyz="0.02 0 -1.74512e-18" rpy="0 -0 0" />
@@ -98,10 +104,6 @@
         <xacro:end_effector_nozzle_link prefix="${prefix}" index="2" />
         <xacro:end_effector_nozzle_link prefix="${prefix}" index="3" />
         <xacro:end_effector_nozzle_link prefix="${prefix}" index="4" />
-        <xacro:end_effector_nozzle_link prefix="${prefix}" index="5" />
-        <xacro:end_effector_nozzle_link prefix="${prefix}" index="6" />
-        <xacro:end_effector_nozzle_link prefix="${prefix}" index="7" />
-        <xacro:end_effector_nozzle_link prefix="${prefix}" index="8" />
         <joint name="${prefix}eef_nozzle_j1" type="fixed">
             <origin xyz="0.135 -0.0475 0.035" rpy="0 1.5708 -0" />
             <axis xyz="-0 -0 -1" />
@@ -109,46 +111,22 @@
             <child link="${prefix}end_effector_nozzle_1" />
         </joint>
         <joint name="${prefix}eef_nozzle_j2" type="fixed">
-            <origin xyz="0.135 0.0475 0.035" rpy="0 1.5708 -0" />
+            <origin xyz="0.135 -0.0475 -0.095" rpy="0 1.5708 -0" />
             <axis xyz="-0 -0 -1" />
             <parent link="${prefix}end_effector_base_link" />
             <child link="${prefix}end_effector_nozzle_2" />
         </joint>
         <joint name="${prefix}eef_nozzle_j3" type="fixed">
-            <origin xyz="0.135 -0.0475 -0.095" rpy="0 1.5708 -0" />
+            <origin xyz="0.135 -0.0475 -0.225" rpy="0 1.5708 -0" />
             <axis xyz="-0 -0 -1" />
             <parent link="${prefix}end_effector_base_link" />
             <child link="${prefix}end_effector_nozzle_3" />
         </joint>
         <joint name="${prefix}eef_nozzle_j4" type="fixed">
-            <origin xyz="0.135 0.0475 -0.095" rpy="0 1.5708 -0" />
-            <axis xyz="-0 -0 -1" />
-            <parent link="${prefix}end_effector_base_link" />
-            <child link="${prefix}end_effector_nozzle_4" />
-        </joint>
-        <joint name="${prefix}eef_nozzle_j5" type="fixed">
-            <origin xyz="0.135 -0.0475 -0.225" rpy="0 1.5708 -0" />
-            <axis xyz="-0 -0 -1" />
-            <parent link="${prefix}end_effector_base_link" />
-            <child link="${prefix}end_effector_nozzle_5" />
-        </joint>
-        <joint name="${prefix}eef_nozzle_j6" type="fixed">
-            <origin xyz="0.135 0.0475 -0.225" rpy="0 1.5708 -0" />
-            <axis xyz="-0 -0 -1" />
-            <parent link="${prefix}end_effector_base_link" />
-            <child link="${prefix}end_effector_nozzle_6" />
-        </joint>
-        <joint name="${prefix}eef_nozzle_j7" type="fixed">
             <origin xyz="0.135 -0.0475 -0.355" rpy="0 1.5708 -0" />
             <axis xyz="-0 -0 -1" />
             <parent link="${prefix}end_effector_base_link" />
-            <child link="${prefix}end_effector_nozzle_7" />
-        </joint>
-        <joint name="${prefix}eef_nozzle_j8" type="fixed">
-            <origin xyz="0.135 0.0475 -0.355" rpy="0 1.5708 -0" />
-            <axis xyz="-0 -0 -1" />
-            <parent link="${prefix}end_effector_base_link" />
-            <child link="${prefix}end_effector_nozzle_8" />
+            <child link="${prefix}end_effector_nozzle_4" />
         </joint>
 
         <xacro:end_effector_sensor_link prefix="${prefix}" index="1" />
@@ -158,37 +136,37 @@
         <xacro:end_effector_sensor_link prefix="${prefix}" index="5" />
         <xacro:end_effector_sensor_link prefix="${prefix}" index="6" />
         <joint name="${prefix}eef_sensor_j1" type="fixed">
-            <origin xyz="0.135 -0.04 0.095" rpy="0 1.5708 -0" />
+            <origin xyz="0.135 -0.1 0.03875" rpy="0 1.5708 -0" />
             <axis xyz="-0 -0 -1" />
             <parent link="${prefix}end_effector_base_link" />
             <child link="${prefix}end_effector_sensor_1" />
         </joint>
         <joint name="${prefix}eef_sensor_j2" type="fixed">
-            <origin xyz="0.135 0.04 0.095" rpy="0 1.5708 -0" />
+            <origin xyz="0.135 0.1 0.03875" rpy="0 1.5708 -0" />
             <axis xyz="-0 -0 -1" />
             <parent link="${prefix}end_effector_base_link" />
             <child link="${prefix}end_effector_sensor_2" />
         </joint>
         <joint name="${prefix}eef_sensor_j3" type="fixed">
-            <origin xyz="0.135 -0.115 -0.16" rpy="0 1.5708 -0" />
+            <origin xyz="0.135 -0.12 -0.16" rpy="0 1.5708 -0" />
             <axis xyz="-0 -0 -1" />
             <parent link="${prefix}end_effector_base_link" />
             <child link="${prefix}end_effector_sensor_3" />
         </joint>
         <joint name="${prefix}eef_sensor_j4" type="fixed">
-            <origin xyz="0.135 0.115 -0.16" rpy="0 1.5708 -0" />
+            <origin xyz="0.135 0.12 -0.16" rpy="0 1.5708 -0" />
             <axis xyz="-0 -0 -1" />
             <parent link="${prefix}end_effector_base_link" />
             <child link="${prefix}end_effector_sensor_4" />
         </joint>
         <joint name="${prefix}eef_sensor_j5" type="fixed">
-            <origin xyz="0.135 -0.04 -0.415" rpy="0 1.5708 -0" />
+            <origin xyz="0.135 -0.1 -0.3625" rpy="0 1.5708 -0" />
             <axis xyz="-0 -0 -1" />
             <parent link="${prefix}end_effector_base_link" />
             <child link="${prefix}end_effector_sensor_5" />
         </joint>
         <joint name="${prefix}eef_sensor_j6" type="fixed">
-            <origin xyz="0.135 0.04 -0.415" rpy="0 1.5708 -0" />
+            <origin xyz="0.135 0.1 -0.3625" rpy="0 1.5708 -0" />
             <axis xyz="-0 -0 -1" />
             <parent link="${prefix}end_effector_base_link" />
             <child link="${prefix}end_effector_sensor_6" />

@@ -6,7 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /TF1/Frames1
-      Splitter Ratio: 0.8029412031173706
+      Splitter Ratio: 0.5941176414489746
     Tree Height: 608
   - Class: rviz_common/Views
     Expanded:
@@ -96,6 +96,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        left_end_effector_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         left_end_effector_nozzle_1:
           Alpha: 1
           Show Axes: false
@@ -112,26 +116,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         left_end_effector_nozzle_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_end_effector_nozzle_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_end_effector_nozzle_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_end_effector_nozzle_7:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_end_effector_nozzle_8:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -232,6 +216,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        right_end_effector_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         right_end_effector_nozzle_1:
           Alpha: 1
           Show Axes: false
@@ -248,26 +236,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         right_end_effector_nozzle_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_end_effector_nozzle_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_end_effector_nozzle_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_end_effector_nozzle_7:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_end_effector_nozzle_8:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -365,6 +333,8 @@ Visualization Manager:
           Value: false
         left_end_effector_base_link:
           Value: false
+        left_end_effector_frame:
+          Value: true
         left_end_effector_nozzle_1:
           Value: false
         left_end_effector_nozzle_2:
@@ -372,14 +342,6 @@ Visualization Manager:
         left_end_effector_nozzle_3:
           Value: false
         left_end_effector_nozzle_4:
-          Value: false
-        left_end_effector_nozzle_5:
-          Value: false
-        left_end_effector_nozzle_6:
-          Value: false
-        left_end_effector_nozzle_7:
-          Value: false
-        left_end_effector_nozzle_8:
           Value: false
         left_end_effector_origin:
           Value: true
@@ -421,6 +383,8 @@ Visualization Manager:
           Value: false
         right_end_effector_base_link:
           Value: false
+        right_end_effector_frame:
+          Value: true
         right_end_effector_nozzle_1:
           Value: false
         right_end_effector_nozzle_2:
@@ -428,14 +392,6 @@ Visualization Manager:
         right_end_effector_nozzle_3:
           Value: false
         right_end_effector_nozzle_4:
-          Value: false
-        right_end_effector_nozzle_5:
-          Value: false
-        right_end_effector_nozzle_6:
-          Value: false
-        right_end_effector_nozzle_7:
-          Value: false
-        right_end_effector_nozzle_8:
           Value: false
         right_end_effector_origin:
           Value: true
@@ -493,14 +449,6 @@ Visualization Manager:
                                           {}
                                         left_end_effector_nozzle_4:
                                           {}
-                                        left_end_effector_nozzle_5:
-                                          {}
-                                        left_end_effector_nozzle_6:
-                                          {}
-                                        left_end_effector_nozzle_7:
-                                          {}
-                                        left_end_effector_nozzle_8:
-                                          {}
                                         left_end_effector_sensor_1:
                                           {}
                                         left_end_effector_sensor_2:
@@ -513,6 +461,8 @@ Visualization Manager:
                                           {}
                                         left_end_effector_sensor_6:
                                           {}
+                                      left_end_effector_frame:
+                                        {}
             right_linear_axis_origin:
               right_linear_axis_rail_link:
                 right_linear_axis_carrier_link:
@@ -535,14 +485,6 @@ Visualization Manager:
                                           {}
                                         right_end_effector_nozzle_4:
                                           {}
-                                        right_end_effector_nozzle_5:
-                                          {}
-                                        right_end_effector_nozzle_6:
-                                          {}
-                                        right_end_effector_nozzle_7:
-                                          {}
-                                        right_end_effector_nozzle_8:
-                                          {}
                                         right_end_effector_sensor_1:
                                           {}
                                         right_end_effector_sensor_2:
@@ -555,6 +497,8 @@ Visualization Manager:
                                           {}
                                         right_end_effector_sensor_6:
                                           {}
+                                      right_end_effector_frame:
+                                        {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -573,7 +517,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 4.682744979858398
+      Distance: 3.6263179779052734
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -588,10 +532,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3053998351097107
+      Pitch: 0.32039982080459595
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz_default_plugins)
-      Yaw: 1.2603868246078491
+      Yaw: 1.1953868865966797
     Saved: ~
 Window Geometry:
   Displays:
