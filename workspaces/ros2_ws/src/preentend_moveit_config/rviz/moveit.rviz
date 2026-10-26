@@ -34,7 +34,7 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Acceleration_Scaling_Factor: 0.1
+    - Acceleration_Scaling_Factor: 0.5
       Class: moveit_rviz_plugin/MotionPlanning
       Enabled: true
       Move Group Namespace: ""
@@ -109,6 +109,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          left_end_effector_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           left_end_effector_nozzle_1:
             Alpha: 1
             Show Axes: false
@@ -125,26 +129,6 @@ Visualization Manager:
             Show Trail: false
             Value: true
           left_end_effector_nozzle_4:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_5:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_6:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_7:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_8:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -245,6 +229,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          right_end_effector_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           right_end_effector_nozzle_1:
             Alpha: 1
             Show Axes: false
@@ -261,26 +249,6 @@ Visualization Manager:
             Show Trail: false
             Value: true
           right_end_effector_nozzle_4:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_5:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_6:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_7:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_8:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -435,6 +403,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          left_end_effector_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           left_end_effector_nozzle_1:
             Alpha: 1
             Show Axes: false
@@ -451,26 +423,6 @@ Visualization Manager:
             Show Trail: false
             Value: true
           left_end_effector_nozzle_4:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_5:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_6:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_7:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_8:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -571,6 +523,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          right_end_effector_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           right_end_effector_nozzle_1:
             Alpha: 1
             Show Axes: false
@@ -587,26 +543,6 @@ Visualization Manager:
             Show Trail: false
             Value: true
           right_end_effector_nozzle_4:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_5:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_6:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_7:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_8:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -675,7 +611,7 @@ Visualization Manager:
         Show Robot Collision: false
         Show Robot Visual: true
       Value: true
-      Velocity_Scaling_Factor: 0.1
+      Velocity_Scaling_Factor: 0.5
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -694,7 +630,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 9.581427574157715
+      Distance: 7.207704067230225
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -709,10 +645,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6499998569488525
+      Pitch: 0.8449996709823608
       Target Frame: world
       Value: Orbit (rviz_default_plugins)
-      Yaw: 3.743354082107544
+      Yaw: 4.333363056182861
     Saved: ~
 Window Geometry:
   Displays:
@@ -730,5 +666,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1394
-  X: 519
-  Y: 230
+  X: 262
+  Y: 199

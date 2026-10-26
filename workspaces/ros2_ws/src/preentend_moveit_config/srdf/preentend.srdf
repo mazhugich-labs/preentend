@@ -1,1558 +1,724 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--This does not replace URDF, and is not an extension
-of URDF.
+<!--This does not replace URDF, and is not an extension of URDF.
     This is a format for representing semantic information about the robot structure.
-    A URDF file must exist for this robot as well, where the joints and the links that are referenced
-are defined
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
 -->
 <robot name="preentend">
-    <!--GROUPS:
-    Representation of a set of joints and links. This can be useful for specifying DOF to plan for,
-    defining arms, end effectors, etc-->
-    <!--LINKS:
-    When a link is specified, the parent joint of that link (if it exists) is automatically
-    included-->
-    <!--JOINTS:
-    When a joint is specified, the child link of that joint (which will always exist) is
-    automatically included-->
-    <!--CHAINS:
-    When a chain is specified, all the links along the chain (including endpoints) are included in
-    the group. Additionally, all the joints that are parents to included links are also included.
-    This means that joints along the chain and the parent joint of the base link are included in the
-    group-->
-    <!--SUBGROUPS:
-    Groups can also be formed by referencing to already defined group names-->
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
     <group name="left_arm">
-        <joint name="base_joint" />
-        <joint name="left_linear_axis_origin_joint" />
-        <joint name="left_linear_axis_rail_origin_joint" />
-        <joint name="left_linear_axis_joint" />
-        <joint name="left_linear_axis_carrier_mount_joint" />
-        <joint name="left_base_joint" />
-        <joint name="left_J1" />
-        <joint name="left_J2" />
-        <joint name="left_J3" />
-        <joint name="left_J4" />
-        <joint name="left_J5" />
-        <joint name="left_J6" />
-        <joint name="left_J6-flange" />
+        <joint name="base_joint"/>
+        <joint name="left_linear_axis_origin_joint"/>
+        <joint name="left_linear_axis_rail_origin_joint"/>
+        <joint name="left_linear_axis_joint"/>
+        <joint name="left_linear_axis_carrier_mount_joint"/>
+        <joint name="left_base_joint"/>
+        <joint name="left_J1"/>
+        <joint name="left_J2"/>
+        <joint name="left_J3"/>
+        <joint name="left_J4"/>
+        <joint name="left_J5"/>
+        <joint name="left_J6"/>
+        <joint name="left_J6-flange"/>
     </group>
     <group name="right_arm">
-        <joint name="base_joint" />
-        <joint name="right_linear_axis_origin_joint" />
-        <joint name="right_linear_axis_rail_origin_joint" />
-        <joint name="right_linear_axis_joint" />
-        <joint name="right_linear_axis_carrier_mount_joint" />
-        <joint name="right_base_joint" />
-        <joint name="right_J1" />
-        <joint name="right_J2" />
-        <joint name="right_J3" />
-        <joint name="right_J4" />
-        <joint name="right_J5" />
-        <joint name="right_J6" />
-        <joint name="right_J6-flange" />
+        <joint name="base_joint"/>
+        <joint name="right_linear_axis_origin_joint"/>
+        <joint name="right_linear_axis_rail_origin_joint"/>
+        <joint name="right_linear_axis_joint"/>
+        <joint name="right_linear_axis_carrier_mount_joint"/>
+        <joint name="right_base_joint"/>
+        <joint name="right_J1"/>
+        <joint name="right_J2"/>
+        <joint name="right_J3"/>
+        <joint name="right_J4"/>
+        <joint name="right_J5"/>
+        <joint name="right_J6"/>
+        <joint name="right_J6-flange"/>
     </group>
     <group name="left_eef">
-        <link name="left_end_effector_origin" />
-        <link name="left_end_effector_base_link" />
-        <link name="left_end_effector_nozzle_1" />
-        <link name="left_end_effector_nozzle_2" />
-        <link name="left_end_effector_nozzle_3" />
-        <link name="left_end_effector_nozzle_4" />
-        <link name="left_end_effector_nozzle_5" />
-        <link name="left_end_effector_nozzle_6" />
-        <link name="left_end_effector_nozzle_7" />
-        <link name="left_end_effector_nozzle_8" />
-        <link name="left_end_effector_sensor_1" />
-        <link name="left_end_effector_sensor_2" />
-        <link name="left_end_effector_sensor_3" />
-        <link name="left_end_effector_sensor_4" />
-        <link name="left_end_effector_sensor_5" />
-        <link name="left_end_effector_sensor_6" />
+        <link name="left_end_effector_origin"/>
+        <link name="left_end_effector_base_link"/>
+        <link name="left_end_effector_nozzle_1"/>
+        <link name="left_end_effector_nozzle_2"/>
+        <link name="left_end_effector_nozzle_3"/>
+        <link name="left_end_effector_nozzle_4"/>
+        <link name="left_end_effector_sensor_1"/>
+        <link name="left_end_effector_sensor_2"/>
+        <link name="left_end_effector_sensor_3"/>
+        <link name="left_end_effector_sensor_4"/>
+        <link name="left_end_effector_sensor_5"/>
+        <link name="left_end_effector_sensor_6"/>
     </group>
     <group name="right_eef">
-        <link name="right_end_effector_origin" />
-        <link name="right_end_effector_base_link" />
-        <link name="right_end_effector_nozzle_1" />
-        <link name="right_end_effector_nozzle_2" />
-        <link name="right_end_effector_nozzle_3" />
-        <link name="right_end_effector_nozzle_4" />
-        <link name="right_end_effector_nozzle_5" />
-        <link name="right_end_effector_nozzle_6" />
-        <link name="right_end_effector_nozzle_7" />
-        <link name="right_end_effector_nozzle_8" />
-        <link name="right_end_effector_sensor_1" />
-        <link name="right_end_effector_sensor_2" />
-        <link name="right_end_effector_sensor_3" />
-        <link name="right_end_effector_sensor_4" />
-        <link name="right_end_effector_sensor_5" />
-        <link name="right_end_effector_sensor_6" />
+        <link name="right_end_effector_origin"/>
+        <link name="right_end_effector_base_link"/>
+        <link name="right_end_effector_nozzle_1"/>
+        <link name="right_end_effector_nozzle_2"/>
+        <link name="right_end_effector_nozzle_3"/>
+        <link name="right_end_effector_nozzle_4"/>
+        <link name="right_end_effector_sensor_1"/>
+        <link name="right_end_effector_sensor_2"/>
+        <link name="right_end_effector_sensor_3"/>
+        <link name="right_end_effector_sensor_4"/>
+        <link name="right_end_effector_sensor_5"/>
+        <link name="right_end_effector_sensor_6"/>
     </group>
-    <!--GROUP
-    STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is
-    useful to define states like 'folded arms'-->
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="left_arm_home" group="left_arm">
-        <joint name="left_J1" value="0" />
-        <joint name="left_J2" value="0" />
-        <joint name="left_J3" value="0" />
-        <joint name="left_J4" value="0" />
-        <joint name="left_J5" value="0" />
-        <joint name="left_J6" value="0" />
-        <joint name="left_linear_axis_joint" value="0" />
+        <joint name="left_linear_axis_joint" value="0"/>
+        <joint name="left_J1" value="0"/>
+        <joint name="left_J2" value="0"/>
+        <joint name="left_J3" value="0"/>
+        <joint name="left_J4" value="0"/>
+        <joint name="left_J5" value="0"/>
+        <joint name="left_J6" value="0"/>
     </group_state>
     <group_state name="right_arm_home" group="right_arm">
-        <joint name="right_J1" value="0" />
-        <joint name="right_J2" value="0" />
-        <joint name="right_J3" value="0" />
-        <joint name="right_J4" value="0" />
-        <joint name="right_J5" value="0" />
-        <joint name="right_J6" value="0" />
-        <joint name="right_linear_axis_joint" value="0" />
+        <joint name="right_linear_axis_joint" value="0"/>
+        <joint name="right_J1" value="0"/>
+        <joint name="right_J2" value="0"/>
+        <joint name="right_J3" value="0"/>
+        <joint name="right_J4" value="0"/>
+        <joint name="right_J5" value="0"/>
+        <joint name="right_J6" value="0"/>
     </group_state>
-    <!--END
-    EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="left_eef" parent_link="left_flange" group="left_eef" />
-    <end_effector name="right_eef" parent_link="right_flange" group="right_eef" />
-    <!--DISABLE
-    COLLISIONS: By default it is assumed that any link of the robot could potentially come into
-    collision with any other link in the robot. This tag disables collision checking between a
-    specified pair of links. -->
-    <disable_collisions link1="left_J1_link" link2="left_J2_link" reason="Adjacent" />
-    <disable_collisions link1="left_J1_link" link2="left_J3_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="left_J5_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="left_J6_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="left_base_link" reason="Adjacent" />
-    <disable_collisions link1="left_J1_link" link2="left_linear_axis_carrier_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="left_linear_axis_rail_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_base_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_linear_axis_carrier_link" reason="Never" />
-    <disable_collisions link1="left_J1_link" link2="right_linear_axis_rail_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_J3_link" reason="Adjacent" />
-    <disable_collisions link1="left_J2_link" link2="left_J4_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_J5_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_J6_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="left_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_base_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_linear_axis_carrier_link" reason="Never" />
-    <disable_collisions link1="left_J2_link" link2="right_linear_axis_rail_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_J4_link" reason="Adjacent" />
-    <disable_collisions link1="left_J3_link" link2="left_J5_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_J6_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_base_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="left_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_base_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_linear_axis_carrier_link" reason="Never" />
-    <disable_collisions link1="left_J3_link" link2="right_linear_axis_rail_link" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="left_J5_link" reason="Adjacent" />
-    <disable_collisions link1="left_J4_link" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_base_link" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_linear_axis_carrier_link" reason="Never" />
-    <disable_collisions link1="left_J4_link" link2="right_linear_axis_rail_link" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_J6_link" reason="Adjacent" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_base_link" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="left_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_base_link" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_linear_axis_carrier_link" reason="Never" />
-    <disable_collisions link1="left_J5_link" link2="right_linear_axis_rail_link" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_base_link" reason="Adjacent" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="left_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_base_link" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_linear_axis_carrier_link" reason="Never" />
-    <disable_collisions link1="left_J6_link" link2="right_linear_axis_rail_link" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="left_linear_axis_carrier_link"
-        reason="Adjacent" />
-    <disable_collisions link1="left_base_link" link2="left_linear_axis_rail_link" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_base_link" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_linear_axis_carrier_link" reason="Never" />
-    <disable_collisions link1="left_base_link" link2="right_linear_axis_rail_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_nozzle_1"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_nozzle_2"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_nozzle_3"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_nozzle_4"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_nozzle_5"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_nozzle_6"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_nozzle_7"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_nozzle_8"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_sensor_1"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_sensor_2"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_sensor_3"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_sensor_4"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_sensor_5"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_sensor_6"
-        reason="Adjacent" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_base_link" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="left_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="left_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="left_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="left_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="left_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="left_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="left_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="left_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_5" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="left_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="left_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="left_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="left_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="left_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="left_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="left_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_6" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="left_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="left_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="left_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="left_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="left_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="left_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_7" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="left_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="left_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="left_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="left_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="left_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_nozzle_8" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="left_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="left_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="left_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="left_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_1" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="left_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="left_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="left_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_2" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="left_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="left_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_3" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="left_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_4" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="left_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_5" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_end_effector_sensor_6" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="left_linear_axis_rail_link"
-        reason="Adjacent" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_linear_axis_rail_link"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_J1_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_J2_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_base_link" reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_base_link"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_nozzle_1"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_linear_axis_carrier_link"
-        reason="Never" />
-    <disable_collisions link1="left_linear_axis_rail_link" link2="right_linear_axis_rail_link"
-        reason="Adjacent" />
-    <disable_collisions link1="right_J1_link" link2="right_J2_link" reason="Adjacent" />
-    <disable_collisions link1="right_J1_link" link2="right_J3_link" reason="Never" />
-    <disable_collisions link1="right_J1_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="right_J1_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="right_J1_link" link2="right_base_link" reason="Adjacent" />
-    <disable_collisions link1="right_J1_link" link2="right_linear_axis_carrier_link" reason="Never" />
-    <disable_collisions link1="right_J1_link" link2="right_linear_axis_rail_link" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_J3_link" reason="Adjacent" />
-    <disable_collisions link1="right_J2_link" link2="right_J4_link" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="right_J2_link" link2="right_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_J4_link" reason="Adjacent" />
-    <disable_collisions link1="right_J3_link" link2="right_J5_link" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_J6_link" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_base_link" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="right_J3_link" link2="right_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="right_J4_link" link2="right_J5_link" reason="Adjacent" />
-    <disable_collisions link1="right_J5_link" link2="right_J6_link" reason="Adjacent" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_base_link" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="right_J5_link" link2="right_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_base_link" reason="Adjacent" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_nozzle_1" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_nozzle_2" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_nozzle_3" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_nozzle_4" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_nozzle_5" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_nozzle_6" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_nozzle_7" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_nozzle_8" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_sensor_1" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_sensor_2" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_sensor_3" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_sensor_4" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_sensor_5" reason="Never" />
-    <disable_collisions link1="right_J6_link" link2="right_end_effector_sensor_6" reason="Never" />
-    <disable_collisions link1="right_base_link" link2="right_linear_axis_carrier_link"
-        reason="Adjacent" />
-    <disable_collisions link1="right_base_link" link2="right_linear_axis_rail_link" reason="Never" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_nozzle_1"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_nozzle_2"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_nozzle_3"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_nozzle_4"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_nozzle_5"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_nozzle_6"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_nozzle_7"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_nozzle_8"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_sensor_1"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_sensor_2"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_sensor_3"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_sensor_4"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_sensor_5"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_sensor_6"
-        reason="Adjacent" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_nozzle_2"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_nozzle_3"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_nozzle_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_nozzle_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_5" link2="right_end_effector_nozzle_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_5" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_5" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_5" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_5" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_5" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_5" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_5" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_5" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_6" link2="right_end_effector_nozzle_7"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_6" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_6" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_6" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_6" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_6" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_6" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_6" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_7" link2="right_end_effector_nozzle_8"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_7" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_7" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_7" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_7" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_7" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_7" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_8" link2="right_end_effector_sensor_1"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_8" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_8" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_8" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_8" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_nozzle_8" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_1" link2="right_end_effector_sensor_2"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_1" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_1" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_1" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_1" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_2" link2="right_end_effector_sensor_3"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_2" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_2" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_2" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_3" link2="right_end_effector_sensor_4"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_3" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_3" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_4" link2="right_end_effector_sensor_5"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_4" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_end_effector_sensor_5" link2="right_end_effector_sensor_6"
-        reason="Never" />
-    <disable_collisions link1="right_linear_axis_carrier_link" link2="right_linear_axis_rail_link"
-        reason="Adjacent" />
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="left_eef" parent_link="left_flange" group="left_eef"/>
+    <end_effector name="right_eef" parent_link="right_flange" group="right_eef"/>
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="left_J1_link" link2="left_J2_link" reason="Adjacent"/>
+    <disable_collisions link1="left_J1_link" link2="left_J3_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="left_J5_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="left_J6_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="left_base_link" reason="Adjacent"/>
+    <disable_collisions link1="left_J1_link" link2="left_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="left_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_J1_link" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="left_J3_link" reason="Adjacent"/>
+    <disable_collisions link1="left_J2_link" link2="left_J4_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="left_J5_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="left_J6_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="left_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="left_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="left_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="left_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="left_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="left_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="left_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="left_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_J2_link" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_J4_link" reason="Adjacent"/>
+    <disable_collisions link1="left_J3_link" link2="left_J5_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_J6_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_J3_link" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="left_J5_link" reason="Adjacent"/>
+    <disable_collisions link1="left_J4_link" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_J4_link" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="left_J6_link" reason="Adjacent"/>
+    <disable_collisions link1="left_J5_link" link2="left_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="left_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="left_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="left_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="left_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="left_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="left_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="left_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="left_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="left_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_J5_link" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="left_end_effector_base_link" reason="Adjacent"/>
+    <disable_collisions link1="left_J6_link" link2="left_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="left_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="left_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="left_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="left_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="left_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="left_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="left_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="left_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_J6_link" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="left_linear_axis_carrier_link" reason="Adjacent"/>
+    <disable_collisions link1="left_base_link" link2="left_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_base_link" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_nozzle_1" reason="Adjacent"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_nozzle_2" reason="Adjacent"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_nozzle_3" reason="Adjacent"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_nozzle_4" reason="Adjacent"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_sensor_1" reason="Adjacent"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_sensor_2" reason="Adjacent"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_sensor_3" reason="Adjacent"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_sensor_4" reason="Adjacent"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_sensor_5" reason="Adjacent"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="left_end_effector_sensor_6" reason="Adjacent"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_base_link" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_1" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_2" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_3" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_nozzle_4" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="left_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="left_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="left_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="left_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_1" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="left_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="left_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="left_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_2" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="left_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="left_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_3" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="left_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_4" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="left_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_5" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_end_effector_sensor_6" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="left_linear_axis_rail_link" reason="Adjacent"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_carrier_link" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_J1_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_J2_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_base_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="left_linear_axis_rail_link" link2="right_linear_axis_rail_link" reason="Adjacent"/>
+    <disable_collisions link1="right_J1_link" link2="right_J2_link" reason="Adjacent"/>
+    <disable_collisions link1="right_J1_link" link2="right_J3_link" reason="Never"/>
+    <disable_collisions link1="right_J1_link" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="right_J1_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="right_J1_link" link2="right_base_link" reason="Adjacent"/>
+    <disable_collisions link1="right_J1_link" link2="right_linear_axis_carrier_link" reason="Never"/>
+    <disable_collisions link1="right_J1_link" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_J3_link" reason="Adjacent"/>
+    <disable_collisions link1="right_J2_link" link2="right_J4_link" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="right_J2_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_J4_link" reason="Adjacent"/>
+    <disable_collisions link1="right_J3_link" link2="right_J5_link" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_J6_link" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="right_J3_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_J4_link" link2="right_J5_link" reason="Adjacent"/>
+    <disable_collisions link1="right_J5_link" link2="right_J6_link" reason="Adjacent"/>
+    <disable_collisions link1="right_J5_link" link2="right_end_effector_base_link" reason="Never"/>
+    <disable_collisions link1="right_J5_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="right_J5_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="right_J5_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="right_J5_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="right_J5_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="right_J5_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="right_J5_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="right_J5_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="right_J5_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="right_J5_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_J6_link" link2="right_end_effector_base_link" reason="Adjacent"/>
+    <disable_collisions link1="right_J6_link" link2="right_end_effector_nozzle_1" reason="Never"/>
+    <disable_collisions link1="right_J6_link" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="right_J6_link" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="right_J6_link" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="right_J6_link" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="right_J6_link" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="right_J6_link" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="right_J6_link" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="right_J6_link" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="right_J6_link" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_base_link" link2="right_linear_axis_carrier_link" reason="Adjacent"/>
+    <disable_collisions link1="right_base_link" link2="right_linear_axis_rail_link" reason="Never"/>
+    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_nozzle_1" reason="Adjacent"/>
+    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_nozzle_2" reason="Adjacent"/>
+    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_nozzle_3" reason="Adjacent"/>
+    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_nozzle_4" reason="Adjacent"/>
+    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_sensor_1" reason="Adjacent"/>
+    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_sensor_2" reason="Adjacent"/>
+    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_sensor_3" reason="Adjacent"/>
+    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_sensor_4" reason="Adjacent"/>
+    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_sensor_5" reason="Adjacent"/>
+    <disable_collisions link1="right_end_effector_base_link" link2="right_end_effector_sensor_6" reason="Adjacent"/>
+    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_nozzle_2" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_1" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_nozzle_3" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_2" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_nozzle_4" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_3" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_sensor_1" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="right_end_effector_nozzle_4" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_1" link2="right_end_effector_sensor_2" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_1" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_1" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_1" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_1" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_2" link2="right_end_effector_sensor_3" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_2" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_2" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_2" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_3" link2="right_end_effector_sensor_4" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_3" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_3" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_4" link2="right_end_effector_sensor_5" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_4" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_end_effector_sensor_5" link2="right_end_effector_sensor_6" reason="Never"/>
+    <disable_collisions link1="right_linear_axis_carrier_link" link2="right_linear_axis_rail_link" reason="Adjacent"/>
 </robot>

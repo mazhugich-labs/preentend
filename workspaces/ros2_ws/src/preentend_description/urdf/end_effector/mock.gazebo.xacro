@@ -19,18 +19,6 @@
         <gazebo reference="${prefix}end_effector_nozzle_4">
             <selfCollide>true</selfCollide>
         </gazebo>
-        <gazebo reference="${prefix}end_effector_nozzle_5">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-        <gazebo reference="${prefix}end_effector_nozzle_6">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-        <gazebo reference="${prefix}end_effector_nozzle_7">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-        <gazebo reference="${prefix}end_effector_nozzle_8">
-            <selfCollide>true</selfCollide>
-        </gazebo>
 
         <gazebo reference="${prefix}end_effector_sensor_1">
             <selfCollide>true</selfCollide>

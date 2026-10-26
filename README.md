@@ -122,6 +122,7 @@ source install/setup.bash
 | --- | --- |
 | `preentend_description` | Xacro/URDF, геометрия и просмотр модели в RViz |
 | `preentend_controller` | Конфигурация `ros2_control`, контроллеры левой и правой рук с линейными осями |
+| `preentend_gazebo` | Мир Gazebo и запуск симуляции с созданием модели робота |
 | `preentend_moveit_config` | SRDF, планирование MoveIt, конфигурация RViz и запуск с mock или Gazebo |
 
 Запускайте **один** из следующих сценариев в отдельном терминале после сборки и `source install/setup.bash`.
@@ -148,7 +149,7 @@ ros2 launch preentend_moveit_config preentend_moveit_fake.launch.py
 ros2 launch preentend_moveit_config preentend_moveit_gazebo.launch.py
 ```
 
-Запускаются Gazebo с миром `empty.sdf`, публикация описания робота, создание модели в Gazebo, `gz_ros2_control`, контроллеры, мост `/clock`, `move_group` и MoveIt RViz. В этом сценарии узлы используют симуляционное время.
+Запускаются Gazebo с миром `preentend_gazebo/worlds/empty.sdf`, публикация описания робота, создание модели в Gazebo, `gz_ros2_control`, контроллеры, мост `/clock`, `move_group` и MoveIt RViz. В этом сценарии узлы используют симуляционное время.
 
 Для проверки состояния контроллеров в другом терминале контейнера:
 
