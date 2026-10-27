@@ -8,6 +8,7 @@ services:
     container_name: ${PROJECT_NAME}-ros2
     network_mode: host
     privileged: true
+    runtime: nvidia
     group_add:
       - ${DRI_RENDER_GID:-109}
       - ${DRI_CARD_GID:-44}
@@ -15,6 +16,11 @@ services:
     stdin_open: true
     environment:
       - DISPLAY=${DISPLAY:-0}
+      - NVIDIA_VISIBLE_DEVICES=${GPU_DEVICE:-all}
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      # hybrid laptops: render OpenGL on the NVIDIA GPU instead of the iGPU
+      - __NV_PRIME_RENDER_OFFLOAD=1
+      - __GLX_VENDOR_LIBRARY_NAME=nvidia
       - QT_X11_NO_MITSHM=1
       - XAUTHORITY=/tmp/.docker.xauth
       - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}

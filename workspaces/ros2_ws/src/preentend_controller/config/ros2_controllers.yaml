@@ -24,6 +24,7 @@ left_arm_controller:
       - left_J6
     command_interfaces:
       - position
+      - velocity
     state_interfaces:
       - position
       - velocity
@@ -53,6 +54,7 @@ right_arm_controller:
       - right_J6
     command_interfaces:
       - position
+      - velocity
     state_interfaces:
       - position
       - velocity

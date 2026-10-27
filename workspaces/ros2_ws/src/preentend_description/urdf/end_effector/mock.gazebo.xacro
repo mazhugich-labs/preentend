@@ -3,39 +3,7 @@
 
     <xacro:macro name="end_effector_gazebo" params="prefix">
 
-        <gazebo reference="${prefix}end_effector_base_link">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-
-        <gazebo reference="${prefix}end_effector_nozzle_1">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-        <gazebo reference="${prefix}end_effector_nozzle_2">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-        <gazebo reference="${prefix}end_effector_nozzle_3">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-        <gazebo reference="${prefix}end_effector_nozzle_4">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-
-        <gazebo reference="${prefix}end_effector_sensor_1">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-        <gazebo reference="${prefix}end_effector_sensor_2">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-        <gazebo reference="${prefix}end_effector_sensor_3">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-        <gazebo reference="${prefix}end_effector_sensor_4">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-        <gazebo reference="${prefix}end_effector_sensor_5">
-            <selfCollide>true</selfCollide>
-        </gazebo>
-        <gazebo reference="${prefix}end_effector_sensor_6">
+        <gazebo reference="${prefix}end_effector_link">
             <selfCollide>true</selfCollide>
         </gazebo>
 

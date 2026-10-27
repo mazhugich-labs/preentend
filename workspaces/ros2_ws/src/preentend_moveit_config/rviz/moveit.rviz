@@ -104,7 +104,43 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          left_end_effector_base_link:
+          left_camera_bottom_screw_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_color_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_depth_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_depth_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_infra1_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_infra1_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_infra2_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_infra2_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -113,22 +149,7 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-          left_end_effector_nozzle_1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_2:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_3:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_4:
+          left_end_effector_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -137,36 +158,6 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-          left_end_effector_sensor_1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_sensor_2:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_sensor_3:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_sensor_4:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_sensor_5:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_sensor_6:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
           left_flange:
             Alpha: 1
             Show Axes: false
@@ -224,7 +215,43 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          right_end_effector_base_link:
+          right_camera_bottom_screw_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_color_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_depth_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_depth_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_infra1_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_infra1_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_infra2_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_infra2_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -233,22 +260,7 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-          right_end_effector_nozzle_1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_2:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_3:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_4:
+          right_end_effector_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -257,36 +269,6 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-          right_end_effector_sensor_1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_sensor_2:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_sensor_3:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_sensor_4:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_sensor_5:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_sensor_6:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
           right_flange:
             Alpha: 1
             Show Axes: false
@@ -336,7 +318,7 @@ Visualization Manager:
         Goal State Color: 250; 128; 0
         Interactive Marker Size: 0
         Joint Violation Color: 255; 0; 255
-        Planning Group: left_arm
+        Planning Group: left_arm_camera
         Query Goal State: true
         Query Start State: false
         Show Workspace: false
@@ -398,7 +380,43 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          left_end_effector_base_link:
+          left_camera_bottom_screw_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_color_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_depth_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_depth_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_infra1_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_infra1_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_infra2_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_infra2_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          left_camera_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -407,22 +425,7 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-          left_end_effector_nozzle_1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_2:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_3:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_nozzle_4:
+          left_end_effector_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -431,36 +434,6 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-          left_end_effector_sensor_1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_sensor_2:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_sensor_3:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_sensor_4:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_sensor_5:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          left_end_effector_sensor_6:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
           left_flange:
             Alpha: 1
             Show Axes: false
@@ -518,7 +491,43 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          right_end_effector_base_link:
+          right_camera_bottom_screw_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_color_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_depth_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_depth_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_infra1_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_infra1_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_infra2_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_infra2_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          right_camera_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -527,22 +536,7 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-          right_end_effector_nozzle_1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_2:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_3:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_nozzle_4:
+          right_end_effector_link:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -551,36 +545,6 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
-          right_end_effector_sensor_1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_sensor_2:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_sensor_3:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_sensor_4:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_sensor_5:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          right_end_effector_sensor_6:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
           right_flange:
             Alpha: 1
             Show Axes: false
@@ -612,6 +576,72 @@ Visualization Manager:
         Show Robot Visual: true
       Value: true
       Velocity_Scaling_Factor: 0.5
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 2.496894359588623
+        Min Value: 1.5521819591522217
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: AxisColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /left_camera/depth/points
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: -9999
+        Min Value: 9999
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz_default_plugins/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: AxisColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 4096
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.009999999776482582
+      Style: Flat Squares
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /right_camera/depth/points
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -630,25 +660,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 7.207704067230225
+      Distance: 8.38066577911377
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.7057167291641235
-        Y: 1.4675204753875732
-        Z: -0.14323461055755615
+        X: 1.2224342823028564
+        Y: -0.6238812804222107
+        Z: 1.9393690824508667
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8449996709823608
+      Pitch: 0.4500002861022949
       Target Frame: world
       Value: Orbit (rviz_default_plugins)
-      Yaw: 4.333363056182861
+      Yaw: 0.20333991944789886
     Saved: ~
 Window Geometry:
   Displays:
@@ -662,9 +692,9 @@ Window Geometry:
     collapsed: false
   MotionPlanning - Trajectory Slider:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000200000000000001c900000379fc0200000004fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000003f00fffffffb000000100044006900730070006c006100790073010000003b00000173000000c700fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e006701000001b4000002000000016900fffffffb0000000800480065006c0070000000029a0000006e0000006e00ffffff000000010000010000000379fc0200000001fb0000000a00560069006500770073000000003b00000379000000a000ffffff000003a30000037900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000200000000000001c900000379fc0200000006fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000003f00fffffffb000000100044006900730070006c006100790073010000003b00000173000000c700fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e006701000001b4000002000000016900fffffffb0000000800480065006c0070000000029a0000006e0000006e00fffffffb0000000a0049006d00610067006501000002eb000000c90000000000000000fb0000000c00430061006d00650072006101000002eb000000c90000000000000000000000010000010000000379fc0200000001fb0000000a00560069006500770073000000003b00000379000000a000ffffff000003a30000037900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: true
   Width: 1394
-  X: 262
-  Y: 199
+  X: 95
+  Y: 181

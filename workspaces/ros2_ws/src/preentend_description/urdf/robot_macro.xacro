@@ -4,7 +4,7 @@
 
     <xacro:macro name="robot"
         params="prefix:='' 
-        linear_axis_model:='mock' robot_model:='m20_12_23d' end_effector_model:='mock'
+        linear_axis_model:='mock' robot_model:='m20_12_23d' end_effector_model:='mock' camera_model:='realsense'
         parent *origin 
         use_gazebo:='false' use_ros2_control:='false' hardware_plugin:='mock_components/GenericSystem'">
 
@@ -29,6 +29,12 @@
         <xacro:end_effector prefix="${prefix}" parent="${prefix}flange" use_gazebo="${use_gazebo}">
             <origin xyz="0 0 0" rpy="0 0 0" />
         </xacro:end_effector>
+
+        <xacro:include
+            filename="$(find preentend_description)/urdf/camera/${camera_model}_macro.xacro" />
+        <xacro:camera prefix="${prefix}" parent="${prefix}flange" use_gazebo="${use_gazebo}">
+            <origin xyz="0.226 0 0.431" rpy="0 0 0" />
+        </xacro:camera>
 
     </xacro:macro>
 </robot>

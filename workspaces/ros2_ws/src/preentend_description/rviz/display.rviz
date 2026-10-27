@@ -5,8 +5,8 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /TF1/Frames1
-      Splitter Ratio: 0.5941176414489746
+        - /TF1
+      Splitter Ratio: 0.6088235378265381
     Tree Height: 608
   - Class: rviz_common/Views
     Expanded:
@@ -91,7 +91,43 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        left_end_effector_base_link:
+        left_camera_bottom_screw_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_camera_color_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_camera_color_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_camera_infra1_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_camera_infra1_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_camera_infra2_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_camera_infra2_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_camera_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -100,22 +136,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        left_end_effector_nozzle_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_end_effector_nozzle_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_end_effector_nozzle_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_end_effector_nozzle_4:
+        left_end_effector_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -124,36 +145,6 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        left_end_effector_sensor_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_end_effector_sensor_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_end_effector_sensor_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_end_effector_sensor_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_end_effector_sensor_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_end_effector_sensor_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         left_flange:
           Alpha: 1
           Show Axes: false
@@ -211,7 +202,43 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        right_end_effector_base_link:
+        right_camera_bottom_screw_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        right_camera_color_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        right_camera_color_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        right_camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        right_camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        right_camera_infra1_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        right_camera_infra1_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        right_camera_infra2_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        right_camera_infra2_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        right_camera_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -220,22 +247,7 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        right_end_effector_nozzle_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_end_effector_nozzle_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_end_effector_nozzle_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_end_effector_nozzle_4:
+        right_end_effector_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -244,36 +256,6 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        right_end_effector_sensor_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_end_effector_sensor_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_end_effector_sensor_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_end_effector_sensor_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_end_effector_sensor_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_end_effector_sensor_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         right_flange:
           Alpha: 1
           Show Axes: false
@@ -331,34 +313,34 @@ Visualization Manager:
           Value: false
         left_base_link:
           Value: false
-        left_end_effector_base_link:
+        left_camera_bottom_screw_frame:
+          Value: false
+        left_camera_color_frame:
+          Value: false
+        left_camera_color_optical_frame:
+          Value: false
+        left_camera_depth_frame:
+          Value: true
+        left_camera_depth_optical_frame:
+          Value: false
+        left_camera_infra1_frame:
+          Value: false
+        left_camera_infra1_optical_frame:
+          Value: false
+        left_camera_infra2_frame:
+          Value: false
+        left_camera_infra2_optical_frame:
+          Value: false
+        left_camera_link:
           Value: false
         left_end_effector_frame:
           Value: true
-        left_end_effector_nozzle_1:
-          Value: false
-        left_end_effector_nozzle_2:
-          Value: false
-        left_end_effector_nozzle_3:
-          Value: false
-        left_end_effector_nozzle_4:
+        left_end_effector_link:
           Value: false
         left_end_effector_origin:
-          Value: true
-        left_end_effector_sensor_1:
-          Value: false
-        left_end_effector_sensor_2:
-          Value: false
-        left_end_effector_sensor_3:
-          Value: false
-        left_end_effector_sensor_4:
-          Value: false
-        left_end_effector_sensor_5:
-          Value: false
-        left_end_effector_sensor_6:
           Value: false
         left_flange:
-          Value: false
+          Value: true
         left_linear_axis_carrier_link:
           Value: false
         left_linear_axis_carrier_mount:
@@ -381,34 +363,34 @@ Visualization Manager:
           Value: false
         right_base_link:
           Value: false
-        right_end_effector_base_link:
+        right_camera_bottom_screw_frame:
+          Value: false
+        right_camera_color_frame:
+          Value: true
+        right_camera_color_optical_frame:
+          Value: false
+        right_camera_depth_frame:
+          Value: true
+        right_camera_depth_optical_frame:
+          Value: false
+        right_camera_infra1_frame:
+          Value: false
+        right_camera_infra1_optical_frame:
+          Value: false
+        right_camera_infra2_frame:
+          Value: false
+        right_camera_infra2_optical_frame:
+          Value: false
+        right_camera_link:
           Value: false
         right_end_effector_frame:
           Value: true
-        right_end_effector_nozzle_1:
-          Value: false
-        right_end_effector_nozzle_2:
-          Value: false
-        right_end_effector_nozzle_3:
-          Value: false
-        right_end_effector_nozzle_4:
+        right_end_effector_link:
           Value: false
         right_end_effector_origin:
-          Value: true
-        right_end_effector_sensor_1:
-          Value: false
-        right_end_effector_sensor_2:
-          Value: false
-        right_end_effector_sensor_3:
-          Value: false
-        right_end_effector_sensor_4:
-          Value: false
-        right_end_effector_sensor_5:
-          Value: false
-        right_end_effector_sensor_6:
           Value: false
         right_flange:
-          Value: false
+          Value: true
         right_linear_axis_carrier_link:
           Value: false
         right_linear_axis_carrier_mount:
@@ -418,7 +400,7 @@ Visualization Manager:
         right_linear_axis_rail_link:
           Value: false
         world:
-          Value: true
+          Value: false
       Marker Scale: 1
       Name: TF
       Show Arrows: true
@@ -439,30 +421,24 @@ Visualization Manager:
                               left_J5_link:
                                 left_J6_link:
                                   left_flange:
+                                    left_camera_bottom_screw_frame:
+                                      left_camera_link:
+                                        left_camera_color_frame:
+                                          left_camera_color_optical_frame:
+                                            {}
+                                        left_camera_depth_frame:
+                                          left_camera_depth_optical_frame:
+                                            {}
+                                        left_camera_infra1_frame:
+                                          left_camera_infra1_optical_frame:
+                                            {}
+                                        left_camera_infra2_frame:
+                                          left_camera_infra2_optical_frame:
+                                            {}
                                     left_end_effector_origin:
-                                      left_end_effector_base_link:
-                                        left_end_effector_nozzle_1:
+                                      left_end_effector_link:
+                                        left_end_effector_frame:
                                           {}
-                                        left_end_effector_nozzle_2:
-                                          {}
-                                        left_end_effector_nozzle_3:
-                                          {}
-                                        left_end_effector_nozzle_4:
-                                          {}
-                                        left_end_effector_sensor_1:
-                                          {}
-                                        left_end_effector_sensor_2:
-                                          {}
-                                        left_end_effector_sensor_3:
-                                          {}
-                                        left_end_effector_sensor_4:
-                                          {}
-                                        left_end_effector_sensor_5:
-                                          {}
-                                        left_end_effector_sensor_6:
-                                          {}
-                                      left_end_effector_frame:
-                                        {}
             right_linear_axis_origin:
               right_linear_axis_rail_link:
                 right_linear_axis_carrier_link:
@@ -475,30 +451,24 @@ Visualization Manager:
                               right_J5_link:
                                 right_J6_link:
                                   right_flange:
+                                    right_camera_bottom_screw_frame:
+                                      right_camera_link:
+                                        right_camera_color_frame:
+                                          right_camera_color_optical_frame:
+                                            {}
+                                        right_camera_depth_frame:
+                                          right_camera_depth_optical_frame:
+                                            {}
+                                        right_camera_infra1_frame:
+                                          right_camera_infra1_optical_frame:
+                                            {}
+                                        right_camera_infra2_frame:
+                                          right_camera_infra2_optical_frame:
+                                            {}
                                     right_end_effector_origin:
-                                      right_end_effector_base_link:
-                                        right_end_effector_nozzle_1:
+                                      right_end_effector_link:
+                                        right_end_effector_frame:
                                           {}
-                                        right_end_effector_nozzle_2:
-                                          {}
-                                        right_end_effector_nozzle_3:
-                                          {}
-                                        right_end_effector_nozzle_4:
-                                          {}
-                                        right_end_effector_sensor_1:
-                                          {}
-                                        right_end_effector_sensor_2:
-                                          {}
-                                        right_end_effector_sensor_3:
-                                          {}
-                                        right_end_effector_sensor_4:
-                                          {}
-                                        right_end_effector_sensor_5:
-                                          {}
-                                        right_end_effector_sensor_6:
-                                          {}
-                                      right_end_effector_frame:
-                                        {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -517,25 +487,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 3.6263179779052734
+      Distance: 4.1993794441223145
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.0636639595031738
-        Y: -0.1417650431394577
-        Z: 0.915766716003418
+        X: 1.1859914064407349
+        Y: 0.08495092391967773
+        Z: 1.0616145133972168
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.32039982080459595
+      Pitch: 0.5953997373580933
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz_default_plugins)
-      Yaw: 1.1953868865966797
+      Yaw: 1.1103864908218384
     Saved: ~
 Window Geometry:
   Displays:
