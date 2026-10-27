@@ -3,7 +3,8 @@ Panels:
     Help Height: 0
     Name: Displays
     Property Tree Widget:
-      Expanded: ~
+      Expanded:
+        - /MotionPlanning1/Planning Metrics1
       Splitter Ratio: 0.5
     Tree Height: 312
   - Class: rviz_common/Help
@@ -145,10 +146,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          left_end_effector_frame:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           left_end_effector_link:
             Alpha: 1
             Show Axes: false
@@ -180,6 +177,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          left_tcp:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           right_J1_link:
             Alpha: 1
             Show Axes: false
@@ -256,10 +257,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          right_end_effector_frame:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           right_end_effector_link:
             Alpha: 1
             Show Axes: false
@@ -291,6 +288,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          right_tcp:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           world:
             Alpha: 1
             Show Axes: false
@@ -316,9 +317,9 @@ Visualization Manager:
         Colliding Link Color: 255; 0; 0
         Goal State Alpha: 1
         Goal State Color: 250; 128; 0
-        Interactive Marker Size: 0
+        Interactive Marker Size: 0.5
         Joint Violation Color: 255; 0; 255
-        Planning Group: left_arm_camera
+        Planning Group: right_arm_tcp
         Query Goal State: true
         Query Start State: false
         Show Workspace: false
@@ -421,10 +422,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          left_end_effector_frame:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           left_end_effector_link:
             Alpha: 1
             Show Axes: false
@@ -456,6 +453,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          left_tcp:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           right_J1_link:
             Alpha: 1
             Show Axes: false
@@ -532,10 +533,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          right_end_effector_frame:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           right_end_effector_link:
             Alpha: 1
             Show Axes: false
@@ -567,6 +564,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          right_tcp:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           world:
             Alpha: 1
             Show Axes: false
@@ -579,8 +580,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 2.496894359588623
-        Min Value: 1.5521819591522217
+        Max Value: 0.02480030059814453
+        Min Value: -0.013994932174682617
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -612,8 +613,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: -9999
-        Min Value: 9999
+        Max Value: 2.4968810081481934
+        Min Value: -0.033907413482666016
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -660,25 +661,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 8.38066577911377
+      Distance: 8.054240226745605
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.2224342823028564
-        Y: -0.6238812804222107
-        Z: 1.9393690824508667
+        X: 0.4720856547355652
+        Y: 0.06404024362564087
+        Z: 1.3323873281478882
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4500002861022949
+      Pitch: 0.5650002956390381
       Target Frame: world
       Value: Orbit (rviz_default_plugins)
-      Yaw: 0.20333991944789886
+      Yaw: 3.746514081954956
     Saved: ~
 Window Geometry:
   Displays:

@@ -48,11 +48,11 @@
             <child link="${prefix}end_effector_link" />
         </joint>
 
-        <link name="${prefix}end_effector_frame" />
-        <joint name="${prefix}end_effector_frame_joint" type="fixed">
+        <link name="${prefix}tcp" />
+        <joint name="${prefix}tcp_joint" type="fixed">
             <origin xyz="0.236 0 0.155" rpy="0 0 0" />
             <parent link="${prefix}end_effector_link" />
-            <child link="${prefix}end_effector_frame" />
+            <child link="${prefix}tcp" />
         </joint>
     </xacro:macro>
 </robot>

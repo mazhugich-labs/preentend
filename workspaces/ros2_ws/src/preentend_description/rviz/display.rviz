@@ -5,7 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /TF1
+        - /TF1/Frames1
       Splitter Ratio: 0.6088235378265381
     Tree Height: 608
   - Class: rviz_common/Views
@@ -132,10 +132,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        left_end_effector_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         left_end_effector_link:
           Alpha: 1
           Show Axes: false
@@ -167,6 +163,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        left_tcp:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         right_J1_link:
           Alpha: 1
           Show Axes: false
@@ -243,10 +243,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        right_end_effector_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         right_end_effector_link:
           Alpha: 1
           Show Axes: false
@@ -278,6 +274,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        right_tcp:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         world:
           Alpha: 1
           Show Axes: false
@@ -320,7 +320,7 @@ Visualization Manager:
         left_camera_color_optical_frame:
           Value: false
         left_camera_depth_frame:
-          Value: true
+          Value: false
         left_camera_depth_optical_frame:
           Value: false
         left_camera_infra1_frame:
@@ -332,8 +332,6 @@ Visualization Manager:
         left_camera_infra2_optical_frame:
           Value: false
         left_camera_link:
-          Value: false
-        left_end_effector_frame:
           Value: true
         left_end_effector_link:
           Value: false
@@ -349,6 +347,8 @@ Visualization Manager:
           Value: false
         left_linear_axis_rail_link:
           Value: false
+        left_tcp:
+          Value: true
         right_J1_link:
           Value: false
         right_J2_link:
@@ -366,11 +366,11 @@ Visualization Manager:
         right_camera_bottom_screw_frame:
           Value: false
         right_camera_color_frame:
-          Value: true
+          Value: false
         right_camera_color_optical_frame:
           Value: false
         right_camera_depth_frame:
-          Value: true
+          Value: false
         right_camera_depth_optical_frame:
           Value: false
         right_camera_infra1_frame:
@@ -382,8 +382,6 @@ Visualization Manager:
         right_camera_infra2_optical_frame:
           Value: false
         right_camera_link:
-          Value: false
-        right_end_effector_frame:
           Value: true
         right_end_effector_link:
           Value: false
@@ -399,6 +397,8 @@ Visualization Manager:
           Value: false
         right_linear_axis_rail_link:
           Value: false
+        right_tcp:
+          Value: true
         world:
           Value: false
       Marker Scale: 1
@@ -437,7 +437,7 @@ Visualization Manager:
                                             {}
                                     left_end_effector_origin:
                                       left_end_effector_link:
-                                        left_end_effector_frame:
+                                        left_tcp:
                                           {}
             right_linear_axis_origin:
               right_linear_axis_rail_link:
@@ -467,7 +467,7 @@ Visualization Manager:
                                             {}
                                     right_end_effector_origin:
                                       right_end_effector_link:
-                                        right_end_effector_frame:
+                                        right_tcp:
                                           {}
       Update Interval: 0
       Value: true
@@ -487,25 +487,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 4.1993794441223145
+      Distance: 6.6078057289123535
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.1859914064407349
-        Y: 0.08495092391967773
-        Z: 1.0616145133972168
+        X: 1.3450255393981934
+        Y: -0.02629898488521576
+        Z: 1.2429943084716797
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5953997373580933
+      Pitch: 0.5853997468948364
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz_default_plugins)
-      Yaw: 1.1103864908218384
+      Yaw: 0.9903866052627563
     Saved: ~
 Window Geometry:
   Displays:

@@ -12,8 +12,8 @@
     <group name="left_arm_flange">
         <chain base_link="base_link" tip_link="left_flange"/>
     </group>
-    <group name="left_arm_eef">
-        <chain base_link="base_link" tip_link="left_end_effector_frame"/>
+    <group name="left_arm_tcp">
+        <chain base_link="base_link" tip_link="left_tcp"/>
     </group>
     <group name="left_arm_camera">
         <chain base_link="base_link" tip_link="left_camera_link"/>
@@ -21,8 +21,8 @@
     <group name="right_arm_flange">
         <chain base_link="base_link" tip_link="right_flange"/>
     </group>
-    <group name="right_arm_eef">
-        <chain base_link="base_link" tip_link="right_end_effector_frame"/>
+    <group name="right_arm_tcp">
+        <chain base_link="base_link" tip_link="right_tcp"/>
     </group>
     <group name="right_arm_camera">
         <chain base_link="base_link" tip_link="right_camera_link"/>
