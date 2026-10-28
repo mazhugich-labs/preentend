@@ -33,7 +33,7 @@
         <xacro:include
             filename="$(find preentend_description)/urdf/camera/${camera_model}_macro.xacro" />
         <xacro:camera prefix="${prefix}" parent="${prefix}flange" use_gazebo="${use_gazebo}">
-            <origin xyz="0.226 0 0.431" rpy="0 0 0" />
+            <origin xyz="0.275 0 0.44" rpy="0 0 0" />
         </xacro:camera>
 
     </xacro:macro>

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot name="preentend" xmlns:xacro="http://wiki.ros.org/xacro">
-  <xacro:arg name="separation" default="3.5" />
+  <xacro:arg name="separation" default="4" />
   <xacro:property name="separation" value="$(arg separation)" />
 
   <xacro:arg name="use_gazebo" default="false" />
