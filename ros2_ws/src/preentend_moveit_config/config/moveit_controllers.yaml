@@ -1,0 +1,4 @@
+# Discover and switch controllers through the ROS 2 controller manager.
+moveit_controller_manager: moveit_ros_control_interface/Ros2ControlManager
+ros_control_namespace: /
+moveit_manage_controllers: true

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot name="preentend" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="control_backend" default="mock"/>
+  <xacro:include filename="$(find preentend_description)/robot/preentend.urdf.xacro"/>
+  <xacro:include filename="$(find preentend_ros2_control)/urdf/preentend_ros2_control_macro.xacro"/>
+
+  <xacro:property name="robot_model" value="$(arg robot_model)"/>
+  <xacro:property name="robot_family" value="${'kuka' if robot_model.startswith('kr') else 'fanuc'}"/>
+  <xacro:preentend_ros2_control_macro robot_family="${robot_family}" control_backend="$(arg control_backend)"/>
+</robot>

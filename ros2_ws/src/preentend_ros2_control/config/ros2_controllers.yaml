@@ -1,0 +1,75 @@
+# This config file is used by ros2_control
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    robot_1_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    robot_2_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    robots_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+robot_1_controller:
+  ros__parameters:
+    joints:
+      - robot_1_ea_linear_joint
+      - robot_1_link_1_joint
+      - robot_1_link_2_joint
+      - robot_1_link_3_joint
+      - robot_1_link_4_joint
+      - robot_1_link_5_joint
+      - robot_1_link_6_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    allow_nonzero_velocity_at_trajectory_end: true
+robot_2_controller:
+  ros__parameters:
+    joints:
+      - robot_2_ea_linear_joint
+      - robot_2_link_1_joint
+      - robot_2_link_2_joint
+      - robot_2_link_3_joint
+      - robot_2_link_4_joint
+      - robot_2_link_5_joint
+      - robot_2_link_6_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    allow_nonzero_velocity_at_trajectory_end: true
+robots_controller:
+  ros__parameters:
+    joints:
+      - robot_1_ea_linear_joint
+      - robot_1_link_1_joint
+      - robot_1_link_2_joint
+      - robot_1_link_3_joint
+      - robot_1_link_4_joint
+      - robot_1_link_5_joint
+      - robot_1_link_6_joint
+      - robot_2_ea_linear_joint
+      - robot_2_link_1_joint
+      - robot_2_link_2_joint
+      - robot_2_link_3_joint
+      - robot_2_link_4_joint
+      - robot_2_link_5_joint
+      - robot_2_link_6_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    allow_nonzero_velocity_at_trajectory_end: true

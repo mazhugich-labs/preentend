@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Position commands and position/velocity feedback for each movable joint. -->
+  <xacro:macro name="preentend_control_joint_macro" params="name initial_position">
+    <joint name="${name}">
+      <command_interface name="position"/>
+      <state_interface name="position">
+        <param name="initial_value">${initial_position}</param>
+      </state_interface>
+      <state_interface name="velocity"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Instantiate once per prefixed robot and its linear axis. -->
+  <xacro:macro name="preentend_robot_ros2_control_macro" params="prefix robot_family control_backend:=mock">
+    <xacro:property name="initial_positions_file" value="$(find preentend_ros2_control)/config/${robot_family}_initial_positions.yaml"/>
+    <xacro:property name="initial_positions" value="${xacro.load_yaml(initial_positions_file)['initial_positions']}"/>
+    <xacro:property name="hardware_plugins" value="${dict(mock='mock_components/GenericSystem', gazebo='gz_ros2_control/GazeboSimSystem')}"/>
+    <ros2_control name="${prefix}system" type="system">
+      <hardware>
+        <plugin>${hardware_plugins[control_backend]}</plugin>
+      </hardware>
+      <xacro:preentend_control_joint_macro name="${prefix}ea_linear_joint" initial_position="${initial_positions[prefix + 'ea_linear_joint']}"/>
+      <xacro:preentend_control_joint_macro name="${prefix}link_1_joint" initial_position="${initial_positions[prefix + 'link_1_joint']}"/>
+      <xacro:preentend_control_joint_macro name="${prefix}link_2_joint" initial_position="${initial_positions[prefix + 'link_2_joint']}"/>
+      <xacro:preentend_control_joint_macro name="${prefix}link_3_joint" initial_position="${initial_positions[prefix + 'link_3_joint']}"/>
+      <xacro:preentend_control_joint_macro name="${prefix}link_4_joint" initial_position="${initial_positions[prefix + 'link_4_joint']}"/>
+      <xacro:preentend_control_joint_macro name="${prefix}link_5_joint" initial_position="${initial_positions[prefix + 'link_5_joint']}"/>
+      <xacro:preentend_control_joint_macro name="${prefix}link_6_joint" initial_position="${initial_positions[prefix + 'link_6_joint']}"/>
+    </ros2_control>
+  </xacro:macro>
+
+  <xacro:macro name="preentend_ros2_control_macro" params="robot_family control_backend:=mock">
+    <xacro:preentend_robot_ros2_control_macro prefix="robot_1_" robot_family="${robot_family}" control_backend="${control_backend}"/>
+    <xacro:preentend_robot_ros2_control_macro prefix="robot_2_" robot_family="${robot_family}" control_backend="${control_backend}"/>
+  </xacro:macro>
+</robot>

@@ -1,0 +1,118 @@
+#!/usr/bin/env python3
+"""Generate full preentend collision matrices with MoveIt's collisions_updater."""
+
+import argparse
+from pathlib import Path
+import subprocess
+import tempfile
+import xml.etree.ElementTree as ET
+
+from ament_index_python.packages import get_package_share_directory
+
+
+MODELS = (
+    'lrmate25_19a', 'lrmate25_19afc', 'm20_25_18d', 'm20_35_18d',
+    'kr16_r2010_2', 'kr20_r1820_2_e', 'kr35_r1840_3', 'kr35_r1840_3_hw',
+    'kr30_r2100',
+)
+GROUPS_SRDF = '''<?xml version="1.0"?>
+<robot name="preentend" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find preentend_moveit_config)/srdf/preentend_groups_macro.xacro"/>
+  <xacro:preentend_groups_macro/>
+</robot>
+'''
+
+
+def validate_geometry(robot):
+    """Do not generate a matrix from a model with missing collision meshes."""
+    for link in robot.findall('link'):
+        for mesh in link.findall('./collision/geometry/mesh'):
+            uri = mesh.get('filename', '')
+            if not uri.startswith('package://'):
+                raise ValueError(f'Unexpected collision mesh URI: {uri}')
+            package, relative = uri[len('package://'):].split('/', 1)
+            path = Path(get_package_share_directory(package)) / relative
+            if not path.is_file():
+                raise FileNotFoundError(f'Missing collision mesh: {path}')
+    for prefix in ('robot_1_', 'robot_2_'):
+        for name in ('base_link', *(f'link_{i}' for i in range(1, 7))):
+            if robot.find(f"link[@name='{prefix}{name}']/collision") is None:
+                raise ValueError(f'{prefix}{name} has no collision geometry')
+
+
+def generate(model, workdir, trials, assembly_args):
+    urdf_file = Path(get_package_share_directory('preentend_description')) / 'robot/preentend.urdf.xacro'
+    srdf_file = workdir / 'groups.srdf'
+    output = workdir / f'{model}.srdf'
+    xacro_args = [f'robot_model:={model}', *assembly_args]
+    urdf = subprocess.run(
+        ['xacro', str(urdf_file), *xacro_args], check=True, capture_output=True, text=True,
+    ).stdout
+    robot = ET.fromstring(urdf)
+    validate_geometry(robot)
+    links = {link.get('name') for link in robot.findall('link')}
+    result = subprocess.run(
+        ['ros2', 'run', 'moveit_setup_assistant', 'collisions_updater',
+         '--urdf', str(urdf_file), '--srdf', str(srdf_file), '--output', str(output),
+         '--trials', str(trials),
+         *[item for arg in xacro_args for item in ('--xacro-args', arg)]],
+        check=True, capture_output=True, text=True,
+    )
+    if '[ERROR]' in result.stdout or '[ERROR]' in result.stderr:
+        raise RuntimeError(result.stdout + result.stderr)
+    pairs = []
+    for rule in ET.parse(output).getroot().findall('disable_collisions'):
+        one, two, reason = (rule.get(key) for key in ('link1', 'link2', 'reason'))
+        if one not in links or two not in links:
+            raise ValueError(f'Unexpected link names: {one}, {two}')
+        pairs.append((one, two, reason))
+    if not pairs:
+        raise ValueError(f'No collision rules generated for {model}')
+    lines = [
+        '<?xml version="1.0"?>',
+        '<robot xmlns:xacro="http://www.ros.org/wiki/xacro">',
+        f'  <!-- Full preentend, collisions_updater; {trials} trials; '
+        + (', '.join(assembly_args) if assembly_args else 'default assembly dimensions') + '. -->',
+        '  <xacro:macro name="preentend_collision_matrix_macro">',
+    ]
+    lines += [f'    <disable_collisions link1="{one}" link2="{two}" reason="{reason}"/>'
+              for one, two, reason in pairs]
+    lines += ['  </xacro:macro>', '</robot>']
+    return '\n'.join(lines) + '\n', len(pairs)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--trials', type=int, default=100000)
+    parser.add_argument('--output-dir', type=Path, required=True)
+    parser.add_argument('--xacro-arg', action='append', default=[], metavar='NAME:=VALUE',
+                        help='override an assembly dimension or separation; may be repeated')
+    args = parser.parse_args()
+    if args.trials < 1:
+        parser.error('--trials must be positive')
+    allowed = {'separation', 'track_length', 'track_width', 'track_height',
+               'carrier_length', 'carrier_width', 'carrier_height', 'travel'}
+    for arg in args.xacro_arg:
+        name, separator, value = arg.partition(':=')
+        if not separator or name not in allowed or not value:
+            parser.error(f'Invalid assembly argument: {arg}')
+    generated = {}
+    with tempfile.TemporaryDirectory(prefix='preentend_collisions_') as directory:
+        workdir = Path(directory)
+        groups_xacro = workdir / 'groups.srdf.xacro'
+        groups_xacro.write_text(GROUPS_SRDF)
+        groups = subprocess.run(
+            ['xacro', str(groups_xacro)], check=True, capture_output=True, text=True,
+        ).stdout
+        (workdir / 'groups.srdf').write_text(groups)
+        for model in MODELS:
+            contents, count = generate(model, workdir, args.trials, args.xacro_arg)
+            generated[model] = contents
+            print(f'{model}: {count} rules', flush=True)
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    for model, contents in generated.items():
+        (args.output_dir / f'{model}.srdf.xacro').write_text(contents)
+
+
+if __name__ == '__main__':
+    main()

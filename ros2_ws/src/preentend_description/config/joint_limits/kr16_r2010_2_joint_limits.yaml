@@ -1,0 +1,95 @@
+# Joint limits for both kr16_r2010_2 assemblies.
+# Linear-axis velocity matches the 1 m/s URDF limit; acceleration is 6.8119 m/s^2.
+# joint_limits.yaml allows the dynamics properties specified in the URDF to be overwritten or augmented as needed
+# Specific joint properties can be changed with the keys [max_position, min_position, max_velocity, max_acceleration, max_jerk]
+# Joint limits can be turned off with [has_velocity_limits, has_acceleration_limits]
+# The default config of moveit does not take into account the jerk limits, the RuckigTrajectorySmoothing adapter must be
+# added to the planning pipeline to support jerk limits # TODO: check if jerk dimensions are ok!!
+# Easiest way to slow down the robot is to decrease the velocity and acceleration scaling factors
+default_velocity_scaling_factor: 1.0
+default_acceleration_scaling_factor: 1.0
+joint_limits:
+  robot_1_ea_linear_joint:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 6.8119
+    has_jerk_limits: false
+  robot_1_link_1_joint:
+    has_velocity_limits: true
+    max_velocity: 3.490656
+    has_acceleration_limits: true
+    max_acceleration: 7.505672
+    has_jerk_limits: false
+  robot_1_link_2_joint:
+    has_velocity_limits: true
+    max_velocity: 2.994851
+    has_acceleration_limits: true
+    max_acceleration: 1.350277
+    has_jerk_limits: false
+  robot_1_link_3_joint:
+    has_velocity_limits: true
+    max_velocity: 3.3161255787892263
+    has_acceleration_limits: true
+    max_acceleration: 13.412379
+    has_jerk_limits: false
+  robot_1_link_4_joint:
+    has_velocity_limits: true
+    max_velocity: 7.504915783575617
+    has_acceleration_limits: true
+    max_acceleration: 99.514484
+    has_jerk_limits: false
+  robot_1_link_5_joint:
+    has_velocity_limits: true
+    max_velocity: 7.504915783575617
+    has_acceleration_limits: true
+    max_acceleration: 95.957307
+    has_jerk_limits: false
+  robot_1_link_6_joint:
+    has_velocity_limits: true
+    max_velocity: 10.99557
+    has_acceleration_limits: true
+    max_acceleration: 120.04985
+    has_jerk_limits: false
+  robot_2_ea_linear_joint:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 6.8119
+    has_jerk_limits: false
+  robot_2_link_1_joint:
+    has_velocity_limits: true
+    max_velocity: 3.490656
+    has_acceleration_limits: true
+    max_acceleration: 7.505672
+    has_jerk_limits: false
+  robot_2_link_2_joint:
+    has_velocity_limits: true
+    max_velocity: 2.994851
+    has_acceleration_limits: true
+    max_acceleration: 1.350277
+    has_jerk_limits: false
+  robot_2_link_3_joint:
+    has_velocity_limits: true
+    max_velocity: 3.3161255787892263
+    has_acceleration_limits: true
+    max_acceleration: 13.412379
+    has_jerk_limits: false
+  robot_2_link_4_joint:
+    has_velocity_limits: true
+    max_velocity: 7.504915783575617
+    has_acceleration_limits: true
+    max_acceleration: 99.514484
+    has_jerk_limits: false
+  robot_2_link_5_joint:
+    has_velocity_limits: true
+    max_velocity: 7.504915783575617
+    has_acceleration_limits: true
+    max_acceleration: 95.957307
+    has_jerk_limits: false
+  robot_2_link_6_joint:
+    has_velocity_limits: true
+    max_velocity: 10.99557
+    has_acceleration_limits: true
+    max_acceleration: 120.04985
+    has_jerk_limits: false

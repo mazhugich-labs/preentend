@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot name="preentend" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="robot_model" default="kr30_r2100"/>
+
+  <xacro:include filename="$(find preentend_moveit_config)/srdf/preentend_groups_macro.xacro" />
+  <xacro:include filename="$(find preentend_moveit_config)/srdf/collision_matrices/$(arg robot_model).srdf.xacro" />
+
+  <xacro:preentend_groups_macro />
+  <xacro:preentend_collision_matrix_macro />
+</robot>

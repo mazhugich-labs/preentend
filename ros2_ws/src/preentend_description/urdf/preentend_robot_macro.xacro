@@ -16,7 +16,6 @@
       ('kr20_r1820_2_e', ('kuka_cybertech_support', '_macro.xacro', 'kuka_')),
       ('kr35_r1840_3', ('kuka_cybertech_support', '_macro.xacro', 'kuka_')),
       ('kr35_r1840_3_hw', ('kuka_cybertech_support', '_macro.xacro', 'kuka_')),
-      ('kr20_r3100', ('kuka_iontec_support', '_macro.xacro', 'kuka_')),
       ('kr30_r2100', ('kuka_iontec_support', '_macro.xacro', 'kuka_'))
     ])}"/>
     <xacro:property name="robot_package" value="${models[robot_model][0]}"/>

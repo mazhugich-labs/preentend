@@ -9,7 +9,7 @@ project(fanuc_m20_description)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY config launch meshes urdf robot rviz
+  DIRECTORY launch meshes urdf robot rviz
   DESTINATION share/${PROJECT_NAME}/
 )
 

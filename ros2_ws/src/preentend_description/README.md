@@ -14,6 +14,12 @@ The selectable models are `lrmate25_19a`, `lrmate25_19afc`, `m20_25_18d`,
 Robot links use `link_1` through `link_6`, with joints named
 `link_1_joint` through `link_6_joint`. Each arm exposes a `flange` frame.
 
+`config/joint_limits/<robot_model>_joint_limits.yaml` contains MoveIt limits
+for both prefixed arms and their linear axes. The axis velocity is limited to
+1 m/s, matching the mock-axis URDF, and its acceleration is 6.8119 m/s².
+Fanuc arm accelerations are estimates based on comparable
+KUKA models, as noted in those files.
+
 `robot/preentend.urdf.xacro` builds two assemblies, with
 a shared `robot_model` for both robots. `separation`
 sets the center-to-center distance between the parallel tracks along Y in
@@ -38,5 +44,5 @@ dimensions and separation supplied at launch. The joint-state controls are
 rebuilt for the selected model. The launch file also accepts the dimension and
 travel arguments above.
 
-For a robot description with ROS 2 control interfaces, see the
+For a robot description with ROS 2 control interfaces, use the
 `preentend_ros2_control` package.

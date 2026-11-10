@@ -1,0 +1,17 @@
+# Default initial positions for preentend's ros2_control fake system
+
+initial_positions:
+  robot_1_ea_linear_joint: 0
+  robot_1_link_1_joint: 0
+  robot_1_link_2_joint: 0
+  robot_1_link_3_joint: 0
+  robot_1_link_4_joint: 0
+  robot_1_link_5_joint: 0
+  robot_1_link_6_joint: 0
+  robot_2_ea_linear_joint: 0
+  robot_2_link_1_joint: 0
+  robot_2_link_2_joint: 0
+  robot_2_link_3_joint: 0
+  robot_2_link_4_joint: 0
+  robot_2_link_5_joint: 0
+  robot_2_link_6_joint: 0

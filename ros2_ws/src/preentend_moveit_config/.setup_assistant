@@ -1,0 +1,16 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: preentend_description
+    relative_path: robot/preentend.urdf.xacro
+  srdf:
+    relative_path: srdf/preentend.srdf.xacro
+  package_settings:
+    author_name: mazhugich
+    author_email: mazhugich.labs@gmail.com
+    generated_timestamp: 1794341806
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="preentend_groups_macro">
+        <group name="robot_1">
+            <chain base_link="world" tip_link="robot_1_t_tcp" />
+        </group>
+        <group name="robot_2">
+            <chain base_link="world" tip_link="robot_2_t_tcp" />
+        </group>
+        <group name="robots">
+            <group name="robot_1" />
+            <group name="robot_2" />
+        </group>
+    </xacro:macro>
+</robot>

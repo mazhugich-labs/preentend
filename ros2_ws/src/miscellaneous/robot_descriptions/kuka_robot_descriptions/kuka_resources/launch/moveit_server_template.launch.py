@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from pathlib import Path
+
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
@@ -25,6 +27,26 @@ def _ros2_control_macro_file_from_family(robot_family):
     if robot_family.startswith("lbr_"):
         return f"{robot_family}_ros2_control_macro.xacro"
     return f"kr_{robot_family}_ros2_control_macro.xacro"
+
+
+def _robot_joint_limits(robot_support_package, robot_model, robot_prefix):
+    path = Path(get_package_share_directory(robot_support_package)) / (
+        f"config/{robot_model}_joint_limits.yaml"
+    )
+    use_assembly_limits = not path.is_file()
+    if use_assembly_limits:
+        path = Path(get_package_share_directory("preentend_description")) / (
+            f"config/joint_limits/{robot_model}_joint_limits.yaml"
+        )
+    with path.open(encoding="utf-8") as file:
+        limits = yaml.safe_load(file)
+    if use_assembly_limits:
+        limits["joint_limits"] = {
+            robot_prefix + name.removeprefix("robot_1_"): joint_limits
+            for name, joint_limits in limits["joint_limits"].items()
+            if name.startswith("robot_1_link_")
+        }
+    return path, limits, use_assembly_limits
 
 
 def launch_setup(context, *args, **kwargs):
@@ -122,9 +144,8 @@ def launch_setup(context, *args, **kwargs):
             + f"/config/planning_{dof.perform(context)}_axis.rviz"
         )
 
-    robot_joint_limits_file_path = (
-        get_package_share_directory(robot_support_package)
-        + f"/config/{robot_model_value}_joint_limits.yaml"
+    robot_joint_limits_file_path, merged_joint_limits, use_assembly_limits = _robot_joint_limits(
+        robot_support_package, robot_model_value, prefix.perform(context)
     )
 
     moveit_builder = MoveItConfigsBuilder(f"kuka_{moveit_config_pkg_value}")
@@ -144,11 +165,6 @@ def launch_setup(context, *args, **kwargs):
             mappings=srdf_mappings,
         )
 
-    with open(
-        robot_joint_limits_file_path,
-        encoding="utf-8",
-    ) as joint_limits_file:
-        merged_joint_limits = yaml.safe_load(joint_limits_file)
     if use_external_axis_value:
         with open(
             get_package_share_directory(kl_support_package_value)
@@ -162,7 +178,7 @@ def launch_setup(context, *args, **kwargs):
     moveit_config = (
         moveit_builder.robot_description_kinematics(file_path="config/kinematics.yaml")
         .trajectory_execution(file_path=controllers_file_path)
-        .joint_limits(file_path=robot_joint_limits_file_path)
+        .joint_limits(file_path=str(robot_joint_limits_file_path))
         .planning_scene_monitor(
             publish_robot_description=True, publish_robot_description_semantic=True
         )
@@ -173,6 +189,10 @@ def launch_setup(context, *args, **kwargs):
     robot_description_planning = moveit_config_dict.get("robot_description_planning", {})
     if not isinstance(robot_description_planning, dict):
         robot_description_planning = {}
+
+    if use_assembly_limits:
+        # The assembly file contains two arms; this template needs one.
+        robot_description_planning["joint_limits"] = {}
 
     # Merge pre-loaded joint limits without writing a temporary YAML file.
     for key, value in merged_joint_limits.items():

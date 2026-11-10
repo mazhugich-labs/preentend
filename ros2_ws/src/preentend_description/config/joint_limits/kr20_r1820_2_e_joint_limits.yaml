@@ -1,0 +1,89 @@
+# Joint limits for both kr20_r1820_2_e assemblies.
+# Linear-axis velocity matches the 1 m/s URDF limit; acceleration is 6.8119 m/s^2.
+default_velocity_scaling_factor: 1.0
+default_acceleration_scaling_factor: 1.0
+joint_limits:
+  robot_1_ea_linear_joint:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 6.8119
+    has_jerk_limits: false
+  robot_1_link_1_joint:
+    has_velocity_limits: true
+    max_velocity: 3.4034
+    has_acceleration_limits: true
+    max_acceleration: 7.8313
+    has_jerk_limits: false
+  robot_1_link_2_joint:
+    has_velocity_limits: true
+    max_velocity: 3.0543
+    has_acceleration_limits: true
+    max_acceleration: 1.533
+    has_jerk_limits: false
+  robot_1_link_3_joint:
+    has_velocity_limits: true
+    max_velocity: 3.1416
+    has_acceleration_limits: true
+    max_acceleration: 1.2748
+    has_jerk_limits: false
+  robot_1_link_4_joint:
+    has_velocity_limits: true
+    max_velocity: 6.2832
+    has_acceleration_limits: true
+    max_acceleration: 44.2579
+    has_jerk_limits: false
+  robot_1_link_5_joint:
+    has_velocity_limits: true
+    max_velocity: 6.2832
+    has_acceleration_limits: true
+    max_acceleration: 6.1837
+    has_jerk_limits: false
+  robot_1_link_6_joint:
+    has_velocity_limits: true
+    max_velocity: 9.5993
+    has_acceleration_limits: true
+    max_acceleration: 32.2332
+    has_jerk_limits: false
+  robot_2_ea_linear_joint:
+    has_velocity_limits: true
+    max_velocity: 1.0
+    has_acceleration_limits: true
+    max_acceleration: 6.8119
+    has_jerk_limits: false
+  robot_2_link_1_joint:
+    has_velocity_limits: true
+    max_velocity: 3.4034
+    has_acceleration_limits: true
+    max_acceleration: 7.8313
+    has_jerk_limits: false
+  robot_2_link_2_joint:
+    has_velocity_limits: true
+    max_velocity: 3.0543
+    has_acceleration_limits: true
+    max_acceleration: 1.533
+    has_jerk_limits: false
+  robot_2_link_3_joint:
+    has_velocity_limits: true
+    max_velocity: 3.1416
+    has_acceleration_limits: true
+    max_acceleration: 1.2748
+    has_jerk_limits: false
+  robot_2_link_4_joint:
+    has_velocity_limits: true
+    max_velocity: 6.2832
+    has_acceleration_limits: true
+    max_acceleration: 44.2579
+    has_jerk_limits: false
+  robot_2_link_5_joint:
+    has_velocity_limits: true
+    max_velocity: 6.2832
+    has_acceleration_limits: true
+    max_acceleration: 6.1837
+    has_jerk_limits: false
+  robot_2_link_6_joint:
+    has_velocity_limits: true
+    max_velocity: 9.5993
+    has_acceleration_limits: true
+    max_acceleration: 32.2332
+    has_jerk_limits: false
