@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!--
+    Dimensions and travel are in meters. The origin places the center of the
+    track's bottom face relative to parent. The carrier starts at the track
+    center and moves along X from -travel/2 to +travel/2. Attach a child to
+    ${prefix}ea_mount_link; its frame is centered on the carrier's top face.
+    The caller should choose dimensions and travel that keep the carrier on
+    the track. Masses and joint limits are placeholders for a mock model.
+  -->
+  <xacro:macro name="mock_linear_axis"
+               params="prefix parent track_length=6.4 track_width=0.4 track_height=0.2 carrier_length=0.4 carrier_width=0.4 carrier_height=0.4 travel=6 *origin">
+    <link name="${prefix}ea_track_link">
+      <visual>
+        <origin xyz="0 0 ${track_height / 2}"/>
+        <geometry><box size="${track_length} ${track_width} ${track_height}"/></geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 ${track_height / 2}"/>
+        <geometry><box size="${track_length} ${track_width} ${track_height}"/></geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 ${track_height / 2}"/>
+        <mass value="1"/>
+        <inertia ixx="${(track_width**2 + track_height**2) / 12}" ixy="0" ixz="0"
+                 iyy="${(track_length**2 + track_height**2) / 12}" iyz="0"
+                 izz="${(track_length**2 + track_width**2) / 12}"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}ea_track_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${prefix}ea_track_link"/>
+      <xacro:insert_block name="origin"/>
+    </joint>
+
+    <link name="${prefix}ea_carrier_link">
+      <visual>
+        <geometry><box size="${carrier_length} ${carrier_width} ${carrier_height}"/></geometry>
+      </visual>
+      <collision>
+        <geometry><box size="${carrier_length} ${carrier_width} ${carrier_height}"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="1"/>
+        <inertia ixx="${(carrier_width**2 + carrier_height**2) / 12}" ixy="0" ixz="0"
+                 iyy="${(carrier_length**2 + carrier_height**2) / 12}" iyz="0"
+                 izz="${(carrier_length**2 + carrier_width**2) / 12}"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}ea_linear_joint" type="prismatic">
+      <parent link="${prefix}ea_track_link"/>
+      <child link="${prefix}ea_carrier_link"/>
+      <origin xyz="0 0 ${track_height + carrier_height / 2}"/>
+      <axis xyz="1 0 0"/>
+      <limit lower="${-travel / 2}" upper="${travel / 2}" effort="1000" velocity="1"/>
+    </joint>
+
+    <link name="${prefix}ea_mount_link"/>
+    <joint name="${prefix}ea_mount_joint" type="fixed">
+      <parent link="${prefix}ea_carrier_link"/>
+      <child link="${prefix}ea_mount_link"/>
+      <origin xyz="0 0 ${carrier_height / 2}"/>
+    </joint>
+  </xacro:macro>
+</robot>
