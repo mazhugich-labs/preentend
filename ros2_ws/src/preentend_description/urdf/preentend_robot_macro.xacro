@@ -4,7 +4,7 @@
   <xacro:include filename="$(find mock_tool_description)/urdf/mock_tool_macro.xacro"/>
 
   <!-- Origin places the bottom center of the track relative to parent. -->
-  <xacro:macro name="robot_on_linear_axis"
+  <xacro:macro name="preentend_robot"
                params="prefix parent robot_model track_length:=6.4 track_width:=0.4 track_height:=0.2 carrier_length:=0.4 carrier_width:=0.4 carrier_height:=0.4 travel:=6 *origin">
     <!-- Robot models with a corresponding macro in this workspace. -->
     <xacro:property name="models" value="${dict([

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="two_robots_on_linear_axes" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="preentend" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:arg name="robot_model" default="kr30_r2100"/>
   <!-- Center-to-center distance between the parallel tracks, in meters. -->
   <xacro:arg name="separation" default="4.0"/>
@@ -10,16 +10,16 @@
   <xacro:arg name="carrier_width" default="0.4"/>
   <xacro:arg name="carrier_height" default="0.4"/>
   <xacro:arg name="travel" default="6.0"/>
-  <xacro:include filename="$(find preentend_description)/urdf/robot_on_linear_axis_macro.xacro"/>
+  <xacro:include filename="$(find preentend_description)/urdf/preentend_robot_macro.xacro"/>
   <link name="world"/>
-  <xacro:robot_on_linear_axis prefix="robot_1_" parent="world" robot_model="$(arg robot_model)"
+  <xacro:preentend_robot prefix="robot_1_" parent="world" robot_model="$(arg robot_model)"
       track_length="$(arg track_length)" track_width="$(arg track_width)" track_height="$(arg track_height)"
       carrier_length="$(arg carrier_length)" carrier_width="$(arg carrier_width)" carrier_height="$(arg carrier_height)" travel="$(arg travel)">
     <origin xyz="0 ${-float('$(arg separation)') / 2} 0" rpy="0 0 0"/>
-  </xacro:robot_on_linear_axis>
-  <xacro:robot_on_linear_axis prefix="robot_2_" parent="world" robot_model="$(arg robot_model)"
+  </xacro:preentend_robot>
+  <xacro:preentend_robot prefix="robot_2_" parent="world" robot_model="$(arg robot_model)"
       track_length="$(arg track_length)" track_width="$(arg track_width)" track_height="$(arg track_height)"
       carrier_length="$(arg carrier_length)" carrier_width="$(arg carrier_width)" carrier_height="$(arg carrier_height)" travel="$(arg travel)">
     <origin xyz="0 ${float('$(arg separation)') / 2} 0" rpy="0 0 0"/>
-  </xacro:robot_on_linear_axis>
+  </xacro:preentend_robot>
 </robot>

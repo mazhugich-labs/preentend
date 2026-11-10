@@ -22,7 +22,7 @@ from rclpy.node import Node
 MODELS = (
     'lrmate25_19a', 'lrmate25_19afc', 'm20_25_18d', 'm20_35_18d',
     'kr16_r2010_2', 'kr20_r1820_2_e', 'kr35_r1840_3', 'kr35_r1840_3_hw',
-    'kr20_r3100', 'kr30_r2100',
+    'kr30_r2100',
 )
 DIMENSIONS = (
     'separation', 'track_length', 'track_width', 'track_height',
@@ -34,7 +34,7 @@ DEFAULTS = ('4.0', '6.4', '0.4', '0.2', '0.4', '0.4', '0.4', '6.0')
 def generate_description(model, dimensions):
     """Expand xacro without a shell, retaining the assembly dimensions."""
     description = Path(get_package_share_directory('preentend_description')) / 'robot' / (
-        'two_robots_on_linear_axes.urdf.xacro'
+        'preentend.urdf.xacro'
     )
     command = ['xacro', str(description), f'robot_model:={model}']
     command.extend(f'{name}:={value}' for name, value in dimensions.items())

@@ -28,7 +28,7 @@ def generate_launch_description():
         for name, value in defaults.items()
     ]
     description_file = PathJoinSubstitution(
-        [FindPackageShare("preentend_description"), "robot", "two_robots_on_linear_axes.urdf.xacro"]
+        [FindPackageShare("preentend_description"), "robot", "preentend.urdf.xacro"]
     )
     command = [FindExecutable(name="xacro"), " ", description_file]
     for name in defaults:
