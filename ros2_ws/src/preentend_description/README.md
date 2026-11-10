@@ -32,7 +32,8 @@ To publish the model and open RViz with its default configuration:
 ros2 launch preentend_description view_preentend.launch.py robot_model:=kr30_r2100 separation:=3.0
 ```
 
-In RViz, set the fixed frame to `world` and add a RobotModel display using the
-`/robot_description` topic. The joint state publisher GUI controls both arms
-and linear axes. The launch file also accepts the dimension and travel
-arguments above.
+The launch opens RViz, the joint-state controls, and a robot model selector.
+Choose a model and click **Load** to replace both arms while keeping the track
+dimensions and separation supplied at launch. The joint-state controls are
+rebuilt for the selected model. The launch file also accepts the dimension and
+travel arguments above.

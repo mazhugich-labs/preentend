@@ -43,13 +43,21 @@ def generate_launch_description():
                 executable="robot_state_publisher",
                 parameters=[{"robot_description": robot_description}],
             ),
-            Node(package="joint_state_publisher_gui", executable="joint_state_publisher_gui"),
+            Node(package="joint_state_publisher", executable="joint_state_publisher"),
+            Node(
+                package="preentend_description",
+                executable="robot_model_selector",
+                parameters=[{
+                    name: ParameterValue(LaunchConfiguration(name), value_type=str)
+                    for name in defaults
+                }],
+            ),
             Node(
                 package="rviz2",
                 executable="rviz2",
-                # arguments=["-d", PathJoinSubstitution(
-                #     [FindPackageShare("preentend_description"), "rviz", "view_preentend.rviz"]
-                # )],
+                arguments=["-d", PathJoinSubstitution(
+                    [FindPackageShare("preentend_description"), "rviz", "view_preentend.rviz"]
+                )],
             ),
         ]
     )

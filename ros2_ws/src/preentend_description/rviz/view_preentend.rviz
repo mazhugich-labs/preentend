@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 555
   - Class: rviz_common/Selection
@@ -54,7 +55,7 @@ Visualization Manager:
       Description Source: Topic
       Description Topic:
         Depth: 5
-        Durability Policy: Volatile
+        Durability Policy: Transient Local
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /robot_description
@@ -65,6 +66,29 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        robot_1_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_1_ea_carrier_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_1_ea_mount_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        robot_1_ea_track_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_1_flange:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         robot_1_link_1:
           Alpha: 1
           Show Axes: false
@@ -95,26 +119,45 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        robot_1_base_link:
+        robot_1_t_link1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        robot_1_ea_carrier_link:
+        robot_1_t_link2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        robot_1_ea_mount_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        robot_1_ea_track_link:
+        robot_1_t_mounting_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        robot_1_flange:
+        robot_1_t_tcp:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        robot_2_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_2_ea_carrier_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_2_ea_mount_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        robot_2_ea_track_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        robot_2_flange:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -148,26 +191,22 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        robot_2_base_link:
+        robot_2_t_link1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        robot_2_ea_carrier_link:
+        robot_2_t_link2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        robot_2_ea_mount_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        robot_2_ea_track_link:
+        robot_2_t_mounting_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        robot_2_flange:
+        robot_2_t_tcp:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -190,6 +229,16 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        robot_1_base_link:
+          Value: false
+        robot_1_ea_carrier_link:
+          Value: false
+        robot_1_ea_mount_link:
+          Value: false
+        robot_1_ea_track_link:
+          Value: false
+        robot_1_flange:
+          Value: true
         robot_1_link_1:
           Value: false
         robot_1_link_2:
@@ -202,16 +251,24 @@ Visualization Manager:
           Value: false
         robot_1_link_6:
           Value: false
-        robot_1_base_link:
+        robot_1_t_link1:
           Value: false
-        robot_1_ea_carrier_link:
+        robot_1_t_link2:
           Value: false
-        robot_1_ea_mount_link:
+        robot_1_t_mounting_link:
           Value: false
-        robot_1_ea_track_link:
+        robot_1_t_tcp:
+          Value: true
+        robot_2_base_link:
           Value: false
-        robot_1_flange:
+        robot_2_ea_carrier_link:
           Value: false
+        robot_2_ea_mount_link:
+          Value: false
+        robot_2_ea_track_link:
+          Value: false
+        robot_2_flange:
+          Value: true
         robot_2_link_1:
           Value: false
         robot_2_link_2:
@@ -224,16 +281,14 @@ Visualization Manager:
           Value: false
         robot_2_link_6:
           Value: false
-        robot_2_base_link:
+        robot_2_t_link1:
           Value: false
-        robot_2_ea_carrier_link:
+        robot_2_t_link2:
           Value: false
-        robot_2_ea_mount_link:
+        robot_2_t_mounting_link:
           Value: false
-        robot_2_ea_track_link:
-          Value: false
-        robot_2_flange:
-          Value: false
+        robot_2_t_tcp:
+          Value: true
         world:
           Value: false
       Marker Scale: 1
@@ -254,6 +309,11 @@ Visualization Manager:
                           robot_1_link_5:
                             robot_1_link_6:
                               robot_1_flange:
+                                robot_1_t_mounting_link:
+                                  robot_1_t_link1:
+                                    robot_1_t_link2:
+                                      robot_1_t_tcp:
+                                        {}
           robot_2_ea_track_link:
             robot_2_ea_carrier_link:
               robot_2_ea_mount_link:
@@ -265,6 +325,11 @@ Visualization Manager:
                           robot_2_link_5:
                             robot_2_link_6:
                               robot_2_flange:
+                                robot_2_t_mounting_link:
+                                  robot_2_t_link1:
+                                    robot_2_t_link2:
+                                      robot_2_t_tcp:
+                                        {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -313,25 +378,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 8.548384666442871
+      Distance: 13.772154808044434
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.7670993804931641
-        Y: -0.4991512596607208
-        Z: 0.5320905447006226
+        X: 0.2862953245639801
+        Y: 0.2621447741985321
+        Z: 0.3544292747974396
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4153982996940613
+      Pitch: 0.5003982186317444
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.725398063659668
+      Yaw: 0.9903978109359741
     Saved: ~
 Window Geometry:
   Displays:
