@@ -12,12 +12,12 @@ controller_manager:
 joint_trajectory_controller:
   ros__parameters:
     joints:
-    - joint_1
-    - joint_2
-    - joint_3
-    - joint_4
-    - joint_5
-    - joint_6
+    - link_1_joint
+    - link_2_joint
+    - link_3_joint
+    - link_4_joint
+    - link_5_joint
+    - link_6_joint
 
     command_interfaces:
       - position

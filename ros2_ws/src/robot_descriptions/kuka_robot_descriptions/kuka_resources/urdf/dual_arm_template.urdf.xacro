@@ -78,17 +78,11 @@
   <!-- world link -->
   <link name="world"/>
   <!-- Robot 1 links and joints -->
-  <xacro:call macro="${robot1_model_macro_name}" prefix="$(arg robot1_prefix)" package_name="${robot1_support_package}"/>
-  <joint name="${robot1_prefix_value}world-base_link" type="fixed">
-    <parent link="world"/>
-    <child link="${robot1_prefix_value}base_link"/>
+  <xacro:call macro="${robot1_model_macro_name}" prefix="$(arg robot1_prefix)" package_name="${robot1_support_package}" parent="world">
     <origin xyz="$(arg robot1_x) $(arg robot1_y) $(arg robot1_z)" rpy="$(arg robot1_roll) $(arg robot1_pitch) $(arg robot1_yaw)"/>
-  </joint>
+  </xacro:call>
   <!-- Robot 2 links and joints -->
-  <xacro:call macro="${robot2_model_macro_name}" prefix="$(arg robot2_prefix)" package_name="${robot2_support_package}"/>
-  <joint name="${robot2_prefix_value}world-base_link" type="fixed">
-    <parent link="world"/>
-    <child link="${robot2_prefix_value}base_link"/>
+  <xacro:call macro="${robot2_model_macro_name}" prefix="$(arg robot2_prefix)" package_name="${robot2_support_package}" parent="world">
     <origin xyz="$(arg robot2_x) $(arg robot2_y) $(arg robot2_z)" rpy="$(arg robot2_roll) $(arg robot2_pitch) $(arg robot2_yaw)"/>
-  </joint>
+  </xacro:call>
 </robot>

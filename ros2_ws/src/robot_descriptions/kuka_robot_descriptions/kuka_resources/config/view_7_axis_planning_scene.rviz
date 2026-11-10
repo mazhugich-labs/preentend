@@ -60,10 +60,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         base_link:
           Alpha: 1
           Show Axes: false
@@ -108,10 +104,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         world:
           Alpha: 1
           Show Axes: false
@@ -129,8 +121,6 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        base:
-          Value: true
         base_link:
           Value: true
         flange:
@@ -149,8 +139,6 @@ Visualization Manager:
           Value: true
         link_7:
           Value: true
-        tool0:
-          Value: true
         world:
           Value: true
       Marker Scale: 0.5
@@ -161,8 +149,6 @@ Visualization Manager:
       Tree:
         world:
           base_link:
-            base:
-              {}
             link_1:
               link_2:
                 link_3:
@@ -171,8 +157,6 @@ Visualization Manager:
                       link_6:
                         link_7:
                           flange:
-                            {}
-                          tool0:
                             {}
       Update Interval: 0
       Value: true

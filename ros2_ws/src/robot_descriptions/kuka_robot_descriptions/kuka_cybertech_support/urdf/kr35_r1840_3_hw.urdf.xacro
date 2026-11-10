@@ -31,11 +31,7 @@
   <!-- world link -->
   <link name="world"/>
   <!-- robot links, joints -->
-  <xacro:kuka_kr35_r1840_3_hw_robot prefix="$(arg prefix)" package_name="kuka_cybertech_support"/>
-  <!-- default world - base_link joint -->
-  <joint name="$(arg prefix)world-base_link" type="fixed">
-    <parent link="world"/>
-    <child link="$(arg prefix)base_link"/>
+  <xacro:kuka_kr35_r1840_3_hw_robot prefix="$(arg prefix)" package_name="kuka_cybertech_support" parent="world">
     <origin xyz="$(arg x) $(arg y) $(arg z)" rpy="$(arg roll) $(arg pitch) $(arg yaw)"/>
-  </joint>
+  </xacro:kuka_kr35_r1840_3_hw_robot>
 </robot>

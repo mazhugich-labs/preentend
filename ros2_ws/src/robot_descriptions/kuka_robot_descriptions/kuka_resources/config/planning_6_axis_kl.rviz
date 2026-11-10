@@ -61,10 +61,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         base_link:
           Alpha: 1
           Show Axes: false
@@ -114,10 +110,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         world:
           Alpha: 1
           Show Axes: false
@@ -151,10 +143,6 @@ Visualization Manager:
           Expand Link Details: false
           Expand Tree: false
           Link Tree Style: Links in Alphabetic Order
-          base:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           base_link:
             Alpha: 1
             Show Axes: false
@@ -204,10 +192,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          tool0:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           world:
             Alpha: 1
             Show Axes: false
@@ -221,8 +205,6 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        base:
-          Value: true
         base_link:
           Value: true
         flange:
@@ -243,8 +225,6 @@ Visualization Manager:
           Value: true
         rail_link_1:
           Value: true
-        tool0:
-          Value: true
         world:
           Value: true
       Marker Scale: 0.5
@@ -257,8 +237,6 @@ Visualization Manager:
           rail_base_link:
             rail_link_1:
               base_link:
-                base:
-                  {}
                 link_1:
                   link_2:
                     link_3:
@@ -266,8 +244,6 @@ Visualization Manager:
                         link_5:
                           link_6:
                             flange:
-                              tool0:
-                                {}
       Update Interval: 0
       Value: true
     - Class: rviz_default_plugins/MarkerArray
@@ -292,10 +268,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         base_link:
           Alpha: 1
           Show Axes: false
@@ -345,10 +317,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         world:
           Alpha: 1
           Show Axes: false
@@ -397,10 +365,6 @@ Visualization Manager:
           Expand Link Details: false
           Expand Tree: false
           Link Tree Style: Links in Alphabetic Order
-          base:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           base_link:
             Alpha: 1
             Show Axes: false
@@ -450,10 +414,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          tool0:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           world:
             Alpha: 1
             Show Axes: false
@@ -504,10 +464,6 @@ Visualization Manager:
           Expand Link Details: false
           Expand Tree: false
           Link Tree Style: Links in Alphabetic Order
-          base:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           base_link:
             Alpha: 1
             Show Axes: false
@@ -557,10 +513,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          tool0:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           world:
             Alpha: 1
             Show Axes: false

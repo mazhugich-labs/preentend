@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr20_r1820_2_e">
-  <xacro:macro name="kuka_kr20_r1820_2_e_robot" params="prefix package_name">
-    <link name="${prefix}base"/>
+  <xacro:macro name="kuka_kr20_r1820_2_e_robot" params="prefix package_name parent:='' *origin">
     <link name="${prefix}base_link">
       <collision>
         <geometry>
@@ -137,63 +136,60 @@
         <origin rpy="-2.6779399020961754 1.5707881132943111 -2.6779472485198745" xyz="-1.4834944904975613 8.347024887031148e-06 1.1013105935004437"/>
       </visual>
     </link>
-    <link name="${prefix}tool0"/>
-    <joint name="${prefix}base_link-base" type="fixed">
-      <child link="${prefix}base"/>
-      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-      <parent link="${prefix}base_link"/>
-    </joint>
-    <joint name="${prefix}joint_1" type="revolute">
+    <joint name="${prefix}link_1_joint" type="revolute">
       <axis xyz="0.0 0.0 1.0"/>
       <child link="${prefix}link_1"/>
       <limit effort="1663.2" lower="-3.2289" upper="3.2289" velocity="3.4034"/>
       <origin rpy="-3.1416 0.0 0.0" xyz="0.0 0.0 0.3868"/>
       <parent link="${prefix}base_link"/>
     </joint>
-    <joint name="${prefix}joint_2" type="revolute">
+    <joint name="${prefix}link_2_joint" type="revolute">
       <axis xyz="0.0 0.0 1.0"/>
       <child link="${prefix}link_2"/>
       <limit effort="1356.252" lower="-3.2289" upper="1.1345" velocity="3.0543"/>
       <origin rpy="1.5708 0.0 0.0" xyz="0.2 -0.0113 -0.1467"/>
       <parent link="${prefix}link_1"/>
     </joint>
-    <joint name="${prefix}joint_3" type="revolute">
+    <joint name="${prefix}link_3_joint" type="revolute">
       <axis xyz="0.0 0.0 1.0"/>
       <child link="${prefix}link_3"/>
       <limit effort="429.6209" lower="-2.4086" upper="3.0543" velocity="3.1416"/>
       <origin rpy="0.0 0.0 0.0" xyz="0.78 0.0 -0.1423"/>
       <parent link="${prefix}link_2"/>
     </joint>
-    <joint name="${prefix}joint_4" type="revolute">
+    <joint name="${prefix}link_4_joint" type="revolute">
       <axis xyz="0.0 0.0 1.0"/>
       <child link="${prefix}link_4"/>
       <limit effort="193.729" lower="-6.1087" upper="6.1087" velocity="6.2832"/>
       <origin rpy="1.5708 0.0 -1.5708" xyz="0.2703 -0.17 0.131"/>
       <parent link="${prefix}link_3"/>
     </joint>
-    <joint name="${prefix}joint_5" type="revolute">
+    <joint name="${prefix}link_5_joint" type="revolute">
       <axis xyz="0.0 0.0 1.0"/>
       <child link="${prefix}link_5"/>
       <limit effort="76.2757" lower="-2.0944" upper="2.0944" velocity="6.2832"/>
       <origin rpy="0.0 1.5708 1.5708" xyz="0.0 0.083 -0.5525"/>
       <parent link="${prefix}link_4"/>
     </joint>
-    <joint name="${prefix}joint_6" type="revolute">
+    <joint name="${prefix}link_6_joint" type="revolute">
       <axis xyz="0.0 0.0 1.0"/>
       <child link="${prefix}link_6"/>
       <limit effort="44.4912" lower="-6.1087" upper="6.1087" velocity="9.5993"/>
       <origin rpy="1.5708 0.0 -1.5708" xyz="0.0785 0.0 -0.083"/>
       <parent link="${prefix}link_5"/>
     </joint>
-    <joint name="${prefix}link_6-flange" type="fixed">
+    <joint name="${prefix}flange_joint" type="fixed">
       <child link="${prefix}flange"/>
       <origin rpy="0.0 1.5708 0.0" xyz="0.0 0.0 -0.052"/>
       <parent link="${prefix}link_6"/>
     </joint>
-    <joint name="${prefix}link_6-tool0" type="fixed">
-      <child link="${prefix}tool0"/>
-      <origin rpy="3.1416 -0.0 3.1416" xyz="0.0 0.0 -0.052"/>
-      <parent link="${prefix}link_6"/>
-    </joint>
+
+    <xacro:if value="${parent != ''}">
+      <joint name="${prefix}base_link_joint" type="fixed">
+        <xacro:insert_block name="origin"/>
+        <parent link="${parent}"/>
+        <child link="${prefix}base_link"/>
+      </joint>
+    </xacro:if>
   </xacro:macro>
 </robot>

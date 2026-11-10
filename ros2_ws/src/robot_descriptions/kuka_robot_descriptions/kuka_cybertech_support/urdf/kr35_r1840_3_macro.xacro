@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="kr35_r1840_3">
-  <xacro:macro name="kuka_kr35_r1840_3_robot" params="prefix package_name">
-    <link name="${prefix}base"/>
+  <xacro:macro name="kuka_kr35_r1840_3_robot" params="prefix package_name parent:='' *origin">
     <link name="${prefix}base_link">
       <collision>
         <geometry>
@@ -136,63 +135,60 @@
         <origin rpy="1.2246467991473532e-16 1.5707963267948966 0.0" xyz="-1.4535000000000002 -6.235184769154167e-17 1.0926"/>
       </visual>
     </link>
-    <link name="${prefix}tool0"/>
-    <joint name="${prefix}base_link-base" type="fixed">
-      <child link="${prefix}base"/>
-      <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 0.0"/>
-      <parent link="${prefix}base_link"/>
-    </joint>
-    <joint name="${prefix}joint_1" type="revolute">
+    <joint name="${prefix}link_1_joint" type="revolute">
       <axis xyz="0.0 0.0 1.0"/>
       <child link="${prefix}link_1"/>
       <limit effort="1920.0" lower="-3.2288591161895095" upper="3.2288591161895095" velocity="3.141592653589793"/>
       <origin rpy="3.141592653589793 0.0 0.0" xyz="0.0 0.0 0.26380000000000003"/>
       <parent link="${prefix}base_link"/>
     </joint>
-    <joint name="${prefix}joint_2" type="revolute">
+    <joint name="${prefix}link_2_joint" type="revolute">
       <axis xyz="0.0 0.0 1.0"/>
       <child link="${prefix}link_2"/>
       <limit effort="1718.4401419395226" lower="-3.2288591161895095" upper="1.1344640137963142" velocity="3.141592653589793"/>
       <origin rpy="1.5707963267948966 0.0 0.0" xyz="0.15 0.0935 -0.1797"/>
       <parent link="${prefix}link_1"/>
     </joint>
-    <joint name="${prefix}joint_3" type="revolute">
+    <joint name="${prefix}link_3_joint" type="revolute">
       <axis xyz="0.0 0.0 1.0"/>
       <child link="${prefix}link_3"/>
       <limit effort="688.567010870269" lower="-2.0943951023931953" upper="3.1066860685499065" velocity="3.490658503988659"/>
       <origin rpy="0.0 0.0 0.0" xyz="0.81 0.0 -0.0225"/>
       <parent link="${prefix}link_2"/>
     </joint>
-    <joint name="${prefix}joint_4" type="revolute">
+    <joint name="${prefix}link_4_joint" type="revolute">
       <axis xyz="0.0 0.0 1.0"/>
       <child link="${prefix}link_4"/>
       <limit effort="252.02227341089431" lower="-3.141592653589793" upper="3.141592653589793" velocity="6.981317007977318"/>
       <origin rpy="1.5707963267948966 0.0 -1.5707963267948966" xyz="0.2505 -0.2 0.116"/>
       <parent link="${prefix}link_3"/>
     </joint>
-    <joint name="${prefix}joint_5" type="revolute">
+    <joint name="${prefix}link_5_joint" type="revolute">
       <axis xyz="0.0 0.0 1.0"/>
       <child link="${prefix}link_5"/>
       <limit effort="182.7441770928834" lower="-2.129301687433082" upper="2.129301687433082" velocity="6.806784082777885"/>
       <origin rpy="0.0 1.5707963267948966 1.5707963267948966" xyz="0.0 -0.0495 -0.6065"/>
       <parent link="${prefix}link_4"/>
     </joint>
-    <joint name="${prefix}joint_6" type="revolute">
+    <joint name="${prefix}link_6_joint" type="revolute">
       <axis xyz="0.0 0.0 1.0"/>
       <child link="${prefix}link_6"/>
       <limit effort="86.0436543199055" lower="-6.2482787221397" upper="6.2482787221397" velocity="7.3303828583761845"/>
       <origin rpy="1.5707963267948966 0.0 -1.5707963267948966" xyz="0.0856 0.0 0.0495"/>
       <parent link="${prefix}link_5"/>
     </joint>
-    <joint name="${prefix}link_6-flange" type="fixed">
+    <joint name="${prefix}flange_joint" type="fixed">
       <child link="${prefix}flange"/>
       <origin rpy="0.0 1.5707963267948966 0.0" xyz="0.0 0.0 -0.0414"/>
       <parent link="${prefix}link_6"/>
     </joint>
-    <joint name="${prefix}link_6-tool0" type="fixed">
-      <child link="${prefix}tool0"/>
-      <origin rpy="3.141592653589793 0.0 3.141592653589793" xyz="0.0 0.0 -0.0414"/>
-      <parent link="${prefix}link_6"/>
-    </joint>
+
+    <xacro:if value="${parent != ''}">
+      <joint name="${prefix}base_link_joint" type="fixed">
+        <xacro:insert_block name="origin"/>
+        <parent link="${parent}"/>
+        <child link="${prefix}base_link"/>
+      </joint>
+    </xacro:if>
   </xacro:macro>
 </robot>

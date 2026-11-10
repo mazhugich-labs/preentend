@@ -68,32 +68,32 @@ Visualization Manager:
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
-        J1_link:
+        link_1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        J2_link:
+        link_2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        J3_link:
+        link_3:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        J4_link:
+        link_4:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        J5_link:
+        link_5:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        J6_link:
+        link_6:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -104,15 +104,7 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        ee_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
         flange:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        wbase:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -133,25 +125,21 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        J1_link:
+        link_1:
           Value: false
-        J2_link:
+        link_2:
           Value: false
-        J3_link:
+        link_3:
           Value: false
-        J4_link:
+        link_4:
           Value: false
-        J5_link:
+        link_5:
           Value: false
-        J6_link:
+        link_6:
           Value: false
         base_link:
           Value: true
-        ee_link:
-          Value: true
         flange:
-          Value: true
-        wbase:
           Value: true
         world:
           Value: true
@@ -163,17 +151,13 @@ Visualization Manager:
       Tree:
         world:
           base_link:
-            J1_link:
-              J2_link:
-                J3_link:
-                  J4_link:
-                    J5_link:
-                      J6_link:
+            link_1:
+              link_2:
+                link_3:
+                  link_4:
+                    link_5:
+                      link_6:
                         flange:
-                          ee_link:
-                            {}
-            wbase:
-              {}
       Update Interval: 0
       Value: true
   Enabled: true

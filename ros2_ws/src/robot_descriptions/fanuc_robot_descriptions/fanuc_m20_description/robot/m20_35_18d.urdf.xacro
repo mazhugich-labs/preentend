@@ -5,8 +5,7 @@
   />
 
   <link name="world" />
-  <link name="ee_link" />
-  <xacro:m20_35_18d parent="world" child="ee_link">
+  <xacro:m20_35_18d parent="world">
     <origin xyz="0 0 0" rpy="0 0 0" />
   </xacro:m20_35_18d>
 </robot>
