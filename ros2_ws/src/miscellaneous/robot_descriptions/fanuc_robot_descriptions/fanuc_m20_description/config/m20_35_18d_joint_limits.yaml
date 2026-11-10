@@ -1,0 +1,42 @@
+# Velocity limits match m20_35_18d URDF (rad/s).
+# Acceleration limits are estimates from KUKA kr35_r1840_3 (rad/s^2),
+# not FANUC manufacturer specifications.
+default_velocity_scaling_factor: 1.0
+default_acceleration_scaling_factor: 1.0
+joint_limits:
+  link_1_joint:
+    has_velocity_limits: true
+    max_velocity: 3.14159265358979
+    has_acceleration_limits: true
+    max_acceleration: 6.54498469497874
+    has_jerk_limits: false
+  link_2_joint:
+    has_velocity_limits: true
+    max_velocity: 3.14159265358979
+    has_acceleration_limits: true
+    max_acceleration: 0.954891384069846
+    has_jerk_limits: false
+  link_3_joint:
+    has_velocity_limits: true
+    max_velocity: 3.49065850398866
+    has_acceleration_limits: true
+    max_acceleration: 0.921018074931045
+    has_jerk_limits: false
+  link_4_joint:
+    has_velocity_limits: true
+    max_velocity: 6.10865238198015
+    has_acceleration_limits: true
+    max_acceleration: 24.9332750284904
+    has_jerk_limits: false
+  link_5_joint:
+    has_velocity_limits: true
+    max_velocity: 6.10865238198015
+    has_acceleration_limits: true
+    max_acceleration: 11.7358346254791
+    has_jerk_limits: false
+  link_6_joint:
+    has_velocity_limits: true
+    max_velocity: 6.98131700797732
+    has_acceleration_limits: true
+    max_acceleration: 14.6607657167524
+    has_jerk_limits: false
