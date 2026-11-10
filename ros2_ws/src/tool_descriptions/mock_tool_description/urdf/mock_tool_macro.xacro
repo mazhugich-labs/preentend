@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!--
+    Dimensions are in meters. The origin places the center of the mounting
+    cylinder's outer face relative to parent. The cylinder and both box links
+    extend along -X; the second box rises in +Z with its bottom aligned to
+    the first box. Each link has a placeholder mass of 1 kg.
+  -->
+  <xacro:macro name="mock_tool"
+               params="prefix parent mounting_radius:=0.04 mounting_height:=0.02 link1_height:=0.12 link1_width:=0.12 link1_length:=0.08 link2_length:=0.12 link2_width:=0.12 link2_height:=0.36 *origin">
+    <link name="${prefix}t_mounting_link">
+      <visual>
+        <origin xyz="${-mounting_height / 2} 0 0" rpy="0 ${pi / 2} 0"/>
+        <geometry><cylinder radius="${mounting_radius}" length="${mounting_height}"/></geometry>
+      </visual>
+      <collision>
+        <origin xyz="${-mounting_height / 2} 0 0" rpy="0 ${pi / 2} 0"/>
+        <geometry><cylinder radius="${mounting_radius}" length="${mounting_height}"/></geometry>
+      </collision>
+      <inertial>
+        <origin xyz="${-mounting_height / 2} 0 0"/>
+        <mass value="1"/>
+        <inertia ixx="${mounting_radius**2 / 2}" ixy="0" ixz="0"
+                 iyy="${(3 * mounting_radius**2 + mounting_height**2) / 12}" iyz="0"
+                 izz="${(3 * mounting_radius**2 + mounting_height**2) / 12}"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}t_mounting_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${prefix}t_mounting_link"/>
+      <xacro:insert_block name="origin"/>
+    </joint>
+
+    <link name="${prefix}t_link1">
+      <visual><geometry><box size="${link1_length} ${link1_width} ${link1_height}"/></geometry></visual>
+      <collision><geometry><box size="${link1_length} ${link1_width} ${link1_height}"/></geometry></collision>
+      <inertial>
+        <mass value="1"/>
+        <inertia ixx="${(link1_width**2 + link1_height**2) / 12}" ixy="0" ixz="0"
+                 iyy="${(link1_length**2 + link1_height**2) / 12}" iyz="0"
+                 izz="${(link1_length**2 + link1_width**2) / 12}"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}t_link1_joint" type="fixed">
+      <parent link="${prefix}t_mounting_link"/>
+      <child link="${prefix}t_link1"/>
+      <origin xyz="${-mounting_height - link1_length / 2} 0 0"/>
+    </joint>
+
+    <link name="${prefix}t_link2">
+      <visual><geometry><box size="${link2_length} ${link2_width} ${link2_height}"/></geometry></visual>
+      <collision><geometry><box size="${link2_length} ${link2_width} ${link2_height}"/></geometry></collision>
+      <inertial>
+        <mass value="1"/>
+        <inertia ixx="${(link2_width**2 + link2_height**2) / 12}" ixy="0" ixz="0"
+                 iyy="${(link2_length**2 + link2_height**2) / 12}" iyz="0"
+                 izz="${(link2_length**2 + link2_width**2) / 12}"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}t_link2_joint" type="fixed">
+      <parent link="${prefix}t_link1"/>
+      <child link="${prefix}t_link2"/>
+      <origin xyz="${-(link1_length + link2_length) / 2} 0 ${(link2_height - link1_height) / 2}"/>
+    </joint>
+
+    <link name="${prefix}t_tcp" />
+    <joint name="${prefix}t_tcp_joint" type="fixed">
+      <origin xyz="${-link2_length/2} 0 0"/>
+      <parent link="${prefix}t_link2"/>
+      <child link="${prefix}t_tcp"/>
+    </joint>
+  </xacro:macro>
+</robot>
