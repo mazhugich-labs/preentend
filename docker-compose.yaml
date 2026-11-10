@@ -1,0 +1,32 @@
+services:
+  ros2:
+    build:
+      dockerfile: ${PROJECT_ROOT}/docker/Dockerfile.ros2
+      args:
+        - USERNAME=${USERNAME:-ros2_user}
+        - USER_ID=${USER_ID:-1000}
+        - GROUP_ID=${GROUP_ID:-1000}
+    group_add:
+      - "44"
+      - "990"
+    container_name: ${PROJECT_NAME}-ros2
+    network_mode: host
+    tty: true
+    stdin_open: true
+    privileged: true
+    environment:
+      - DISPLAY=${DISPLAY:-0}
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    volumes:
+      - /tmp/.docker.xauth:/tmp/.docker.xauth
+      - ${PROJECT_ROOT}/ros2_ws:/home/ros2_ws
+    working_dir: /home/ros2_ws
+    devices:
+      - /dev/dri:/dev/dri
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
