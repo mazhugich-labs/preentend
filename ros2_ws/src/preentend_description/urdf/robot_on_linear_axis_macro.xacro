@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find mock_external_axis_description)/urdf/mock_linear_axis_macro.xacro"/>
+  <xacro:include filename="$(find mock_tool_description)/urdf/mock_tool_macro.xacro"/>
+
+  <!-- Origin places the bottom center of the track relative to parent. -->
+  <xacro:macro name="robot_on_linear_axis"
+               params="prefix parent robot_model track_length:=6.4 track_width:=0.4 track_height:=0.2 carrier_length:=0.4 carrier_width:=0.4 carrier_height:=0.4 travel:=6 *origin">
+    <!-- Robot models with a corresponding macro in this workspace. -->
+    <xacro:property name="models" value="${dict([
+      ('lrmate25_19a', ('fanuc_lrmate_description', '_urdf_macro.xacro', '')),
+      ('lrmate25_19afc', ('fanuc_lrmate_description', '_urdf_macro.xacro', '')),
+      ('m20_25_18d', ('fanuc_m20_description', '_urdf_macro.xacro', '')),
+      ('m20_35_18d', ('fanuc_m20_description', '_urdf_macro.xacro', '')),
+      ('kr16_r2010_2', ('kuka_cybertech_support', '_macro.xacro', 'kuka_')),
+      ('kr20_r1820_2_e', ('kuka_cybertech_support', '_macro.xacro', 'kuka_')),
+      ('kr35_r1840_3', ('kuka_cybertech_support', '_macro.xacro', 'kuka_')),
+      ('kr35_r1840_3_hw', ('kuka_cybertech_support', '_macro.xacro', 'kuka_')),
+      ('kr20_r3100', ('kuka_iontec_support', '_macro.xacro', 'kuka_')),
+      ('kr30_r2100', ('kuka_iontec_support', '_macro.xacro', 'kuka_'))
+    ])}"/>
+    <xacro:property name="robot_package" value="${models[robot_model][0]}"/>
+    <xacro:property name="macro_file" value="${robot_model + models[robot_model][1]}"/>
+    <xacro:property name="macro_name" value="${models[robot_model][2] + robot_model + ('_robot' if models[robot_model][2] else '')}"/>
+    <xacro:mock_linear_axis prefix="${prefix}" parent="${parent}"
+        track_length="${track_length}" track_width="${track_width}" track_height="${track_height}"
+        carrier_length="${carrier_length}" carrier_width="${carrier_width}" carrier_height="${carrier_height}" travel="${travel}">
+      <xacro:insert_block name="origin"/>
+    </xacro:mock_linear_axis>
+
+    <xacro:include filename="$(find ${robot_package})/urdf/${macro_file}"/>
+    <xacro:call macro="${macro_name}" prefix="${prefix}" package_name="${robot_package}" parent="${prefix}ea_mount_link">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:call>
+    <!-- The flange's +X points out of the robot; the tool extends along -X. -->
+    <xacro:mock_tool prefix="${prefix}" parent="${prefix}flange">
+      <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
+    </xacro:mock_tool>
+  </xacro:macro>
+</robot>
