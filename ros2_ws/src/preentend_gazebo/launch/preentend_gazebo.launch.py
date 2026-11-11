@@ -41,6 +41,13 @@ def launch_nodes(context):
         Node(package='ros_gz_bridge', executable='parameter_bridge',
              parameters=[{'config_file': str(gazebo_share / 'config/bridge.yaml'),
                           'use_sim_time': True}], output='screen'),
+        # Gazebo's point coordinates are X-forward despite the optical frame ID.
+        *[Node(package='ros_gz_bridge', executable='parameter_bridge',
+               name=f'{robot}_point_cloud_bridge',
+               parameters=[{'config_file': str(gazebo_share / f'config/{robot}_point_cloud_bridge.yaml'),
+                            'override_frame_id': f'{robot}_camera_depth_frame',
+                            'use_sim_time': True}], output='screen')
+          for robot in ('robot_1', 'robot_2')],
         Node(package='robot_state_publisher', executable='robot_state_publisher',
              parameters=[{'robot_description': description, 'use_sim_time': True}], output='screen'),
         Node(package='ros_gz_sim', executable='create',
@@ -60,7 +67,8 @@ def generate_launch_description():
         [DeclareLaunchArgument(name, default_value=value) for name, value in ROBOT_DEFAULTS.items()]
         + [DeclareLaunchArgument('robot_description', default_value='',
                                  description='Optional already-expanded robot description.'),
-           DeclareLaunchArgument('gz_args', default_value='-r empty.sdf',
+           DeclareLaunchArgument('gz_args',
+                                 default_value='-r ' + str(Path(get_package_share_directory('preentend_gazebo')) / 'worlds/preentend.sdf'),
                                  description='Arguments passed to Gazebo Sim.'),
            OpaqueFunction(function=launch_nodes)]
     )

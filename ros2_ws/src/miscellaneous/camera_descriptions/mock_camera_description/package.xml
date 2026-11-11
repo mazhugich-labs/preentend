@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>mock_camera_description</name>
+  <version>0.0.0</version>
+  <description>Reusable D435-like RGB-D camera description and Gazebo sensors.</description>
+  <maintainer email="mazhugich@todo.todo">mazhugich</maintainer>
+  <license>BSD-3-Clause</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>xacro</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

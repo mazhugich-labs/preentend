@@ -93,12 +93,15 @@ def launch_nodes(context, backend):
     )
     if backend == 'gazebo':
         common.append({'use_sim_time': True})
+        rviz_cfg_file = 'rviz/preentend_moveit_gazebo.rviz'
+    else:
+        rviz_cfg_file = 'rviz/preentend_moveit_fake.rviz'
     return [
         control,
         Node(package='moveit_ros_move_group', executable='move_group',
              parameters=[*common, controller_settings], output='screen'),
         Node(package='rviz2', executable='rviz2',
-             arguments=['-d', str(moveit_share / 'rviz/preentend_moveit_fake.rviz')],
+             arguments=['-d', str(moveit_share / rviz_cfg_file)],
              parameters=common, output='screen'),
     ]
 
@@ -110,7 +113,9 @@ def generate_moveit_launch_description(backend):
                      for name, value in ROBOT_DEFAULTS.items() if name != 'robot_model')
     cache_home = Path(os.environ.get('XDG_CACHE_HOME') or Path.home() / '.cache')
     if backend == 'gazebo':
-        arguments.append(DeclareLaunchArgument('gz_args', default_value='-r empty.sdf',
+        arguments.append(DeclareLaunchArgument(
+            'gz_args', default_value='-r ' + str(
+                Path(get_package_share_directory('preentend_gazebo')) / 'worlds/preentend.sdf'),
                                                description='Arguments passed to Gazebo Sim.'))
     return LaunchDescription(arguments + [
         DeclareLaunchArgument('collision_trials', default_value='100000',

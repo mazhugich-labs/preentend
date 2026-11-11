@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <robot name="preentend" xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include filename="$(find preentend_ros2_control)/robot/preentend_ros2_control.urdf.xacro"/>
+  <xacro:include filename="$(find mock_camera_description)/urdf/mock_camera_gazebo_macro.xacro"/>
+  <xacro:mock_camera_gazebo prefix="robot_1_" topic_prefix="/robot_1/camera"/>
+  <xacro:mock_camera_gazebo prefix="robot_2_" topic_prefix="/robot_2/camera"/>
   <gazebo>
     <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
       <parameters>$(find preentend_ros2_control)/config/ros2_controllers.yaml</parameters>

@@ -18,7 +18,7 @@ Preentend is a simulation project for a touchless car wash: two industrial robot
 - `ros2_ws/src/preentend_ros2_control` — defines control interfaces, initial positions, controllers, and a mock hardware launch.
 - `ros2_ws/src/preentend_gazebo` — spawns the system in Gazebo with simulated control and a clock bridge.
 - `ros2_ws/src/preentend_moveit_config` — provides planning groups, collision matrix generation and caching, planning configuration, and MoveIt launches.
-- `ros2_ws/src/miscellaneous` — reusable FANUC and KUKA robot descriptions, mock linear axis and tool descriptions, and KUKA resources.
+- `ros2_ws/src/miscellaneous` — reusable FANUC and KUKA robot descriptions, mock linear axis, tool, and RGB-D camera descriptions, and KUKA resources.
 - `docker/` and `docker-compose.yaml` — the container image and runtime configuration; `scripts/` contains Compose helpers.
 
 ## Installation
@@ -78,9 +78,6 @@ ros2 launch preentend_moveit_config preentend_moveit_gazebo.launch.py \
 ```
 
 Use `--show-args` with a launch command to see its options. MoveIt generates a collision matrix for the selected description on first launch and reuses it when the inputs have not changed.
-
-<!-- Placeholder: system overview image -->
-<!-- Placeholder: planning and simulation demo -->
 
 ## TODO
 

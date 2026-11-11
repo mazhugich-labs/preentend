@@ -2,6 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <xacro:include filename="$(find mock_external_axis_description)/urdf/mock_linear_axis_macro.xacro"/>
   <xacro:include filename="$(find mock_tool_description)/urdf/mock_tool_macro.xacro"/>
+  <xacro:include filename="$(find mock_camera_description)/urdf/mock_camera_macro.xacro"/>
 
   <!-- Origin places the bottom center of the track relative to parent. -->
   <xacro:macro name="preentend_robot"
@@ -35,5 +36,9 @@
     <xacro:mock_tool prefix="${prefix}" parent="${prefix}flange">
       <origin xyz="0 0 0" rpy="0 0 ${pi}"/>
     </xacro:mock_tool>
+    <!-- Set this mounting transform relative to the robot flange. -->
+    <xacro:mock_camera prefix="${prefix}" parent="${prefix}flange">
+      <origin xyz="0.2075 0 -0.0775" rpy="0 0 0"/>
+    </xacro:mock_camera>
   </xacro:macro>
 </robot>

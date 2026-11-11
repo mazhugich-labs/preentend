@@ -23,6 +23,6 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-install(DIRECTORY launch config robot DESTINATION share/${PROJECT_NAME})
+install(DIRECTORY launch config robot worlds DESTINATION share/${PROJECT_NAME})
 
 ament_package()

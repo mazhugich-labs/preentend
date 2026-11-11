@@ -21,6 +21,7 @@
   <exec_depend>xacro</exec_depend>
   <exec_depend>mock_external_axis_description</exec_depend>
   <exec_depend>mock_tool_description</exec_depend>
+  <exec_depend>mock_camera_description</exec_depend>
   <exec_depend>fanuc_lrmate_description</exec_depend>
   <exec_depend>fanuc_m20_description</exec_depend>
   <exec_depend>kuka_cybertech_support</exec_depend>
