@@ -23,9 +23,11 @@ def launch_nodes(context):
     gazebo_share = Path(get_package_share_directory('preentend_gazebo'))
     mappings = {name: LaunchConfiguration(name).perform(context) for name in ROBOT_DEFAULTS}
     mappings['control_backend'] = 'gazebo'
-    description = xacro.process_file(
-        str(gazebo_share / 'robot/preentend_gazebo.urdf.xacro'), mappings=mappings,
-    ).toxml()
+    description = LaunchConfiguration('robot_description').perform(context)
+    if not description:
+        description = xacro.process_file(
+            str(gazebo_share / 'robot/preentend_gazebo.urdf.xacro'), mappings=mappings,
+        ).toxml()
     # Gazebo resolves package:// meshes relative to the parent of each package share.
     paths = sorted({str(Path(prefix) / 'share') for prefix in get_packages_with_prefixes().values()})
     resource_path = os.pathsep.join(filter(None, [os.environ.get('GZ_SIM_RESOURCE_PATH', ''), *paths]))
@@ -56,7 +58,9 @@ def launch_nodes(context):
 def generate_launch_description():
     return LaunchDescription(
         [DeclareLaunchArgument(name, default_value=value) for name, value in ROBOT_DEFAULTS.items()]
-        + [DeclareLaunchArgument('gz_args', default_value='-r empty.sdf',
+        + [DeclareLaunchArgument('robot_description', default_value='',
+                                 description='Optional already-expanded robot description.'),
+           DeclareLaunchArgument('gz_args', default_value='-r empty.sdf',
                                  description='Arguments passed to Gazebo Sim.'),
            OpaqueFunction(function=launch_nodes)]
     )
