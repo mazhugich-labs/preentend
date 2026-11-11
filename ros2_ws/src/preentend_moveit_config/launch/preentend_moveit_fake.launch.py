@@ -1,14 +1,18 @@
 """Start MoveIt with ROS 2 mock hardware for the selected robot model."""
 
 from pathlib import Path
+import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, OpaqueFunction
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, OpaqueFunction
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.logging import get_logger
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 import xacro
 import yaml
+from preentend_moveit_config.collision_cache import get_collision_srdf
 
 
 ROBOT_MODELS = (
@@ -16,6 +20,11 @@ ROBOT_MODELS = (
     'kr16_r2010_2', 'kr20_r1820_2_e', 'kr35_r1840_3', 'kr35_r1840_3_hw',
     'kr30_r2100',
 )
+ROBOT_DEFAULTS = {
+    'robot_model': 'kr30_r2100', 'separation': '4.0', 'track_length': '6.4',
+    'track_width': '0.4', 'track_height': '0.2', 'carrier_length': '0.4',
+    'carrier_width': '0.4', 'carrier_height': '0.4', 'travel': '6.0',
+}
 
 
 def load_yaml(path):
@@ -32,49 +41,66 @@ def launch_nodes(context):
     description_share = Path(get_package_share_directory('preentend_description'))
 
     # Keep the model argument identical for geometry, control and semantics.
-    mappings = {'robot_model': model, 'control_backend': 'mock'}
+    mappings = {name: LaunchConfiguration(name).perform(context) for name in ROBOT_DEFAULTS}
+    mappings['control_backend'] = 'mock'
     robot_description = {'robot_description': xacro.process_file(
         str(control_share / 'robot/preentend_ros2_control.urdf.xacro'), mappings=mappings).toxml()}
-    semantic_description = {'robot_description_semantic': xacro.process_file(
-        str(moveit_share / 'srdf/preentend.srdf.xacro'),
-        mappings={'robot_model': model}).toxml()}
+    semantic_template = xacro.process_file(
+        str(moveit_share / 'srdf/preentend_groups.srdf.xacro')).toxml()
+    srdf, cache_hit = get_collision_srdf(
+        robot_description['robot_description'], semantic_template, mappings,
+        int(LaunchConfiguration('collision_trials').perform(context)),
+        LaunchConfiguration('collision_cache_dir').perform(context),
+    )
+    get_logger('preentend_moveit_fake').info(
+        'Using cached collision matrix' if cache_hit else 'Generated collision matrix'
+    )
+    semantic_description = {'robot_description_semantic': srdf}
     kinematics = {'robot_description_kinematics': load_yaml(
         moveit_share / 'config/kinematics.yaml')}
     ompl = load_yaml(moveit_share / 'config/ompl_planning.yaml')
-    planning = {'planning_pipelines': ['ompl'], 'default_planning_pipeline': 'ompl',
-                'ompl': ompl}
+    planning = {'planning_pipelines': ['ompl', 'chomp', 'pilz_industrial_motion_planner'],
+                'default_planning_pipeline': 'ompl', 'ompl': ompl,
+                'chomp': load_yaml(moveit_share / 'config/chomp_planning.yaml'),
+                'pilz_industrial_motion_planner': load_yaml(
+                    moveit_share / 'config/pilz_industrial_motion_planner_planning.yaml')}
     controller_settings = load_yaml(moveit_share / 'config/moveit_controllers.yaml')
 
     planning_limits = {'robot_description_planning': load_yaml(
         description_share / 'config/joint_limits' / f'{model}_joint_limits.yaml')}
+    planning_limits['robot_description_planning'].update(
+        load_yaml(moveit_share / 'config/pilz_cartesian_limits.yaml'))
 
     common = [robot_description, semantic_description, kinematics, planning, planning_limits]
-    controllers_file = str(control_share / 'config/ros2_controllers.yaml')
+    control = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(str(
+            control_share / 'launch/preentend_ros2_control_fake.launch.py')),
+        launch_arguments={
+            **{name: mappings[name] for name in ROBOT_DEFAULTS},
+            'robot_description': robot_description['robot_description'],
+        }.items(),
+    )
     return [
-        Node(package='robot_state_publisher', executable='robot_state_publisher',
-             parameters=[robot_description], output='screen'),
-        Node(package='controller_manager', executable='ros2_control_node',
-             parameters=[controllers_file], output='screen'),
-        Node(package='controller_manager', executable='spawner',
-             arguments=['joint_state_broadcaster', '--controller-manager', '/controller_manager'],
-             output='screen'),
-        # Load all trajectory controllers inactive so MoveIt can switch between
-        # the two single-arm controllers and the combined controller.
-        Node(package='controller_manager', executable='spawner',
-             arguments=['robot_1_controller', 'robot_2_controller', 'robots_controller',
-                        '--inactive', '--controller-manager', '/controller_manager'],
-             output='screen'),
+        control,
         Node(package='moveit_ros_move_group', executable='move_group',
              parameters=[*common, controller_settings], output='screen'),
         Node(package='rviz2', executable='rviz2',
-             # arguments=['-d', str(moveit_share / 'rviz/preentend.rviz')],
+             arguments=['-d', str(moveit_share / 'rviz/preentend_moveit_fake.rviz')],
              parameters=common, output='screen'),
     ]
 
 
 def generate_launch_description():
-    return LaunchDescription([
-        DeclareLaunchArgument('robot_model', default_value='kr30_r2100',
-                              choices=list(ROBOT_MODELS)),
+    arguments = [DeclareLaunchArgument('robot_model', default_value=ROBOT_DEFAULTS['robot_model'],
+                                       choices=list(ROBOT_MODELS))]
+    arguments.extend(DeclareLaunchArgument(name, default_value=value)
+                     for name, value in ROBOT_DEFAULTS.items() if name != 'robot_model')
+    cache_home = Path(os.environ.get('XDG_CACHE_HOME') or Path.home() / '.cache')
+    return LaunchDescription(arguments + [
+        DeclareLaunchArgument('collision_trials', default_value='100000',
+                              description='Number of collision-sampling trials.'),
+        DeclareLaunchArgument('collision_cache_dir',
+                              default_value=str(cache_home / 'preentend_moveit_config/collisions'),
+                              description='Directory for generated collision matrices.'),
         OpaqueFunction(function=launch_nodes),
     ])

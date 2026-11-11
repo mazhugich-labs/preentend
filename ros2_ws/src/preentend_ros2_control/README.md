@@ -21,3 +21,14 @@ individual controllers because they claim the same joints. Gazebo also needs
 a single system plugin for the whole model, controller startup, and suitable
 physical properties for the robot links. These control tags do not start Gazebo
 or controllers.
+
+To start the mock hardware, robot-state publisher, and controllers:
+
+```sh
+ros2 launch preentend_ros2_control preentend_ros2_control_fake.launch.py \
+  robot_model:=kr30_r2100 separation:=4.0
+```
+
+The launch accepts the robot model and all assembly dimension arguments. It
+also accepts an already-expanded `robot_description`; the MoveIt launch uses
+that option to share exactly the same URDF with the controller manager.
