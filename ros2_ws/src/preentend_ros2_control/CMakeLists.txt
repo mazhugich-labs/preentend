@@ -24,6 +24,5 @@ if(BUILD_TESTING)
 endif()
 
 install(DIRECTORY config launch robot urdf DESTINATION share/${PROJECT_NAME})
-install(FILES README.md DESTINATION share/${PROJECT_NAME})
 
 ament_package()

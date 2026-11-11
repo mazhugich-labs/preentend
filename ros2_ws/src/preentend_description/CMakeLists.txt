@@ -25,6 +25,5 @@ endif()
 
 install(DIRECTORY config urdf robot launch rviz DESTINATION share/${PROJECT_NAME})
 install(PROGRAMS scripts/robot_model_selector DESTINATION lib/${PROJECT_NAME})
-install(FILES README.md DESTINATION share/${PROJECT_NAME})
 
 ament_package()

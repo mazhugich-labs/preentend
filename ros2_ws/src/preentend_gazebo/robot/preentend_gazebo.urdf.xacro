@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<robot name="preentend" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find preentend_ros2_control)/robot/preentend_ros2_control.urdf.xacro"/>
+  <gazebo>
+    <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(find preentend_ros2_control)/config/ros2_controllers.yaml</parameters>
+      <ros><argument>--ros-args</argument><argument>-p</argument><argument>use_sim_time:=true</argument></ros>
+    </plugin>
+  </gazebo>
+</robot>
