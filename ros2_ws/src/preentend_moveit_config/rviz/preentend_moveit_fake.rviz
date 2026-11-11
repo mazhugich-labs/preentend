@@ -3,10 +3,7 @@ Panels:
     Help Height: 0
     Name: Displays
     Property Tree Widget:
-      Expanded:
-        - /Global Options1
-        - /Status1
-        - /TF1/Frames1
+      Expanded: ~
       Splitter Ratio: 0.6823529601097107
     Tree Height: 204
   - Class: rviz_common/Selection
@@ -48,338 +45,6 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Alpha: 1
-      Class: rviz_default_plugins/RobotModel
-      Collision Enabled: false
-      Description File: ""
-      Description Source: Topic
-      Description Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /robot_description
-      Enabled: true
-      Links:
-        All Links Enabled: true
-        Expand Joint Details: false
-        Expand Link Details: false
-        Expand Tree: false
-        Link Tree Style: Links in Alphabetic Order
-        robot_1_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_camera_color_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        robot_1_camera_depth_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        robot_1_camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_ea_carrier_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_ea_mount_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        robot_1_ea_track_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_flange:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        robot_1_link_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_link_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_link_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_link_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_link_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_link_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_t_link1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_t_link2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_t_mounting_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_1_t_tcp:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        robot_2_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_camera_color_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        robot_2_camera_depth_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        robot_2_camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_ea_carrier_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_ea_mount_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        robot_2_ea_track_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_flange:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        robot_2_link_1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_link_2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_link_3:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_link_4:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_link_5:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_link_6:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_t_link1:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_t_link2:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_t_mounting_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        robot_2_t_tcp:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        world:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-      Mass Properties:
-        Inertia: false
-        Mass: false
-      Name: RobotModel
-      TF Prefix: ""
-      Update Interval: 0
-      Value: true
-      Visual Enabled: true
-    - Class: rviz_default_plugins/TF
-      Enabled: true
-      Filter (blacklist): ""
-      Filter (whitelist): ""
-      Frame Timeout: 15
-      Frames:
-        All Enabled: false
-        robot_1_base_link:
-          Value: false
-        robot_1_camera_color_optical_frame:
-          Value: true
-        robot_1_camera_depth_optical_frame:
-          Value: true
-        robot_1_camera_link:
-          Value: true
-        robot_1_ea_carrier_link:
-          Value: false
-        robot_1_ea_mount_link:
-          Value: false
-        robot_1_ea_track_link:
-          Value: false
-        robot_1_flange:
-          Value: true
-        robot_1_link_1:
-          Value: false
-        robot_1_link_2:
-          Value: false
-        robot_1_link_3:
-          Value: false
-        robot_1_link_4:
-          Value: false
-        robot_1_link_5:
-          Value: false
-        robot_1_link_6:
-          Value: false
-        robot_1_t_link1:
-          Value: false
-        robot_1_t_link2:
-          Value: false
-        robot_1_t_mounting_link:
-          Value: false
-        robot_1_t_tcp:
-          Value: true
-        robot_2_base_link:
-          Value: false
-        robot_2_camera_color_optical_frame:
-          Value: true
-        robot_2_camera_depth_optical_frame:
-          Value: true
-        robot_2_camera_link:
-          Value: true
-        robot_2_ea_carrier_link:
-          Value: false
-        robot_2_ea_mount_link:
-          Value: false
-        robot_2_ea_track_link:
-          Value: false
-        robot_2_flange:
-          Value: true
-        robot_2_link_1:
-          Value: false
-        robot_2_link_2:
-          Value: false
-        robot_2_link_3:
-          Value: false
-        robot_2_link_4:
-          Value: false
-        robot_2_link_5:
-          Value: false
-        robot_2_link_6:
-          Value: false
-        robot_2_t_link1:
-          Value: false
-        robot_2_t_link2:
-          Value: false
-        robot_2_t_mounting_link:
-          Value: false
-        robot_2_t_tcp:
-          Value: true
-        world:
-          Value: false
-      Marker Scale: 1
-      Name: TF
-      Show Arrows: true
-      Show Axes: true
-      Show Names: false
-      Tree:
-        world:
-          robot_1_ea_track_link:
-            robot_1_ea_carrier_link:
-              robot_1_ea_mount_link:
-                robot_1_base_link:
-                  robot_1_link_1:
-                    robot_1_link_2:
-                      robot_1_link_3:
-                        robot_1_link_4:
-                          robot_1_link_5:
-                            robot_1_link_6:
-                              robot_1_flange:
-                                robot_1_camera_link:
-                                  robot_1_camera_color_optical_frame:
-                                    {}
-                                  robot_1_camera_depth_optical_frame:
-                                    {}
-                                robot_1_t_mounting_link:
-                                  robot_1_t_link1:
-                                    robot_1_t_link2:
-                                      robot_1_t_tcp:
-                                        {}
-          robot_2_ea_track_link:
-            robot_2_ea_carrier_link:
-              robot_2_ea_mount_link:
-                robot_2_base_link:
-                  robot_2_link_1:
-                    robot_2_link_2:
-                      robot_2_link_3:
-                        robot_2_link_4:
-                          robot_2_link_5:
-                            robot_2_link_6:
-                              robot_2_flange:
-                                robot_2_camera_link:
-                                  robot_2_camera_color_optical_frame:
-                                    {}
-                                  robot_2_camera_depth_optical_frame:
-                                    {}
-                                robot_2_t_mounting_link:
-                                  robot_2_t_link1:
-                                    robot_2_t_link2:
-                                      robot_2_t_tcp:
-                                        {}
-      Update Interval: 0
-      Value: true
     - Acceleration_Scaling_Factor: 0.5
       Class: moveit_rviz_plugin/MotionPlanning
       Enabled: true
@@ -417,6 +82,10 @@ Visualization Manager:
             Show Trail: false
             Value: true
           robot_1_camera_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          robot_1_camera_depth_frame:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -502,6 +171,10 @@ Visualization Manager:
             Show Trail: false
             Value: true
           robot_2_camera_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          robot_2_camera_depth_frame:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -640,6 +313,10 @@ Visualization Manager:
             Alpha: 1
             Show Axes: false
             Show Trail: false
+          robot_1_camera_depth_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           robot_1_camera_depth_optical_frame:
             Alpha: 1
             Show Axes: false
@@ -722,6 +399,10 @@ Visualization Manager:
             Show Trail: false
             Value: true
           robot_2_camera_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          robot_2_camera_depth_frame:
             Alpha: 1
             Show Axes: false
             Show Trail: false
@@ -856,25 +537,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 10.398298263549805
+      Distance: 11.64609432220459
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.09128282219171524
-        Y: -0.9213330745697021
-        Z: 0.38058221340179443
+        X: -0.4114275276660919
+        Y: -0.7386912107467651
+        Z: 0.4868685007095337
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6353981494903564
+      Pitch: 0.5603982210159302
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.6103981733322144
+      Yaw: 0.8703979253768921
     Saved: ~
 Window Geometry:
   Displays:

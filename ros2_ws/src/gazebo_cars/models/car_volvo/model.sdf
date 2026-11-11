@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+Static car. The mesh is centered on the model origin, rests on z = 0 and has its length
+along x (heading along +x or -x depends on the source mesh). Collision is the mesh bounding box.
+Bounding box: 4.97 x 2.33 x 1.76 m.
+-->
+<sdf version="1.9">
+  <model name="car_volvo">
+    <static>true</static>
+    <link name="link">
+      <collision name="collision">
+        <pose>0 0 0.8814 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>4.9718 2.3254 1.7628</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <pose>-0.7170 0.7691 0.0449 0 0 1.570796</pose>
+        <geometry>
+          <mesh>
+            <uri>model://car_volvo/meshes/volvo.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

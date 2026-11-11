@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>gazebo_cars</name>
+  <version>0.0.0</version>
+  <description>Static car models for Gazebo and a launch file to spawn them</description>
+  <maintainer email="mazhugich.labs@gmail.com">mazhugich-labs</maintainer>
+  <license>BSD-3-Clause</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ros_gz_sim</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+    <!-- ros_gz_sim adds this to GZ_SIM_RESOURCE_PATH, so model://car_* resolves -->
+    <gazebo_ros gazebo_model_path="${prefix}/models" />
+  </export>
+</package>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
   <!-- Attach to the camera body; Gazebo cameras look along +X. -->
-  <xacro:macro name="mock_camera_gazebo" params="prefix topic_prefix update_rate:=15 color_width:=1280 color_height:=720 depth_width:=1280 depth_height:=720 depth_near:=0.28 depth_far:=10.0">
+  <xacro:macro name="mock_camera_gazebo" params="prefix topic_prefix update_rate:=15 color_width:=1280 color_height:=720 depth_width:=640 depth_height:=480 depth_near:=0.28 depth_far:=10.0">
     <gazebo reference="${prefix}camera_link">
       <sensor name="${prefix}camera_color" type="camera">
         <pose>0.0125 0 0 0 0 0</pose>

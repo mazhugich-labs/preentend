@@ -81,4 +81,5 @@ Use `--show-args` with a launch command to see its options. MoveIt generates a c
 
 ## TODO
 
-- [ ] Add RGB-D camera support.
+- [x] Add RGB-D camera support.
+- [x] Add variety of car models.
