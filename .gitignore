@@ -2,3 +2,4 @@ __pycache__/
 build/
 install/
 log/
+workspaces/ros2_ws/scans/

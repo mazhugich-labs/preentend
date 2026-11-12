@@ -23,6 +23,7 @@ services:
       - __GLX_VENDOR_LIBRARY_NAME=nvidia
       - QT_X11_NO_MITSHM=1
       - XAUTHORITY=/tmp/.docker.xauth
+      - GZ_IP=127.0.0.1
       - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
@@ -50,9 +51,12 @@ services:
     stdin_open: true
     tty: true
     environment:
+      - DISPLAY=${DISPLAY}
+      - XAUTHORITY=/tmp/.docker.xauth
       - ACCEPT_EULA=Y
       - ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}
       - NVIDIA_VISIBLE_DEVICES=${GPU_DEVICE:-all}
+      - NVIDIA_DRIVER_CAPABILITIES=all
     volumes:
       - ${HOME}/.Xauthority:/isaac-sim/.Xauthority
       - ${ISAAC_SIM_DATA:-~/docker/isaac-sim}/cache/main:/isaac-sim/.cache:rw
