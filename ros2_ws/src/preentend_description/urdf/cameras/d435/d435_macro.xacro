@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Nominal D435 frames. The mounting frame is the bottom screw mount;
+       camera_link coincides with the depth sensor, with +X forward, +Y left,
+       and +Z up. Optical frames use +Z forward, +X right, and +Y down. -->
+  <xacro:macro name="camera" params="prefix">
+    <link name="${prefix}camera_bottom_screw_frame" />
+
+
+    <link name="${prefix}camera_link" />
+    <joint name="${prefix}camera_link_joint" type="fixed">
+      <parent link="${prefix}camera_bottom_screw_frame" />
+      <child link="${prefix}camera_link" />
+      <origin xyz="0.0106 0.0175 0.0125" rpy="0 0 0" />
+    </joint>
+
+    <link name="${prefix}camera_depth_frame" />
+    <joint name="${prefix}camera_depth_joint" type="fixed">
+      <parent link="${prefix}camera_link" />
+      <child link="${prefix}camera_depth_frame" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+    <link name="${prefix}camera_depth_optical_frame" />
+    <joint name="${prefix}camera_depth_optical_joint" type="fixed">
+      <parent link="${prefix}camera_depth_frame" />
+      <child link="${prefix}camera_depth_optical_frame" />
+      <origin xyz="0 0 0" rpy="${-pi / 2} 0 ${-pi / 2}" />
+    </joint>
+
+    <link name="${prefix}camera_infra1_frame" />
+    <joint name="${prefix}camera_infra1_joint" type="fixed">
+      <parent link="${prefix}camera_link" />
+      <child link="${prefix}camera_infra1_frame" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+    <link name="${prefix}camera_infra1_optical_frame" />
+    <joint name="${prefix}camera_infra1_optical_joint" type="fixed">
+      <parent link="${prefix}camera_infra1_frame" />
+      <child link="${prefix}camera_infra1_optical_frame" />
+      <origin xyz="0 0 0" rpy="${-pi / 2} 0 ${-pi / 2}" />
+    </joint>
+
+    <link name="${prefix}camera_infra2_frame" />
+    <joint name="${prefix}camera_infra2_joint" type="fixed">
+      <parent link="${prefix}camera_link" />
+      <child link="${prefix}camera_infra2_frame" />
+      <origin xyz="0 -0.05 0" rpy="0 0 0" />
+    </joint>
+    <link name="${prefix}camera_infra2_optical_frame" />
+    <joint name="${prefix}camera_infra2_optical_joint" type="fixed">
+      <parent link="${prefix}camera_infra2_frame" />
+      <child link="${prefix}camera_infra2_optical_frame" />
+      <origin xyz="0 0 0" rpy="${-pi / 2} 0 ${-pi / 2}" />
+    </joint>
+
+    <link name="${prefix}camera_color_frame" />
+    <joint name="${prefix}camera_color_joint" type="fixed">
+      <parent link="${prefix}camera_link" />
+      <child link="${prefix}camera_color_frame" />
+      <origin xyz="0 0.015 0" rpy="0 0 0" />
+    </joint>
+    <link name="${prefix}camera_color_optical_frame" />
+    <joint name="${prefix}camera_color_optical_joint" type="fixed">
+      <parent link="${prefix}camera_color_frame" />
+      <child link="${prefix}camera_color_optical_frame" />
+      <origin xyz="0 0 0" rpy="${-pi / 2} 0 ${-pi / 2}" />
+    </joint>
+  </xacro:macro>
+</robot>

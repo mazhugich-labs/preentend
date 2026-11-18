@@ -154,7 +154,7 @@ planner_configs:
     type: geometric::TrajOpt
 
 robot_1:
-  projection_evaluator: joints(robot_1_ea_linear_joint,robot_1_link_1_joint)
+  projection_evaluator: joints(robot_1_ea_track_link_joint,robot_1_link_1_joint)
   enforce_constrained_state_space: true
   planner_configs:
     - APSConfigDefault
@@ -184,7 +184,7 @@ robot_1:
     - TrajOptDefault
 
 robot_2:
-  projection_evaluator: joints(robot_2_ea_linear_joint,robot_2_link_1_joint)
+  projection_evaluator: joints(robot_2_ea_track_link_joint,robot_2_link_1_joint)
   enforce_constrained_state_space: true
   planner_configs:
     - APSConfigDefault
@@ -214,7 +214,7 @@ robot_2:
     - TrajOptDefault
 
 robots:
-  projection_evaluator: joints(robot_1_ea_linear_joint,robot_2_ea_linear_joint)
+  projection_evaluator: joints(robot_1_ea_track_link_joint,robot_2_ea_track_link_joint)
   enforce_constrained_state_space: true
   planner_configs:
     - APSConfigDefault

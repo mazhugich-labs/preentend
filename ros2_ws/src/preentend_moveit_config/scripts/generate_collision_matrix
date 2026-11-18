@@ -1,0 +1,197 @@
+#!/usr/bin/env python3
+"""Generate or reuse a model's MoveIt self-collision matrix macro."""
+
+import argparse
+import fcntl
+import hashlib
+import math
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+from urllib.parse import unquote, urlparse
+import xml.etree.ElementTree as ET
+
+from ament_index_python.packages import get_package_share_directory
+
+XACRO_NS = 'http://www.ros.org/wiki/xacro'
+CACHE_VERSION = 'preentend-collision-matrix-v3'
+MODELS = ('lrmate25_19a', 'lrmate25_19afc', 'm20_25_18d', 'm20_35_18d',
+          'kr16_r2010_2', 'kr20_r1820_2_e', 'kr30_r2100',
+          'kr35_r1840_3', 'kr35_r1840_3_hw')
+LAYOUT_ARGS = ('separation', 'travel')
+
+
+def run(command):
+    try:
+        result = subprocess.run(command, check=True, text=True, capture_output=True)
+    except subprocess.CalledProcessError as exc:
+        raise RuntimeError(f'{command[0]} failed:\n{exc.stdout or ""}{exc.stderr or ""}') from exc
+    if '[ERROR]' in result.stdout or '[ERROR]' in result.stderr:
+        raise RuntimeError(f'{command[0]} failed:\n{result.stdout}{result.stderr}')
+    return result.stdout
+
+
+def mesh_path(uri):
+    if uri.startswith('package://'):
+        package, separator, relative = uri[len('package://'):].partition('/')
+        if not separator or not relative:
+            raise ValueError(f'Invalid mesh URI: {uri}')
+        return Path(get_package_share_directory(package)) / relative
+    if uri.startswith('file://'):
+        parsed = urlparse(uri)
+        if parsed.netloc not in ('', 'localhost'):
+            raise ValueError(f'Unsupported mesh URI: {uri}')
+        return Path(unquote(parsed.path))
+    if Path(uri).is_absolute():
+        return Path(uri)
+    raise ValueError(f'Unsupported mesh URI: {uri}')
+
+
+def fingerprint(robot, model, groups_xml, trials):
+    """Include the robot geometry, mesh contents, planning groups and sampling count."""
+    digest = hashlib.sha256()
+    for value in (CACHE_VERSION, model, str(trials), groups_xml, ET.tostring(robot, encoding='unicode')):
+        digest.update(value.encode('utf-8'))
+        digest.update(b'\0')
+    paths = {mesh_path(mesh.get('filename', ''))
+             for mesh in robot.findall('./link/collision/geometry/mesh')}
+    for path in sorted(paths):
+        if not path.is_file():
+            raise FileNotFoundError(f'Collision mesh not found: {path}')
+        digest.update(str(path).encode('utf-8'))
+        digest.update(b'\0')
+        with path.open('rb') as stream:
+            for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+                digest.update(chunk)
+    return digest.hexdigest()
+
+
+def cached_matrix(path, key, links):
+    if not path.is_file():
+        return False
+    text = path.read_text(encoding='utf-8')
+    if f'<!-- collision-cache: {key} -->' not in text:
+        return False
+    try:
+        root = ET.fromstring(text)
+        macro = root.find(f'{{{XACRO_NS}}}macro')
+        if root.tag != 'robot' or macro is None or macro.get('name') != 'preentend_collision_matrix':
+            return False
+        rules = macro.findall('disable_collisions')
+        return bool(rules) and all(r.get('link1') in links and r.get('link2') in links
+                                   and r.get('reason') for r in rules)
+    except ET.ParseError:
+        return False
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--robot-description', type=Path, required=True,
+                        help='URDF or xacro file for the complete robot')
+    parser.add_argument('--robot-model', choices=MODELS, required=True)
+    parser.add_argument('--output-dir', type=Path,
+                        help='output directory (default: package share/srdf/collision_matrices)')
+    parser.add_argument('--trials', type=int, default=100000)
+    parser.add_argument('--xacro-arg', action='append', default=[], metavar='NAME:=VALUE',
+                        help='override an axis parameter or separation; repeat as needed')
+    parser.add_argument('--force', action='store_true', help='regenerate even if cached')
+    args = parser.parse_args()
+    # MoveIt divides trials among hardware threads, then divides each share by 20.
+    min_trials = 20 * (os.cpu_count() or 1)
+    if args.trials < min_trials:
+        parser.error(f'--trials must be at least {min_trials} for this machine to avoid a MoveIt crash')
+    if not args.robot_description.is_file():
+        parser.error(f'robot description not found: {args.robot_description}')
+    overrides = {}
+    for arg in args.xacro_arg:
+        name, sep, value = arg.partition(':=')
+        if not sep or name not in LAYOUT_ARGS or not value or name in overrides:
+            parser.error(f'Invalid or repeated layout argument: {arg}')
+        try:
+            number = float(value)
+            if not math.isfinite(number):
+                raise ValueError
+        except ValueError:
+            parser.error(f'Layout argument must be finite: {arg}')
+        overrides[name] = value
+
+    description = args.robot_description.resolve()
+    if description.name.endswith('.xacro'):
+        family = 'fanuc' if args.robot_model.startswith(('lrmate', 'm20')) else 'kuka'
+        urdf = run(['xacro', str(description), f'robot_family:={family}', f'robot_model:={args.robot_model}',
+                    *[f'{k}:={v}' for k, v in overrides.items()]])
+    else:
+        if overrides:
+            parser.error('--xacro-arg requires a xacro robot description')
+        urdf = description.read_text(encoding='utf-8')
+    robot = ET.fromstring(urdf)
+    if robot.tag != 'robot' or not robot.get('name'):
+        raise ValueError('Robot description must have a named robot root')
+    links = {link.get('name') for link in robot.findall('link')}
+    for prefix in ('robot_1_', 'robot_2_'):
+        for suffix in ('base_link', *(f'link_{i}' for i in range(1, 7))):
+            if robot.find(f"link[@name='{prefix}{suffix}']/collision") is None:
+                raise ValueError(f'{prefix}{suffix} has no collision geometry')
+
+    share = Path(get_package_share_directory('preentend_moveit_config'))
+    groups_macro = share / 'srdf/preentend_groups.srdf.xacro'
+    with tempfile.TemporaryDirectory(prefix='preentend-collision-') as tmp:
+        tmp = Path(tmp)
+        groups_file = tmp / 'groups.srdf.xacro'
+        # ElementTree quotes the file name and robot name safely.
+        semantic = ET.Element('robot', {'name': robot.get('name'), 'xmlns:xacro': XACRO_NS})
+        ET.SubElement(semantic, 'xacro:include', {'filename': str(groups_macro)})
+        ET.SubElement(semantic, 'xacro:preentend_planning_groups')
+        groups_file.write_text(ET.tostring(semantic, encoding='unicode'), encoding='utf-8')
+        groups_xml = run(['xacro', str(groups_file)])
+        groups = ET.fromstring(groups_xml)
+        if not groups.findall('group'):
+            raise ValueError('No planning groups found in semantic description')
+        key = fingerprint(robot, args.robot_model, ET.tostring(groups, encoding='unicode'), args.trials)
+        output_dir = (args.output_dir or share / 'srdf/collision_matrices').expanduser().resolve()
+        output_dir.mkdir(parents=True, exist_ok=True)
+        target = output_dir / f'{args.robot_model}.srdf.xacro'
+        with (output_dir / f'.{args.robot_model}.lock').open('a') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX)
+            if not args.force and cached_matrix(target, key, links):
+                print(f'Reusing {target}')
+                return
+            urdf_file, srdf_file, result_file = tmp / 'robot.urdf', tmp / 'groups.srdf', tmp / 'result.srdf'
+            urdf_file.write_text(urdf, encoding='utf-8')
+            srdf_file.write_text(groups_xml, encoding='utf-8')
+            run(['ros2', 'run', 'moveit_setup_assistant', 'collisions_updater',
+                 '--urdf', str(urdf_file), '--srdf', str(srdf_file), '--output', str(result_file),
+                 '--trials', str(args.trials)])
+            result = ET.parse(result_file).getroot()
+            if result.tag != 'robot' or result.get('name') != robot.get('name'):
+                raise ValueError('Generated SRDF robot does not match the input')
+            rules = result.findall('disable_collisions')
+            if not rules or any(r.get('link1') not in links or r.get('link2') not in links
+                                or not r.get('reason') for r in rules):
+                raise ValueError('Generated collision rules are empty or reference invalid links')
+            ET.register_namespace('xacro', XACRO_NS)
+            output = ET.Element('robot')
+            output.append(ET.Comment(f' collision-cache: {key} '))
+            macro = ET.SubElement(output, f'{{{XACRO_NS}}}macro', {'name': 'preentend_collision_matrix'})
+            for rule in rules:
+                ET.SubElement(macro, 'disable_collisions', {k: rule.get(k) for k in ('link1', 'link2', 'reason')})
+            ET.indent(output, space='  ')
+            with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=output_dir, delete=False) as out:
+                temp_name = out.name
+                try:
+                    out.write('<?xml version="1.0"?>\n' + ET.tostring(output, encoding='unicode') + '\n')
+                except BaseException:
+                    os.unlink(temp_name)
+                    raise
+            os.replace(temp_name, target)
+            print(f'Generated {target} ({len(rules)} collision rules)')
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except (OSError, RuntimeError, ValueError, ET.ParseError) as exc:
+        print(f'Error: {exc}', file=sys.stderr)
+        sys.exit(1)

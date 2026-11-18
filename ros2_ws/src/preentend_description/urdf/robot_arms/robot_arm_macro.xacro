@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="robot_arm.ros2_control.xacro" />
+
+  <xacro:macro name="robot_arm" params="robot_family robot_model mode prefix parent *origin">
+    <xacro:include filename="$(find preentend_description)/urdf/robot_arms/${robot_family}/${robot_model}_macro.xacro" ns="arm_description" />
+    <xacro:arm_description.robot_arm prefix="${prefix}" />
+    <joint name="${prefix}base_link_joint" type="fixed">
+      <parent link="${parent}" />
+      <child link="${prefix}base_link" />
+      <xacro:insert_block name="origin" />
+    </joint>
+    <xacro:if value="${mode == 'gazebo'}">
+      <xacro:include filename="$(find preentend_description)/urdf/robot_arms/robot_arm.gazebo.xacro" ns="arm_gazebo" />
+      <xacro:arm_gazebo.robot_arm_gazebo prefix="${prefix}" />
+    </xacro:if>
+  </xacro:macro>
+</robot>

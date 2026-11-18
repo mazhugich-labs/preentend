@@ -23,7 +23,6 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-install(DIRECTORY config urdf robot launch rviz DESTINATION share/${PROJECT_NAME})
-install(PROGRAMS scripts/robot_model_selector DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY urdf meshes config launch DESTINATION share/${PROJECT_NAME})
 
 ament_package()

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<robot name="preentend" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:arg name="robot_family" default="kuka" />
+  <xacro:arg name="robot_model" default="kr30_r2100" />
+  <xacro:arg name="external_axis_model" default="mock" />
+  <xacro:arg name="end_effector_model" default="mock" />
+  <xacro:arg name="robot_arm_camera_model" default="d435" />
+  <xacro:arg name="overhead_camera_model" default="d435" />
+  <xacro:arg name="mode" default="mock" />
+  <xacro:arg name="controllers_file" default="" />
+  <xacro:arg name="separation" default="4.0" />
+
+  <xacro:arg name="travel" default="6.0" />
+
+  <xacro:arg name="robot_arm_camera_update_rate" default="15" />
+  <xacro:arg name="robot_arm_camera_color_width" default="1280" />
+  <xacro:arg name="robot_arm_camera_color_height" default="720" />
+  <xacro:arg name="robot_arm_camera_depth_width" default="640" />
+  <xacro:arg name="robot_arm_camera_depth_height" default="480" />
+  <xacro:arg name="overhead_camera_update_rate" default="15" />
+  <xacro:arg name="overhead_camera_color_width" default="1920" />
+  <xacro:arg name="overhead_camera_color_height" default="1080" />
+  <xacro:arg name="overhead_camera_depth_width" default="640" />
+  <xacro:arg name="overhead_camera_depth_height" default="480" />
+
+  <xacro:include filename="$(find preentend_description)/urdf/_common_macro.xacro" />
+  <link name="base_link" />
+
+  <!-- Compensate for the camera mount so the depth origin is at (0, 0, 4). -->
+  <xacro:camera camera_model="$(arg overhead_camera_model)" mode="$(arg mode)" prefix="overhead_" parent="base_link" topic_prefix="/overhead/camera" update_rate="$(arg overhead_camera_update_rate)" color_width="$(arg overhead_camera_color_width)" color_height="$(arg overhead_camera_color_height)" depth_width="$(arg overhead_camera_depth_width)" depth_height="$(arg overhead_camera_depth_height)">
+    <origin xyz="0.0175 -0.0125 4.0106" rpy="0 ${pi / 2} ${pi / 2}" />
+  </xacro:camera>
+
+  <xacro:preentend_robot prefix="robot_1_" parent="base_link" robot_family="$(arg robot_family)" robot_model="$(arg robot_model)" external_axis_model="$(arg external_axis_model)" end_effector_model="$(arg end_effector_model)" camera_model="$(arg robot_arm_camera_model)" camera_topic_prefix="/robot_1/camera" mode="$(arg mode)" travel="$(arg travel)" update_rate="$(arg robot_arm_camera_update_rate)" color_width="$(arg robot_arm_camera_color_width)" color_height="$(arg robot_arm_camera_color_height)" depth_width="$(arg robot_arm_camera_depth_width)" depth_height="$(arg robot_arm_camera_depth_height)">
+    <origin xyz="0 ${-float('$(arg separation)') / 2} 0" rpy="0 0 0" />
+  </xacro:preentend_robot>
+  <xacro:preentend_robot prefix="robot_2_" parent="base_link" robot_family="$(arg robot_family)" robot_model="$(arg robot_model)" external_axis_model="$(arg external_axis_model)" end_effector_model="$(arg end_effector_model)" camera_model="$(arg robot_arm_camera_model)" camera_topic_prefix="/robot_2/camera" mode="$(arg mode)" travel="$(arg travel)" update_rate="$(arg robot_arm_camera_update_rate)" color_width="$(arg robot_arm_camera_color_width)" color_height="$(arg robot_arm_camera_color_height)" depth_width="$(arg robot_arm_camera_depth_width)" depth_height="$(arg robot_arm_camera_depth_height)">
+    <origin xyz="0 ${float('$(arg separation)') / 2} 0" rpy="0 0 ${pi}" />
+  </xacro:preentend_robot>
+
+  <xacro:if value="${'$(arg mode)' == 'gazebo'}">
+    <gazebo>
+      <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+        <parameters>$(arg controllers_file)</parameters>
+        <ros><argument>--ros-args</argument><argument>-p</argument><argument>use_sim_time:=true</argument></ros>
+      </plugin>
+    </gazebo>
+  </xacro:if>
+</robot>

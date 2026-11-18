@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="robot_arm_control_joint" params="prefix joint_name">
+    <joint name="${prefix + joint_name}">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="robot_arm_control" params="prefix">
+    <xacro:robot_arm_control_joint prefix="${prefix}" joint_name="link_1_joint" />
+    <xacro:robot_arm_control_joint prefix="${prefix}" joint_name="link_2_joint" />
+    <xacro:robot_arm_control_joint prefix="${prefix}" joint_name="link_3_joint" />
+    <xacro:robot_arm_control_joint prefix="${prefix}" joint_name="link_4_joint" />
+    <xacro:robot_arm_control_joint prefix="${prefix}" joint_name="link_5_joint" />
+    <xacro:robot_arm_control_joint prefix="${prefix}" joint_name="link_6_joint" />
+  </xacro:macro>
+</robot>

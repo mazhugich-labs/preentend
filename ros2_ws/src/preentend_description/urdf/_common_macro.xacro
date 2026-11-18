@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="external_axes/external_axis_macro.xacro" />
+  <xacro:include filename="robot_arms/robot_arm_macro.xacro" />
+  <xacro:include filename="end_effectors/end_effector_macro.xacro" />
+  <xacro:include filename="cameras/camera_macro.xacro" />
+
+  <!-- The origin locates the bottom center of the external axis track. -->
+  <xacro:macro name="preentend_robot"
+    params="prefix parent *origin robot_family robot_model external_axis_model end_effector_model camera_model camera_topic_prefix mode travel update_rate color_width color_height depth_width depth_height">
+    <xacro:external_axis external_axis_model="${external_axis_model}" mode="${mode}"
+      prefix="${prefix}" parent="${parent}" travel="${travel}">
+      <xacro:insert_block name="origin" />
+    </xacro:external_axis>
+    <xacro:robot_arm robot_family="${robot_family}" robot_model="${robot_model}" mode="${mode}"
+      prefix="${prefix}" parent="${prefix}ea_carrier_link">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:robot_arm>
+    <xacro:end_effector end_effector_model="${end_effector_model}" mode="${mode}" prefix="${prefix}"
+      parent="${prefix}flange">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:end_effector>
+    <xacro:camera camera_model="${camera_model}" mode="${mode}" prefix="${prefix}"
+      parent="${prefix}eef_tcp" topic_prefix="${camera_topic_prefix}" update_rate="${update_rate}"
+      color_width="${color_width}" color_height="${color_height}" depth_width="${depth_width}"
+      depth_height="${depth_height}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:camera>
+    <xacro:if value="${mode == 'gazebo'}">
+      <ros2_control name="${prefix}system" type="system">
+        <hardware>
+          <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        </hardware>
+        <xacro:external_axis_control external_axis_model="${external_axis_model}" prefix="${prefix}" />
+        <xacro:robot_arm_control prefix="${prefix}" />
+      </ros2_control>
+    </xacro:if>
+  </xacro:macro>
+</robot>

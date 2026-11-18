@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:macro name="external_axis" params="prefix travel">
+        <!-- track.stl spans 1 m in X; leave half a metre for the carrier. -->
+        <xacro:property name="track_x_scale" value="${float(travel) + 0.5}" />
+        <!-- Recover the original second moments before scaling X at constant density. -->
+        <xacro:property name="track_ixx" value="2.49247" />
+        <xacro:property name="track_iyy" value="7.01637" />
+        <xacro:property name="track_izz" value="7.03219" />
+        <xacro:property name="track_x_second_moment" value="${(track_iyy + track_izz - track_ixx) / 2}" />
+
+        <link name="${prefix}ea_track_link">
+            <inertial>
+                <mass value="${54.9396 * track_x_scale}" />
+                <origin xyz="0 0 0.075" rpy="0 0 0" />
+                <inertia ixx="${track_ixx * track_x_scale}" ixy="0" ixz="0"
+                    iyy="${track_x_scale * (track_iyy + (track_x_scale**2 - 1) * track_x_second_moment)}"
+                    iyz="0"
+                    izz="${track_x_scale * (track_izz + (track_x_scale**2 - 1) * track_x_second_moment)}" />
+            </inertial>
+            <visual>
+                <geometry>
+                    <mesh
+                        filename="package://preentend_description/meshes/external_axes/mock/track.stl"
+                        scale="${track_x_scale} 1 1" />
+                </geometry>
+                <material name="ea_material">
+                    <color rgba="0.25 0.25 0.25 1" />
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <mesh
+                        filename="package://preentend_description/meshes/external_axes/mock/track.stl"
+                        scale="${track_x_scale} 1 1" />
+                </geometry>
+            </collision>
+        </link>
+
+        <link name="${prefix}ea_carrier_link">
+            <inertial>
+                <mass value="23.6736" />
+                <origin xyz="0 0 -0.05850821" rpy="0 0 0" />
+                <inertia ixx="0.767701" ixy="0" ixz="0" iyy="0.599373" iyz="0" izz="1.2538" />
+            </inertial>
+            <visual>
+                <geometry>
+                    <mesh
+                        filename="package://preentend_description/meshes/external_axes/mock/carrier.stl" />
+                </geometry>
+                <material name="ea_material">
+                    <color rgba="0.25 0.25 0.25 1" />
+                </material>
+            </visual>
+            <collision>
+                <geometry>
+                    <mesh
+                        filename="package://preentend_description/meshes/external_axes/mock/carrier.stl" />
+                </geometry>
+            </collision>
+        </link>
+        <joint name="${prefix}ea_track_link_joint" type="prismatic">
+            <origin xyz="0 0 0.45" rpy="0 0 0" />
+            <axis xyz="1 0 0" />
+            <limit lower="${-travel / 2}" upper="${travel / 2}" effort="1000" velocity="1" />
+            <parent link="${prefix}ea_track_link" />
+            <child link="${prefix}ea_carrier_link" />
+        </joint>
+    </xacro:macro>
+
+</robot>

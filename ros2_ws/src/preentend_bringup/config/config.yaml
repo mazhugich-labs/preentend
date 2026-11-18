@@ -1,0 +1,25 @@
+robot_arm:
+  family: kuka
+  model: kr30_r2100
+
+layout:
+  separation: 4.0
+
+external_axis:
+  model: mock
+  travel: 6.0
+
+end_effector:
+  model: mock
+
+cameras:
+  robot_arm:
+    model: d435
+    update_rate: 15
+    color: {width: 1280, height: 720}
+    depth: {width: 640, height: 480}
+  overhead:
+    model: d435
+    update_rate: 15
+    color: {width: 1280, height: 720}
+    depth: {width: 640, height: 480}

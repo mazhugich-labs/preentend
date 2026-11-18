@@ -3,20 +3,16 @@
 <package format="3">
   <name>preentend_ros2_control</name>
   <version>0.0.0</version>
-  <description>ROS 2 control configuration for the preentend robot assemblies.</description>
+  <description>TODO: Package description</description>
   <maintainer email="mazhugich@todo.todo">mazhugich</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <exec_depend>xacro</exec_depend>
-  <exec_depend>launch</exec_depend>
-  <exec_depend>launch_ros</exec_depend>
-  <exec_depend>ament_index_python</exec_depend>
-  <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>preentend_description</exec_depend>
   <exec_depend>hardware_interface</exec_depend>
   <exec_depend>gz_ros2_control</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>joint_state_broadcaster</exec_depend>
   <exec_depend>joint_trajectory_controller</exec_depend>

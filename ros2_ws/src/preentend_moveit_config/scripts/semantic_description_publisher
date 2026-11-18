@@ -1,0 +1,80 @@
+#!/usr/bin/env python3
+"""Generate and publish a semantic description for the published robot."""
+import argparse
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import time
+import xml.etree.ElementTree as ET
+
+import rclpy
+from rclpy.node import Node
+from rclpy.qos import DurabilityPolicy, QoSProfile, ReliabilityPolicy
+from std_msgs.msg import String
+from preentend_utils import process_xacro
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--robot-model', required=True)
+    parser.add_argument('--srdf-file', type=Path, required=True)
+    parser.add_argument('--collision-matrices-dir', type=Path, required=True)
+    parser.add_argument('--collision-trials', type=int, default=100000)
+    parser.add_argument('--description-timeout', type=float, default=60.0)
+    parser.add_argument('--robot-description-topic', default='/robot_description')
+    parser.add_argument('--semantic-description-topic', default='/robot_description_semantic')
+    args = parser.parse_args()
+    if args.description_timeout <= 0 or args.collision_trials <= 0:
+        parser.error('description timeout and collision trials must be positive')
+    rclpy.init(args=[])
+    node = Node('semantic_description_publisher')
+    qos = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL,
+                     reliability=ReliabilityPolicy.RELIABLE)
+    messages = []
+    subscription = node.create_subscription(String, args.robot_description_topic,
+                                            lambda msg: messages.append(msg.data), qos)
+    try:
+        deadline = time.monotonic() + args.description_timeout
+        while rclpy.ok() and not messages and time.monotonic() < deadline:
+            rclpy.spin_once(node, timeout_sec=min(0.5, max(0.0, deadline - time.monotonic())))
+        if not messages:
+            raise RuntimeError(f'No robot description received on {args.robot_description_topic}')
+        urdf = messages[-1]
+        node.destroy_subscription(subscription)
+        with tempfile.TemporaryDirectory(prefix='preentend-semantic-') as tmp:
+            description = Path(tmp) / 'robot.urdf'
+            description.write_text(urdf, encoding='utf-8')
+            subprocess.run([
+                'ros2', 'run', 'preentend_moveit_config', 'generate_collision_matrix',
+                '--robot-description', str(description), '--robot-model', args.robot_model,
+                '--output-dir', str(args.collision_matrices_dir), '--trials', str(args.collision_trials),
+            ], check=True)
+            srdf = process_xacro(args.srdf_file, mappings={
+                'robot_model': args.robot_model,
+                'collision_matrices_dir': str(args.collision_matrices_dir.resolve()),
+            })
+        robot, semantic = ET.fromstring(urdf), ET.fromstring(srdf)
+        links = {link.get('name') for link in robot.findall('link')}
+        rules = semantic.findall('disable_collisions')
+        if robot.tag != 'robot' or semantic.tag != 'robot' or robot.get('name') != semantic.get('name'):
+            raise ValueError('URDF and SRDF robot names do not match')
+        if not rules or any(rule.get('link1') not in links or rule.get('link2') not in links for rule in rules):
+            raise ValueError('Semantic collision rules do not match the published robot')
+        publisher = node.create_publisher(String, args.semantic_description_topic, qos)
+        message = String()
+        message.data = srdf
+        publisher.publish(message)
+        print('SEMANTIC_DESCRIPTION_READY', flush=True)
+        rclpy.spin(node)
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except (OSError, RuntimeError, ValueError, ET.ParseError, subprocess.CalledProcessError) as exc:
+        print(f'Unable to publish semantic description: {exc}', file=sys.stderr, flush=True)
+        sys.exit(1)

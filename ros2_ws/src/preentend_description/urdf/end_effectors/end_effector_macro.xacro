@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="end_effector" params="end_effector_model mode prefix parent *origin">
+    <xacro:include filename="$(find preentend_description)/urdf/end_effectors/${end_effector_model}/${end_effector_model}_macro.xacro" ns="effector_description" />
+    <xacro:effector_description.end_effector prefix="${prefix}" />
+    <joint name="${prefix}eef_link_joint" type="fixed">
+      <parent link="${parent}" />
+      <child link="${prefix}eef_link" />
+      <xacro:insert_block name="origin" />
+    </joint>
+    <xacro:if value="${mode == 'gazebo'}">
+      <xacro:include filename="$(find preentend_description)/urdf/end_effectors/${end_effector_model}/${end_effector_model}.gazebo.xacro" ns="effector_gazebo" />
+      <xacro:effector_gazebo.end_effector_gazebo prefix="${prefix}" />
+    </xacro:if>
+  </xacro:macro>
+</robot>

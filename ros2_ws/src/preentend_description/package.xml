@@ -3,32 +3,22 @@
 <package format="3">
   <name>preentend_description</name>
   <version>0.0.0</version>
-  <description>Robot and external axis assemblies.</description>
+  <description>TODO: Package description</description>
   <maintainer email="mazhugich@todo.todo">mazhugich</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <exec_depend>launch</exec_depend>
-  <exec_depend>launch_ros</exec_depend>
-  <exec_depend>ament_index_python</exec_depend>
-  <exec_depend>python_qt_binding</exec_depend>
-  <exec_depend>rcl_interfaces</exec_depend>
-  <exec_depend>rclpy</exec_depend>
-  <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>joint_state_publisher_gui</exec_depend>
-  <exec_depend>rviz2</exec_depend>
-  <exec_depend>xacro</exec_depend>
-  <exec_depend>mock_external_axis_description</exec_depend>
-  <exec_depend>mock_tool_description</exec_depend>
-  <exec_depend>mock_camera_description</exec_depend>
-  <exec_depend>fanuc_lrmate_description</exec_depend>
-  <exec_depend>fanuc_m20_description</exec_depend>
-  <exec_depend>kuka_cybertech_support</exec_depend>
-  <exec_depend>kuka_iontec_support</exec_depend>
-
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
+
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>preentend_utils</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>rviz2</exec_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

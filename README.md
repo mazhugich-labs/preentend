@@ -51,35 +51,39 @@ Run these commands in a sourced container shell:
 
 ```sh
 # View the description and select a robot model.
-ros2 launch preentend_description preentend_description.launch.py
+ros2 launch preentend_description _preentend_description.launch.py
 ```
 
 https://github.com/user-attachments/assets/95a4e74f-8a9e-47c8-92a5-244c3c14af5b
 
 ```sh
-# Plan with mock hardware and RViz.
-ros2 launch preentend_moveit_config preentend_moveit_fake.launch.py
-```
-
-https://github.com/user-attachments/assets/9e15f291-9b46-4e76-a7ee-49049f0e9f1d
-
-```sh
 # Run Gazebo, MoveIt, and RViz together.
-ros2 launch preentend_moveit_config preentend_moveit_gazebo.launch.py
+ros2 launch preentend_bringup preentend_moveit_gazebo.launch.py
 ```
 
 https://github.com/user-attachments/assets/31ae3f52-45ab-42b3-96b8-aee3a7ff0b26
 
-Choose another model or adjust the system dimensions through launch arguments, for example:
+Choose another model or adjust separation through launch arguments, for example:
 
 ```sh
-ros2 launch preentend_moveit_config preentend_moveit_gazebo.launch.py \
-  robot_model:=m20_25_18d separation:=3.2 track_length:=7.0
+ros2 launch preentend_bringup preentend_moveit_gazebo.launch.py \
+  robot_model:=m20_25_18d separation:=3.2
 ```
 
-Use `--show-args` with a launch command to see its options. MoveIt generates a collision matrix for the selected description on first launch and reuses it when the inputs have not changed.
+Edit `ros2_ws/src/preentend_bringup/config/config.yaml` or pass `config_file:=<path>` to adjust the system configuration. Use `--show-args` with a launch command to see its options. MoveIt generates a collision matrix for the selected description on first launch and reuses it when the inputs have not changed.
+
+Spawn car alongside MoveIt Gazebo launch script.
+
+```sh
+ros2 launch gazebo_cars spawn_car.launch.py
+```
+
+https://github.com/user-attachments/assets/8a0d0032-1cf5-4a1b-b658-e0b456bbbb14
+
+Use `--car <model>` with launch command to specify car model.
 
 ## TODO
 
 - [x] Add RGB-D camera support.
 - [x] Add variety of car models.
+- [ ] Add washing bay geometry.
