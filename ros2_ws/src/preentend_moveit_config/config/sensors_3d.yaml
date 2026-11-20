@@ -1,0 +1,23 @@
+octomap_frame: base_link
+octomap_resolution: 0.05
+sensors:
+  - robot_1_camera
+  - robot_2_camera
+robot_1_camera:
+  sensor_plugin: occupancy_map_monitor/PointCloudOctomapUpdater
+  point_cloud_topic: /robot_1/camera/depth/points
+  max_range: 5.0
+  point_subsample: 8
+  padding_offset: 0.05
+  padding_scale: 1.0
+  max_update_rate: 1.0
+  filtered_cloud_topic: /robot_1/camera/filtered_points
+robot_2_camera:
+  sensor_plugin: occupancy_map_monitor/PointCloudOctomapUpdater
+  point_cloud_topic: /robot_2/camera/depth/points
+  max_range: 5.0
+  point_subsample: 8
+  padding_offset: 0.05
+  padding_scale: 1.0
+  max_update_rate: 1.0
+  filtered_cloud_topic: /robot_2/camera/filtered_points

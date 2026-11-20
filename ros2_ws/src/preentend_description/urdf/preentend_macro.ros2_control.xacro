@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="control_joint" params="name">
+    <joint name="${name}">
+      <command_interface name="position" />
+      <command_interface name="velocity" />
+      <state_interface name="position" />
+      <state_interface name="velocity" />
+    </joint>
+  </xacro:macro>
+  <xacro:macro name="robot_control" params="prefix mode">
+    <ros2_control name="${prefix}system" type="system">
+      <hardware>
+        <xacro:if value="${mode == 'mock'}"><plugin>mock_components/GenericSystem</plugin></xacro:if>
+        <xacro:if value="${mode == 'gazebo'}"><plugin>gz_ros2_control/GazeboSimSystem</plugin></xacro:if>
+      </hardware>
+      <xacro:control_joint name="${prefix}ea_track_link_joint" />
+      <xacro:control_joint name="${prefix}link_1_joint" />
+      <xacro:control_joint name="${prefix}link_2_joint" />
+      <xacro:control_joint name="${prefix}link_3_joint" />
+      <xacro:control_joint name="${prefix}link_4_joint" />
+      <xacro:control_joint name="${prefix}link_5_joint" />
+      <xacro:control_joint name="${prefix}link_6_joint" />
+    </ros2_control>
+  </xacro:macro>
+  <xacro:macro name="preentend_ros2_control" params="mode">
+    <xacro:if value="${mode == 'mock' or mode == 'gazebo'}">
+      <xacro:robot_control prefix="robot_1_" mode="${mode}" />
+      <xacro:robot_control prefix="robot_2_" mode="${mode}" />
+    </xacro:if>
+  </xacro:macro>
+</robot>

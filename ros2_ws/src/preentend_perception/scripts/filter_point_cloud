@@ -1,0 +1,242 @@
+#!/usr/bin/env python3
+"""Remove ground and URDF collision surfaces from a point cloud."""
+
+from collections import deque
+from pathlib import Path
+import struct
+import time
+from urllib.parse import unquote, urlparse
+import xml.etree.ElementTree as ET
+
+from ament_index_python.packages import get_package_share_directory
+import numpy as np
+import rclpy
+from rclpy.duration import Duration
+from rclpy.node import Node
+from rclpy.qos import DurabilityPolicy, QoSProfile, ReliabilityPolicy, qos_profile_sensor_data
+from rclpy.time import Time
+from scipy.spatial import cKDTree
+from scipy.spatial.transform import Rotation
+from sensor_msgs.msg import PointCloud2, PointField
+from sensor_msgs_py.point_cloud2 import dtype_from_fields
+from std_msgs.msg import String
+from tf2_ros import Buffer, TransformException, TransformListener
+
+
+def mesh_triangles(path):
+    data = path.read_bytes()
+    if len(data) >= 84 and 84 + 50 * struct.unpack_from('<I', data, 80)[0] == len(data):
+        triangles = np.frombuffer(data, offset=84, dtype=np.dtype([
+            ('normal', '<f4', 3), ('vertices', '<f4', (3, 3)), ('attribute', '<u2')]))['vertices']
+        return triangles.astype(float)
+    values = [list(map(float, line.split()[1:4])) for line in data.decode('ascii').splitlines()
+              if line.strip().startswith('vertex ')]
+    if not values or len(values) % 3:
+        raise ValueError(f'Invalid STL mesh: {path}')
+    return np.asarray(values).reshape(-1, 3, 3)
+
+
+def mesh_path(uri):
+    if uri.startswith('package://'):
+        package, sep, name = uri[10:].partition('/')
+        if not sep:
+            raise ValueError(f'Invalid mesh URI: {uri}')
+        return Path(get_package_share_directory(package)) / name
+    parsed = urlparse(uri)
+    if parsed.scheme == 'file' and parsed.netloc in ('', 'localhost'):
+        return Path(unquote(parsed.path))
+    if not parsed.scheme and Path(uri).is_absolute():
+        return Path(uri)
+    raise ValueError(f'Unsupported collision mesh URI: {uri}')
+
+
+def vec(text, default):
+    values = np.asarray([float(x) for x in (text or default).split()])
+    if values.shape != (3,) or not np.all(np.isfinite(values)):
+        raise ValueError(f'Expected three finite values: {text}')
+    return values
+
+
+def sample_mesh(triangles, spacing):
+    # Subdivide each triangle so neighbouring surface samples are at most spacing apart.
+    samples = []
+    for a, b, c in triangles:
+        steps = max(1, int(np.ceil(max(np.linalg.norm(b-a), np.linalg.norm(c-a),
+                                       np.linalg.norm(c-b)) / spacing)))
+        for i in range(steps + 1):
+            j = np.arange(steps + 1 - i)
+            samples.append(a + (b-a) * (i / steps) + np.outer(j / steps, c-a))
+    if not samples:
+        raise ValueError('Collision mesh contains no triangles')
+    points = np.concatenate(samples)
+    # A voxel representative bounds memory for meshes with shared vertices.
+    _, indices = np.unique(np.floor(points / (spacing / 2)).astype(np.int64), axis=0, return_index=True)
+    return points[indices]
+
+
+def collision_shapes(urdf, spacing):
+    root = ET.fromstring(urdf)
+    if root.tag != 'robot':
+        raise ValueError('Robot description must contain a robot root')
+    shapes = []
+    for link in root.findall('link'):
+        name = link.get('name')
+        for collision in link.findall('collision'):
+            geometry = collision.find('geometry')
+            if geometry is None or len(geometry) != 1:
+                raise ValueError(f'Invalid collision geometry on {name}')
+            origin = collision.find('origin')
+            xyz = vec(origin.get('xyz') if origin is not None else None, '0 0 0')
+            rpy = vec(origin.get('rpy') if origin is not None else None, '0 0 0')
+            rotation = Rotation.from_euler('xyz', rpy)
+            item = geometry[0]
+            if item.tag == 'mesh':
+                scale = vec(item.get('scale'), '1 1 1')
+                if np.any(scale <= 0):
+                    raise ValueError(f'Invalid mesh scale on {name}')
+                vertices = mesh_triangles(mesh_path(item.get('filename', ''))) * scale
+                samples = sample_mesh(vertices, spacing)
+                shape = ('mesh', cKDTree(samples), samples.min(axis=0), samples.max(axis=0))
+            elif item.tag == 'box':
+                size = vec(item.get('size'), '')
+                if np.any(size <= 0):
+                    raise ValueError(f'Invalid box size on {name}')
+                shape = ('box', size / 2)
+            elif item.tag in ('sphere', 'cylinder'):
+                radius = float(item.get('radius', 'nan'))
+                length = float(item.get('length', 'nan')) if item.tag == 'cylinder' else 0
+                if not np.isfinite(radius) or radius <= 0 or (item.tag == 'cylinder' and (not np.isfinite(length) or length <= 0)):
+                    raise ValueError(f'Invalid {item.tag} on {name}')
+                shape = (item.tag, radius, length)
+            else:
+                raise ValueError(f'Unsupported collision geometry {item.tag} on {name}')
+            shapes.append((name, xyz, rotation, shape))
+    if not shapes:
+        raise ValueError('Robot description has no collision geometry')
+    return shapes
+
+
+def robot_mask(points, shapes, transforms, padding):
+    mask = np.zeros(len(points), dtype=bool)
+    for link, xyz, origin_rotation, shape in shapes:
+        translation, rotation = transforms[link]
+        local = origin_rotation.inv().apply(rotation.inv().apply(points - translation) - xyz)
+        kind = shape[0]
+        if kind == 'mesh':
+            _, tree, low, high = shape
+            candidates = np.flatnonzero(~mask & np.all((local >= low - padding) & (local <= high + padding), axis=1))
+            if len(candidates):
+                distance, _ = tree.query(local[candidates], distance_upper_bound=padding, workers=1)
+                mask[candidates] |= np.isfinite(distance)
+        elif kind == 'box':
+            mask |= np.all(np.abs(local) <= shape[1] + padding, axis=1)
+        elif kind == 'sphere':
+            mask |= np.linalg.norm(local, axis=1) <= shape[1] + padding
+        else:
+            mask |= (np.linalg.norm(local[:, :2], axis=1) <= shape[1] + padding) & (np.abs(local[:, 2]) <= shape[2] / 2 + padding)
+    return mask
+
+
+class CloudFilter(Node):
+    def __init__(self):
+        super().__init__('cloud_filter')
+        for name, default in [('input_topic', '/fused_points'), ('output_topic', '/filtered_points'),
+                              ('target_frame', 'base_link'), ('robot_description_topic', '/robot_description'),
+                              ('ground_height', 0.03), ('robot_padding', 0.05), ('mesh_sample_spacing', 0.04),
+                              ('transform_wait', 0.5), ('queue_size', 3)]:
+            self.declare_parameter(name, default)
+        self.target = self.get_parameter('target_frame').value
+        self.ground = self.get_parameter('ground_height').value
+        self.padding = self.get_parameter('robot_padding').value
+        self.spacing = self.get_parameter('mesh_sample_spacing').value
+        self.wait = self.get_parameter('transform_wait').value
+        queue_size = self.get_parameter('queue_size').value
+        if not self.target or not np.isfinite(self.ground) or not 0 < self.spacing <= self.padding or self.wait <= 0 or queue_size < 1:
+            raise ValueError('Expected a frame, finite ground height, positive wait and queue size, and 0 < mesh_sample_spacing <= robot_padding')
+        self.shapes = None
+        self.pending = deque(maxlen=queue_size)
+        self.buffer = Buffer()
+        self.listener = TransformListener(self.buffer, self)
+        description_qos = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL,
+                                     reliability=ReliabilityPolicy.RELIABLE)
+        self.description_sub = self.create_subscription(String, self.get_parameter('robot_description_topic').value,
+                                                        self.set_description, description_qos)
+        self.cloud_sub = self.create_subscription(PointCloud2, self.get_parameter('input_topic').value,
+                                                  self.enqueue, qos_profile_sensor_data)
+        self.publisher = self.create_publisher(PointCloud2, self.get_parameter('output_topic').value,
+                                               qos_profile_sensor_data)
+        self.timer = self.create_timer(0.02, self.process_pending)
+
+    def set_description(self, msg):
+        try:
+            shapes = collision_shapes(msg.data, self.spacing)
+        except (ValueError, OSError, ET.ParseError) as exc:
+            self.shapes = None
+            self.get_logger().error(f'Cannot load robot collision geometry: {exc}')
+            return
+        self.shapes = shapes
+        self.get_logger().info(f'Loaded {len(shapes)} robot collision shapes')
+
+    def enqueue(self, cloud):
+        self.pending.append((time.monotonic(), cloud))
+
+    def process_pending(self):
+        if not self.pending or self.shapes is None:
+            return
+        queued, cloud = self.pending[0]
+        if cloud.header.frame_id != self.target:
+            self.pending.popleft()
+            self.get_logger().warning(f'Expected cloud in {self.target}, got {cloud.header.frame_id}', throttle_duration_sec=5.0)
+            return
+        try:
+            transforms = {}
+            for link in {shape[0] for shape in self.shapes}:
+                t = self.buffer.lookup_transform(self.target, link, Time.from_msg(cloud.header.stamp), timeout=Duration()).transform
+                transforms[link] = (np.array([t.translation.x, t.translation.y, t.translation.z]),
+                                    Rotation.from_quat([t.rotation.x, t.rotation.y, t.rotation.z, t.rotation.w]))
+        except TransformException as exc:
+            if time.monotonic() - queued >= self.wait:
+                self.pending.popleft()
+                self.get_logger().warning(f'Dropping cloud: {exc}', throttle_duration_sec=5.0)
+            return
+        self.pending.popleft()
+        try:
+            fields = {field.name: field for field in cloud.fields}
+            if any(name not in fields or fields[name].count != 1 or fields[name].datatype not in
+                   (PointField.FLOAT32, PointField.FLOAT64) for name in ('x', 'y', 'z')):
+                raise ValueError('cloud needs scalar float x, y and z fields')
+            row_bytes = cloud.width * cloud.point_step
+            if cloud.row_step < row_bytes or len(cloud.data) < cloud.row_step * cloud.height:
+                raise ValueError('invalid point cloud data or row stride')
+            data = bytearray().join(cloud.data[i * cloud.row_step:i * cloud.row_step + row_bytes]
+                                    for i in range(cloud.height))
+            dtype = dtype_from_fields(cloud.fields, point_step=cloud.point_step).newbyteorder('>' if cloud.is_bigendian else '<')
+            records = np.ndarray((cloud.width * cloud.height,), dtype=dtype, buffer=data)
+            points = np.column_stack((records['x'], records['y'], records['z']))
+            candidates = np.flatnonzero(np.all(np.isfinite(points), axis=1) & (points[:, 2] > self.ground))
+            keep = candidates[~robot_mask(points[candidates], self.shapes, transforms, self.padding)]
+            raw = np.frombuffer(data, dtype=np.uint8).reshape(-1, cloud.point_step)
+            result = PointCloud2(header=cloud.header, height=1, width=len(keep), fields=cloud.fields,
+                                 is_bigendian=cloud.is_bigendian, point_step=cloud.point_step,
+                                 row_step=len(keep) * cloud.point_step, is_dense=True)
+            result.data = raw[keep].tobytes()
+            self.publisher.publish(result)
+        except (ValueError, AssertionError, TypeError) as exc:
+            self.get_logger().warning(f'Dropping invalid cloud: {exc}', throttle_duration_sec=5.0)
+
+
+def main():
+    rclpy.init()
+    node = None
+    try:
+        node = CloudFilter()
+        rclpy.spin(node)
+    finally:
+        if node is not None:
+            node.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()

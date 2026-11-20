@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-  <!-- The supported robot arms need no additional Gazebo elements. -->
-  <xacro:macro name="robot_arm_gazebo" params="prefix" />
-</robot>

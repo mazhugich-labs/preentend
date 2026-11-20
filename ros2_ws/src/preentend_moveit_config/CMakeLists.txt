@@ -23,7 +23,6 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-install(DIRECTORY srdf config launch DESTINATION share/${PROJECT_NAME})
-install(PROGRAMS scripts/generate_collision_matrix scripts/semantic_description_publisher DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY config srdf DESTINATION share/${PROJECT_NAME})
 
 ament_package()

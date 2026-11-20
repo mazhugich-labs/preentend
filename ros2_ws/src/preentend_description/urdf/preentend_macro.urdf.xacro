@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="components/robot_arm_macro.xacro" />
+  <xacro:include filename="components/external_axis_macro.xacro" />
+  <xacro:include filename="components/end_effector_macro.xacro" />
+  <xacro:include filename="components/camera_macro.xacro" />
+
+  <!-- Origin locates the bottom centre of the external axis track. -->
+  <xacro:macro name="robot" params="prefix parent travel *origin">
+    <xacro:external_axis prefix="${prefix}" travel="${travel}" />
+    <joint name="${prefix}ea_track_mount_joint" type="fixed">
+      <parent link="${parent}" />
+      <child link="${prefix}ea_track_link" />
+      <xacro:insert_block name="origin" />
+    </joint>
+    <xacro:robot_arm prefix="${prefix}" />
+    <joint name="${prefix}base_link_joint" type="fixed">
+      <parent link="${prefix}ea_carrier_link" />
+      <child link="${prefix}base_link" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+    <xacro:end_effector prefix="${prefix}" />
+    <joint name="${prefix}eef_link_joint" type="fixed">
+      <parent link="${prefix}flange" />
+      <child link="${prefix}eef_link" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+    <xacro:camera prefix="${prefix}" />
+    <joint name="${prefix}camera_joint" type="fixed">
+      <parent link="${prefix}eef_tcp" />
+      <child link="${prefix}camera_bottom_screw_frame" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="preentend_urdf" params="parent separation travel">
+    <xacro:robot prefix="robot_1_" parent="${parent}" travel="${travel}">
+      <origin xyz="0 ${-separation / 2} 0" rpy="0 0 0" />
+    </xacro:robot>
+    <xacro:robot prefix="robot_2_" parent="${parent}" travel="${travel}">
+      <origin xyz="0 ${separation / 2} 0" rpy="0 0 ${pi}" />
+    </xacro:robot>
+  </xacro:macro>
+</robot>

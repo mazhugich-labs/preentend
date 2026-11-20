@@ -70,7 +70,20 @@ ros2 launch preentend_bringup preentend_moveit_gazebo.launch.py \
   robot_model:=m20_25_18d separation:=3.2
 ```
 
-Edit `ros2_ws/src/preentend_bringup/config/config.yaml` or pass `config_file:=<path>` to adjust the system configuration. Use `--show-args` with a launch command to see its options. MoveIt generates a collision matrix for the selected description on first launch and reuses it when the inputs have not changed.
+Edit `ros2_ws/src/preentend_bringup/config/config.yaml` or pass `config_file:=<path>` to adjust the system configuration. Use `--show-args` with a launch command to see its options. MoveIt generates a collision matrix for each family, model, and separation on first launch and reuses the file if it exists. Remove the file to regenerate it after changing robot geometry or planning groups.
+
+The standalone MoveIt launch takes its robot-specific paths as arguments. For the included description, run:
+
+```sh
+description_share="$(ros2 pkg prefix --share preentend_description)"
+ros2 launch preentend_moveit_config standalone.launch.py \
+  description_file:="${description_share}/urdf/preentend.urdf.xacro" \
+  srdf_file:="${description_share}/srdf/preentend.srdf.xacro" \
+  groups_file:="${description_share}/srdf/_common.srdf.xacro" \
+  collision_matrices_dir:="${description_share}/srdf/collision_matrices"
+```
+
+The matrix output directory must match the location included by the supplied SRDF xacro. The standalone generator accepts the same paths through `--robot-description`, `--groups-file`, and `--output-dir`.
 
 Spawn car alongside MoveIt Gazebo launch script.
 
