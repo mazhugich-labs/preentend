@@ -34,7 +34,7 @@ from rclpy.action import ActionClient
 from rclpy.duration import Duration
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.node import Node
-from rclpy.qos import DurabilityPolicy, QoSProfile, ReliabilityPolicy, qos_profile_sensor_data
+from rclpy.qos import DurabilityPolicy, QoSProfile, ReliabilityPolicy
 from rclpy.time import Time
 from sensor_msgs.msg import PointCloud2
 from sensor_msgs_py import point_cloud2
@@ -266,12 +266,15 @@ class ScanNode(Node):
         self._cloud_lock = threading.Condition()
         self._clouds = {}
         self._cloud_seq = {"left": 0, "right": 0}
+        # The Gazebo point-cloud publishers offer reliable delivery. Large
+        # frames can be lost in best-effort mode before a scan can capture them.
+        cloud_qos = QoSProfile(depth=1, reliability=ReliabilityPolicy.RELIABLE)
         for side in ("left", "right"):
             self.create_subscription(
                 PointCloud2,
                 f"/{side}_camera/depth/points",
                 lambda msg, name=side: self._on_cloud(name, msg),
-                qos_profile_sensor_data,
+                cloud_qos,
             )
 
         self._state_lock = threading.Lock()
